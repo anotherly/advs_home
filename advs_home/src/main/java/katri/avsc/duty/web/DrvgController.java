@@ -96,7 +96,7 @@ public class DrvgController {
 		model.addAttribute("uriModel", uriModel);
 
 		int iPageNo = 1;	//현재 페이지
-		LOG.debug(" ########## Duty_Drvg_List.do ###########");
+		LOG.debug(" ########## Duty_Drvg_List.do 1234 ###########");
 		LOG.debug(" searchType["+paramMap.get("searchType")+"]");
 		LOG.debug(" searchWord["+paramMap.get("searchWord")+"]");
 		LOG.debug("     userid["+(String)session.getAttribute("user_id")+"]");
