@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="dataUpload">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="dataupMap" class="java.util.HashMap">
+		<result property="bSeq" column="B_SEQ" />
+		<result property="bbsSeq" column="BBS_SEQ" />
+		<result property="bFromDay" column="B_FROM_DAY" />
+		<result property="bToDay" column="B_TO_DAY" />
+		<result property="bImportantYn" column="B_IMPORTANT_YN" />
+		<result property="bTitle" column="B_TITLE" />
+		<result property="bContent" column="B_CONTENT"		jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="bAttachCnt" column="B_ATTACH_CNT" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="bPassword" column="B_PASSWORD" />
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="weather" column="WEATHER" />
+		<result property="roadSituation" column="ROAD_SITUATION" />
+		<result property="roadTypeCd" column="ROAD_TYPE_CD" />
+		<result property="actInfoType" column="ACT_INFO_TYPE" />
+		<result property="etcInfo" column="ETC_INFO" />
+		<result property="bbsNm" column="BBS_NM" />
+		<result property="drivingModeView" column="DRIVING_MODE_VIEW" />
+		<result property="weatherView" column="WEATHER_VIEW" />
+		<result property="roadSituationView" column="ROAD_SITUATION_VIEW" />
+		<result property="roadTypeCdView" column="ROAD_TYPE_CD_VIEW" />
+		<result property="actInfoTypeView" column="ACT_INFO_TYPE_VIEW" />
+		<result property="bFromDayView" column="B_FROM_DAY_VIEW" />
+		<result property="bToDayView" column="B_TO_DAY_VIEW" />
+		<result property="fileSeq" column="FILE_SEQ" />
+		<result property="saveNm" column="SAVE_NM" />
+		<result property="fileSizeView" column="FILE_SIZE_VIEW" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="carType" column="CAR_TYPE" />
+		<result property="carModel" column="CAR_MODEL" />
+		<result property="movieSensorModel" column="MOVIE_SENSOR_MODEL" />
+		<result property="lidarModel" column="LIDAR_MODEL" />
+		<result property="radarModel" column="RADAR_MODEL" />
+		<result property="attachFilename" column="ATTACH_FILENAME" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="autocarLevel" column="AUTOCAR_LEVEL" />
+		<result property="carTypeView" column="CAR_TYPE_VIEW" />
+		<result property="autocarLevelView" column="AUTOCAR_LEVEL_VIEW" />
+		<result property="cfileSizeView" column="CFILE_SIZE_VIEW" />
+		<result property="bdwrSeq" column="BDWR_SEQ" />
+		<result property="dataType" column="DATA_TYPE" />
+		<result property="bdwrTtlNm" column="BDWR_TTL_NM" />
+		<result property="bdwrCts" column="BDWR_CTS"		jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="dataForm" column="DATA_FORM" />
+		<result property="datasetFile" column="DATASET_FILE" />
+		<result property="dfileSizeView" column="DFILE_SIZE_VIEW" />
+		<result property="fileTypeView" column="FILE_TYPE_VIEW" />
+		<result property="fileType" column="FILE_TYPE" />
+		<result property="fileSize" column="FILE_SIZE" />
+	</resultMap>
+
+	<parameterMap id="dataupParamMap" class="java.util.HashMap">
+		<parameter property="b_seq"/>
+		<parameter property="bbs_seq"/>
+		<parameter property="b_from_day"/>
+		<parameter property="b_to_day"/>
+		<parameter property="b_important_yn"/>
+		<parameter property="b_title"/>
+		<parameter property="b_content" jdbcType="CLOB"/>
+		<parameter property="b_attach_cnt"/>
+		<parameter property="vehicle_id"/>
+		<parameter property="b_password"/>
+		<parameter property="driving_mode"/>
+		<parameter property="weather"/>
+		<parameter property="road_situation"/>
+		<parameter property="road_type_cd"/>
+		<parameter property="act_info_type"/>
+		<parameter property="etc_info"/>
+		<parameter property="reg_id"/>
+		<parameter property="bdwr_seq"/>
+		<parameter property="data_type"/>
+	</parameterMap>
+
+	<!-- 상세내용 -->
+	<select id="dtupDAO.selectDtupInfo" parameterClass="java.util.HashMap" resultMap="dataupMap">
+		SELECT A.*
+		      ,(SELECT BBS_NM FROM TB_WEB_HT_BBS WHERE BBS_SEQ = A.BBS_SEQ) AS BBS_NM
+		      ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
+		      ,fn_ct_get_code_name('weather', A.WEATHER ) AS WEATHER_VIEW
+		      ,fn_ct_get_code_name('road_situation', A.ROAD_SITUATION ) AS ROAD_SITUATION_VIEW
+		      ,fn_ct_get_code_name('road_type_cd', A.ROAD_TYPE_CD ) AS ROAD_TYPE_CD_VIEW
+		      ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
+		      ,DATE_FORMAT(A.B_FROM_DAY, '%Y-%m-%d') AS B_FROM_DAY_VIEW
+		      ,DATE_FORMAT(A.B_TO_DAY, '%Y-%m-%d') AS B_TO_DAY_VIEW
+		      ,B.FILE_SEQ
+		      ,B.SAVE_NM
+		      ,IFNULL(FORMAT(ROUND(IFNULL(B.FILE_SIZE,0)/1024,0), 0),'-') AS FILE_SIZE_VIEW
+		      ,C.*
+		      ,fn_ct_get_code_name('car_type', C.CAR_TYPE ) AS CAR_TYPE_VIEW
+		      ,fn_ct_get_code_name('autocar_level', C.AUTOCAR_LEVEL ) AS AUTOCAR_LEVEL_VIEW
+		      ,ROUND(IFNULL(C.FILE_SIZE,0)/1024,0) AS CFILE_SIZE_VIEW
+		      ,D.BDWR_TTL_NM
+		      ,D.BDWR_CTS
+		      ,D.DATA_FORM
+		      ,D.ATTACH_FILENAME AS DATASET_FILE
+		      ,IFNULL(FORMAT(ROUND(IFNULL(D.FILE_SIZE,0)/1024,0), 0),'-') AS DFILE_SIZE_VIEW
+		      ,fn_ct_get_code_name('mydata_attach_cd', B.FILE_TYPE ) AS FILE_TYPE_VIEW
+		      ,B.FILE_TYPE
+		      ,B.FILE_SIZE
+		  FROM TB_WEB_HT_APPEND B, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+		 WHERE 1=1
+		   AND A.B_SEQ = B.B_SEQ
+		   AND A.VEHICLE_ID = C.VEHICLE_ID
+		   AND A.B_SEQ = #b_seq# 
+		   AND A.BBS_SEQ = #bbs_seq#
+	</select>
+
+	<!-- 차량 중복확인 -->
+	<select id="dtupDAO.selectCarIsExist" parameterClass="java.util.HashMap" resultClass="int">
+		SELECT COUNT(*) selcnt
+		  FROM TB_WEB_HT_CAR A
+		 WHERE 1=1
+		   AND A.VEHICLE_ID = #vehicle_id#
+	</select>
+
+	<!-- 차량 등록 -->
+	<insert id="dtupDAO.insertCar" parameterClass="java.util.HashMap">
+		INSERT 
+		  INTO TB_WEB_HT_CAR
+		       (VEHICLE_ID
+		       ,USER_ID
+		       ,CAR_TYPE
+		       ,CAR_MODEL
+		       ,MOVIE_SENSOR_MODEL
+		       ,LIDAR_MODEL
+		       ,RADAR_MODEL
+		       ,ATTACH_FILENAME
+		       ,FILE_SIZE
+		       ,AUTOCAR_LEVEL)
+		VALUES (#vehicle_id#
+		       ,#user_id#
+		       ,#car_type#
+		       ,#car_model#
+		       ,#movie_sensor_model#
+		       ,#lidar_model#
+		       ,#radar_model#
+		       ,#attach_filename#
+		       ,#file_size#
+		       ,#autocar_level#)
+	</insert>
+
+	<!-- 차량 수정 -->
+	<update id="dtupDAO.updateCar" parameterClass="java.util.HashMap">
+        UPDATE TB_WEB_HT_CAR
+           SET CAR_TYPE				= #car_type#
+		      ,CAR_MODEL			= #car_model#
+		      ,MOVIE_SENSOR_MODEL	= #movie_sensor_model#
+		      ,LIDAR_MODEL			= #lidar_model#
+		      ,RADAR_MODEL			= #radar_model#
+		      ,AUTOCAR_LEVEL		= #autocar_level#
+		   <isEqual property="at_file_yn" compareValue="Y">
+		      ,ATTACH_FILENAME		= #attach_filename#
+		      ,FILE_SIZE			= #file_size#
+		   </isEqual>
+		 WHERE 1=1
+		   AND VEHICLE_ID = #vehicle_id#
+		   AND USER_ID = #user_id#
+	</update>
+
+	<!-- 차량 삭제 -->
+	<delete id="dtupDAO.deleteCar" parameterClass="java.util.HashMap">
+		DELETE FROM TB_WEB_HT_CAR
+		 WHERE 1=1
+		   AND VEHICLE_ID = #vehicle_id#
+		   AND USER_ID = #user_id#
+	</delete>
+
+	<!-- 게시글 등록 -->
+	<insert id="dtupDAO.insertBoard" parameterClass="java.util.HashMap">
+		INSERT 
+		  INTO TB_WEB_HT_BOARD 
+		       (B_SEQ
+		       ,BBS_SEQ
+		       ,B_FROM_DAY
+		       ,B_TO_DAY
+		       ,B_IMPORTANT_YN
+		       ,B_TITLE
+		       ,B_CONTENT
+		       ,B_ATTACH_CNT
+		       ,VEHICLE_ID
+		       ,B_PASSWORD
+		       ,DRIVING_MODE
+		       ,WEATHER
+		       ,ROAD_SITUATION
+		       ,ROAD_TYPE_CD
+		       ,ACT_INFO_TYPE
+		       ,ETC_INFO
+		       ,BDWR_SEQ
+		       ,DATA_TYPE
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES (#b_seq#
+		       ,#bbs_seq#
+		       ,DATE_FORMAT(#b_from_day#,'%Y-%m-%d')
+		       ,DATE_FORMAT(#b_to_day#,'%Y-%m-%d')
+		       ,#b_important_yn#
+		       ,#b_title#
+		       ,#b_content#
+		       ,#b_attach_cnt#
+		       ,#vehicle_id#
+		       ,#b_password#
+		       ,#driving_mode#
+		       ,#weather#
+		       ,#road_situation#
+		       ,#road_type_cd#
+		       ,#act_info_type#
+		       ,#etc_info#
+		       ,#bdwr_seq#
+		       ,#bbs_seq#
+		       ,#reg_id#
+		       ,NOW())
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="dtupDAO.updateBoard" parameterClass="java.util.HashMap">
+		UPDATE TB_WEB_HT_BOARD
+		   SET BBS_SEQ				= #bbs_seq#
+		      ,B_FROM_DAY			= DATE_FORMAT(#b_from_day#,'%Y-%m-%d %H:%i:%s')
+		      ,B_TO_DAY				= DATE_FORMAT(#b_to_day#,'%Y-%m-%d %H:%i:%s')
+		      ,B_IMPORTANT_YN	= #b_important_yn#
+		      ,B_TITLE				= #b_title#
+		      ,B_CONTENT			= #b_content#
+		      ,B_ATTACH_CNT		= #b_attach_cnt#
+		      ,VEHICLE_ID			= #vehicle_id#
+		      ,B_PASSWORD			= #b_password#
+		      ,DRIVING_MODE		= #driving_mode#
+		      ,WEATHER				= #weather#
+		      ,ROAD_SITUATION	= #road_situation#
+		      ,ROAD_TYPE_CD		= #road_type_cd#
+		      ,ACT_INFO_TYPE	= #act_info_type#
+		      ,ETC_INFO				= #etc_info#
+		      ,BDWR_SEQ				= #bdwr_seq#
+		      ,DATA_TYPE			= #bbs_seq#
+		      ,UPDATE_ID			= #reg_id#
+		      ,UPDATE_DATE		= NOW()
+		WHERE 1=1
+		  AND B_SEQ		= #b_seq#
+		  AND BBS_SEQ	= #bbs_seq_old#
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="dtupDAO.deleteBoard" parameterClass="java.util.HashMap">
+		DELETE FROM TB_WEB_HT_BOARD
+		 WHERE 1=1
+		   AND B_SEQ = #b_seq#
+		   AND BBS_SEQ = #bbs_seq#
+	</delete>
+
+	<!-- 첨부파일 등록 -->
+	<insert id="dtupDAO.insertAppend" parameterClass="java.util.HashMap">
+		INSERT 
+		  INTO TB_WEB_HT_APPEND 
+		       (FILE_SEQ
+		       ,B_SEQ
+		       ,SAVE_NM
+		       ,REAL_NM
+		       ,FILE_SIZE
+		       ,FILE_TYPE
+		       ,FILE_EXT
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES ((SELECT IFNULL(MAX(TO_NUMBER(FILE_SEQ)),0)+1 FROM TB_WEB_HT_APPEND)
+		       ,#b_seq#
+		       ,#save_nm#
+		       ,#real_nm#
+		       ,#file_size#
+		       ,#file_type#
+		       ,#file_ext#
+		       ,#reg_id#
+		       ,NOW())
+	</insert>
+
+	<!-- 첨부파일 삭제 -->
+	<delete id="dtupDAO.deleteAppend" parameterClass="java.util.HashMap">
+		/*dtupDAO.deleteAppend*/
+		DELETE FROM TB_WEB_HT_APPEND
+		 WHERE 1=1
+		   AND B_SEQ = #b_seq#
+	</delete>
+
+	<!-- CHANGE_ID.nextval -->
+	<select id="dtupDAO.sequenceBseq" parameterClass="java.util.HashMap" resultClass="String">
+		SELECT IFNULL(MAX(TO_NUMBER(B_SEQ)),0)+1 FROM TB_WEB_HT_BOARD
+	</select>
+
+</sqlMap>

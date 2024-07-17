@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/cm/css/all.css" type="text/css"?>
+<?xml-stylesheet href="/cm/css/content.css" type="text/css"?>
+<?xml-stylesheet href="/cm/css/Responsive.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+    	<w2:type palette="support">COMPONENT</w2:type>
+        <w2:buildDate/>
+        <w2:publicInfo method="scwin.setUserInfo,scwin.show,scwin.hide" 
+        			  component="" >
+        </w2:publicInfo> 
+        <xf:model>
+            <xf:instance>
+                <data xmlns=""/>
+            </xf:instance>
+            <w2:dataCollection baseNode="map">
+            </w2:dataCollection>
+            <w2:workflowCollection>
+            </w2:workflowCollection>
+        </xf:model>
+         <publicInfo method="">
+    	</publicInfo>
+    	
+         <script type="text/javascript" lazy="false"><![CDATA[
+        /**
+         * @component
+         * @company 
+         * @developer inswave008
+         * @variableClone true
+         * @notSupportBrowser 
+         * @version 
+         * @htmlRender 
+         * @icon 
+         * @disableIcon 
+         * @width 
+         * @height 
+         * @description 
+         */ 
+        
+	scwin.onpageload = function() {
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	
+	scwin.btn_logout_onclick = function() {
+		com.logout();
+	};
+	
+	scwin.btn_changePassword_onclick = function() {
+		var winWid = $(window).width();
+		var winHei = $(window).height();
+		
+		var popWid = 500;
+		var popHei = 330;
+		
+		if (com.isAdmin()) {
+			popHei -= 44;
+		}
+		
+		var sumLeft = (winWid - popWid) / 2;
+		var sumTop = (winHei - popHei) / 2;
+		
+		// global data ?
+		
+		if ( $c.common.getSideType() == "1" ){ 
+			var data = { "empCd" : $p.top().wfm_side.getWindow().dma_defInfo.get("EMP_CD") };
+		} else {
+			var data = { "empCd" : $p.parent().$p.parent().$p.getComponentById( 'udc_side').dma_defInfo.get("EMP_CD") };
+		}
+		
+		
+		var opts = {
+		"id" : "settingPassword",
+		"width" : popWid + "px",
+		"height" : popHei + "px",
+		"top" : sumTop, 
+		"left" : sumLeft,
+		"popupName" : "비밀번호변경",
+		"modal" : true, 
+		"useIFrame" : false,
+		"title" : "비밀번호변경",
+		"useATagBtn" : true,
+		"frameMode" : "wframe"
+		};
+		com.openPopup("/cm/xml/settingPassword.xml", opts, data);
+	};
+	
+	scwin.btn_setting_onclick = function() {
+		var data = { "data" : "", callbackFn : "scwin.callbackSetting" };
+		var winWid = $(window).width();
+		var winHei = $(window).height();
+		var popWid = 500;
+		var popHei = 250;
+		var sumLeft = (winWid - popWid) / 2;
+		var sumTop = (winHei - popHei) / 2;
+		
+		
+		var opts = {
+			"id" : "mainSettingPop",
+			"width" : popWid + "px",
+			"height" : popHei + "px",
+			"top" : sumTop, 
+			"left" : sumLeft,
+			"popupName" : "환경설정 관리",
+			"modal" : true, 
+			"useIFrame" : false,
+			"title" : "환경설정 관리",
+			"useATagBtn" : true,
+			"frameMode" : "wframe"
+		};
+		
+		com.openPopup("/cm/xml/settingPop.xml", opts, data);
+	};
+	
+	scwin.callbackSetting = function() {
+		$c.common.confirm($p ,"정상 처리되었습니다. 화면을 갱신하시겠습니까?", "scwin.execUpdateMainSettingConfirmCallback");
+	};
+	
+	scwin.execUpdateMainSettingConfirmCallback = function(isConfirm) {
+		if (isConfirm === true) {
+			com.goHome();
+		}
+	};
+	
+	
+	
+	scwin.show = function(){
+		// this = udc_header_option	을 찾고 싶은 경우, $p.getFrame().
+		$p.getFrame().show();
+	};
+	
+	scwin.hide = function(){
+		$p.getFrame().hide();
+	};
+	
+	scwin.setUserInfo = function(userInfo){
+		scwin.userInfo = userInfo;
+		txt_empNm.setValue(scwin.userInfo.EMP_NM);
+	};
+	
+	
+	
+	
+	
+	]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+    	<xf:group class="option_box" id="" style="">
+    		<xf:group class="" id="" style="" tagname="ul">
+    			<xf:group class="on mypage" id="" style="" tagname="li">
+    				<w2:anchor class="btn_mypage" disabled="" ev:onclick="" id="txt_empNm" outerDiv="false" style="" target="" title="aa">
+    					<xf:label><![CDATA[HONG KIL DONG]]></xf:label>
+    				</w2:anchor>
+    				<xf:group class="items" id="" style="" tagname="ul">
+    					<xf:group class="" id="" style="" tagname="li">
+    						<w2:anchor ev:onclick="scwin.btn_changePassword_onclick" id="btn_changePassword" outerDiv="false" style="">
+    							<xf:label><![CDATA[비밀번호 변경]]></xf:label>
+    						</w2:anchor>
+    					</xf:group>
+    					<xf:group class="" id="" style="" tagname="li">
+    						<w2:anchor class="" ev:onclick="scwin.btn_logout_onclick" id="btn_logout" outerDiv="false" style="">
+    							<xf:label><![CDATA[Logout]]></xf:label>
+    						</w2:anchor>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    			<xf:group class="set" id="" style="" tagname="li">
+    				<w2:anchor class="btn_setting" ev:onclick="scwin.btn_setting_onclick" id="btn_setting" outerDiv="false" style="">
+    					<xf:label><![CDATA[Setting]]></xf:label>
+    				</w2:anchor>
+    			</xf:group>
+    		</xf:group>
+    	</xf:group>
+    </body>
+</html>

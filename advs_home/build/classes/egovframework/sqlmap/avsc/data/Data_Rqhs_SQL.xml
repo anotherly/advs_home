@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//http://ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="requesthistory">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="paramMap" type="java.util.Map"/>
+
+	<!-- <resultMap id="incidentMap" class="java.util.HashMap">
+		<result property="agencyCd" column="AGENCY_CD" />
+		<result property="tmpRaceNumber" column="TMP_RACE_NUMBER" />
+		<result property="userNm" column="USER_NM" />
+		<result property="authCd" column="AUTH_CD" />	 
+	</resultMap> -->
+		
+	<!-- 목록 조회 -->
+	<select id="rqhsDAO.selectRqhsList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT *
+		  FROM (
+		        SELECT A.*
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.REG_DATE DESC) / 10 ) LISTCNT
+		          FROM(
+		              SELECT '권한신청' AS DIV_NAME
+		                    ,USER_ID AS ID_VIEW
+		                    ,AGENCY_CD AS NAME_VIEW
+		                    ,APPOR_STATUS AS STATUS
+		                    ,fn_ct_get_code_name('appor_status', APPOR_STATUS ) AS STATUS_VIEW 
+		                    ,CNCL_NOTE AS CNCL_VIEW 
+		                    ,DATE_FORMAT(REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		                    ,REG_DATE
+		                FROM TB_WEB_IT_USER
+		               WHERE USER_ID = #userid#
+		              UNION
+		              SELECT '임시운행등록번호신청' AS DIV_NAME
+		                    ,TMP_RACE_NUMBER AS ID_VIEW
+		                    ,TMP_RACE_AGENCY AS NAME_VIEW
+		                    ,APPOR_STATUS AS STATUS
+		                    ,fn_ct_get_code_name('appor_status', APPOR_STATUS ) AS STATUS_VIEW 
+		                    ,CNCL_NOTE AS CNCL_VIEW
+		                    ,DATE_FORMAT(REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		                    ,REG_DATE
+		                FROM TB_CM_HT_TEMPOPER
+		               WHERE USER_ID = #userid#
+		              ) A
+		          WHERE 1=1
+				   <isEqual prepend="AND" property="searchType" compareValue="1">
+					  A.NAME_VIEW LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+				   <isEqual prepend="AND" property="searchType" compareValue="2">
+					  A.STATUS_VIEW LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+		          ORDER BY A.REG_DATE DESC
+		       )
+		 WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="rqhsDAO.selectRqhsListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+        SELECT COUNT(*) totcnt
+          FROM(
+              SELECT '권한신청' AS DIV_NAME
+                    ,USER_ID AS ID_VIEW
+                    ,fn_ct_get_code_name('agency_cd', AGENCY_CD ) AS NAME_VIEW
+                    ,fn_ct_get_code_name('appor_status', APPOR_STATUS ) AS STATUS_VIEW 
+                    ,CNCL_NOTE AS CNCL_VIEW 
+                    ,DATE_FORMAT(REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+                    ,REG_DATE
+                FROM TB_WEB_IT_USER
+               WHERE USER_ID = #userid#
+              UNION
+              SELECT '임시운행등록번호신청' AS DIV_NAME
+                    ,TMP_RACE_NUMBER AS ID_VIEW
+                    ,TMP_RACE_AGENCY AS NAME_VIEW
+                    ,fn_ct_get_code_name('appor_status', APPOR_STATUS ) AS STATUS_VIEW 
+                    ,CNCL_NOTE AS CNCL_VIEW
+                    ,DATE_FORMAT(REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+                    ,REG_DATE
+                FROM TB_CM_HT_TEMPOPER
+               WHERE USER_ID = #userid#
+              ) A
+          WHERE 1=1
+		   <isEqual prepend="AND" property="searchType" compareValue="1">
+			  A.NAME_VIEW LIKE CONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+		   <isEqual prepend="AND" property="searchType" compareValue="2">
+			  A.STATUS_VIEW LIKE C
+			  ONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+	</select>
+	
+	<!-- 기관명 조회 -->
+	<select id="rqhsDAO.selectMemberList" parameterClass="java.util.HashMap" resultClass="egovMap">
+			/* QUERY ID : rqhsDAO.selectMemberList */
+			SELECT  USER_NM, AUTH_CD, USE_YN, TRIM(AGENCY_CD) AS AGENCY_CD			
+			FROM TB_WEB_IT_USER A			
+          WHERE 1=1                 
+                <isNotNull property="userid"> 
+		   			AND A.USER_ID= #userid#
+		  		</isNotNull>
+	</select>
+	
+		<!-- 임시운행번호 조회 -->
+	<select id="rqhsDAO.selectRaceNumberList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		  	/* QUERY ID : rqhsDAO.selectRaceNumberList */	
+	  		SELECT TMP_RACE_NUMBER FROM TB_CM_HT_TEMPOPER	A		
+        	WHERE 1=1   
+            <isNotNull property="userid"> 
+         		AND A.TMP_RACE_AGENCY = (SELECT  TRIM(AGENCY_CD) AS AGENCY_CD from TB_WEB_IT_USER			
+										 WHERE 1=1 AND user_id = #userid# ) 
+            </isNotNull>
+	</select>
+
+
+     <!-- 권한 위임 요청 -->
+	<insert id="rqhsDAO.insertAuth" parameterClass="java.util.HashMap">		
+		INSERT 
+		  INTO TB_WEB_DT_AUTH
+		       (USER_ID
+		       ,USER_NM
+		       ,AUTH_CD
+		       ,AGENCY_CD
+		       ,AUTH_ID			     
+		       ,APPOR_STATUS
+		       ,REG_ID
+		       ,REG_DATE
+		       ,APPOR_YN)
+		VALUES (#user_id#
+		       ,#user_nm#
+		       ,#auth_cd#
+		       ,#agency_cd#
+		       ,#auth_id#		      
+		       ,'101'
+		       ,#user_id#
+		       ,SYSDATE
+		       ,'Y'
+		       )
+	</insert>
+	
+	<!-- 권한위침요청 여부 체크한다. -->
+	<select id="rqhsDAO.selectApporYn" parameterClass="java.util.HashMap" resultClass="egovMap">
+			select APPOR_YN			
+			from AVDS.TB_WEB_DT_AUTH A			
+          WHERE 1=1                 
+                <isNotEmpty property="userid"> 
+		   			AND A.user_id = #userid#
+		  		</isNotEmpty>		  			
+          		
+	</select>
+	
+	
+</sqlMap>

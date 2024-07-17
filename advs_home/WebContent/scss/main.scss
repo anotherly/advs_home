@@ -1,0 +1,1180 @@
+@import 'svg';
+@import './common';
+
+
+
+
+//common
+.wrap{
+    position:relative;
+    &.on{
+        &::before{
+            position: fixed;
+            width:100%;
+            height:100%;
+            background: #000000;
+            opacity: .2;
+            z-index: 1;
+            content: "";
+        }
+    }
+    
+}
+
+#skip_nav {position:relative;}
+#skip_nav dt {display:none}
+#skip_nav dd{margin:0;}
+#skip_nav dd.on{height: 40px;position: absolute;z-index: 9999;width: 100%;}
+#skip_nav dd a {display:block; position:absolute; top:-50px; left:0; z-index:10; width:100%; background:#e7e7e7; line-height:14px; font-size:18px; color:#333; text-decoration:none; text-align:center;line-height:36px;}
+#skip_nav dd a:active, #skip_nav dd a:focus {top:0;}
+
+//header
+header{
+    @include display-flex;
+    @include align-center;
+    @include position(fixed,$t:0,$l:0 );
+    width:100%;
+    height:110px;
+    z-index:1;
+    //box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    .header{
+        &__inner{
+            //height: 100%;
+            background: #ffffff;
+            overflow: hidden;
+            button{
+                background-color: transparent;
+            }
+            >div{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width:100%;
+                height: 11rem;
+                padding:0 4rem;
+                background: #ffffff;
+                overflow: hidden;
+            }
+            &.on{
+                position: absolute;
+                top: 0;
+                width:100%;
+                background: #ffffff ;
+                z-index: 999;
+                
+                >div{
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+                    overflow: visible;
+                }
+                .logo{
+                    a{
+                        width:100%;
+                        height: 2.5rem;
+                        background: url(../images/wnc/common/img_logo_color.png)no-repeat center;
+                        background-size: cover;
+                    }
+                }
+                #gnb {
+                    overflow: visible;
+                    .depth{
+                        &-1{
+                            color: #000000;
+                            &+ul{
+                                height: 38.6rem;
+                                padding: 3rem 0;
+                                padding-top: 1.6rem;
+                                visibility: visible;
+                            }
+                        }
+                    
+                    }
+                }
+                nav{
+                    a{
+                        color: #797979;
+                    }
+                }
+                .button-sitemap{
+                    background: url(../images/wnc/common/img_btnSiteMap.png);
+                }
+            }
+            
+        }
+    }
+    .logo{
+        max-width: 32.4rem;
+        margin-right: 5rem;
+        flex: 1;
+        a{
+            display: block;
+            width:100%;
+            height: 2.5rem;
+            background: url(../images/wnc/common/img_logo_color.png)no-repeat center;
+            //background-size: cover;
+        }
+    }
+    #gnb{
+        @include d-flex;
+        position: relative;
+        width:60%;
+        height: 100%;
+        overflow: hidden;
+        flex:1;
+        >div{
+            >div{
+                @include d-flex;
+                position: relative;
+                flex:1;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                &.on{
+                    transition:all .2s;
+                    &::before{
+                        @include position(absolute, $l:0, $b:0);
+                        width:100%;
+                        height:.3rem;
+                        background: #0077b7;
+                        transition:all .2s;
+                        content:"";
+                    }
+                    .depth-1{
+                        color:#0077b7 !important;
+                        text-shadow: none !important;
+                    }
+                }
+                >a{
+                    @include d-flex;
+                    width:100%;
+                    height:100%;
+                    
+                }
+            }
+        }
+        .gnb{
+            //@include position(absolute, $l:0);
+            width:100%;
+            height:100%;
+            &-bg{
+                @include position(absolute,$t:11rem, $l:-41.4rem);
+                width: 41.4rem;
+                background: #fafafa;
+                z-index: -1;
+                img{
+                    @include position(absolute,$t:0rem, $l:0);
+                }
+            }
+        }
+        .depth{
+            &-1{
+                position: relative;
+                //width:22rem;
+                @include font(2.2rem,500,#000000);
+                //padding:0 2rem;  
+                &+ul{
+                    //display: none;
+                    position: absolute;
+                    top: 11rem;
+                    width:100%;
+                    height: 0;
+                    //margin: -1.4rem 0;
+                    visibility: hidden;
+                }
+            }
+            &-2{
+                >a{
+                    display: block;
+                    padding: 1.4rem 0;
+                    font-size: 1.8rem;
+                    &:hover{
+                        color:#0077b7;
+                    }
+                }
+                // &+li{
+                //     a{
+                //         margin-top: 2.5rem;
+                //     }
+                    
+                // }
+            }
+        }
+        
+    }
+    nav{
+        margin: -1.75rem;
+        a{
+            @include font(1.5rem,500,#797979);
+            padding:1.75rem;
+            &+a{
+                position:relative;
+                &::before{
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width:1px;
+                    height:1.2rem; 
+                    background: #797979;
+                    opacity: .6;
+                    transform: translateY(-50%);
+                    content:""
+                }
+            }
+        }
+    }
+    .button-sitemap{
+        width:3.4rem;
+        height:2.8rem;
+        margin-left: 5rem;
+        background: url(../images/wnc/common/img_btnSiteMap.png);
+    }
+}
+// .hover-bar-wrap{
+//     @include position(absolute, $l:-22rem, $b:0);
+//     width:100%;
+//     z-index: -1
+// }
+// #gnb .gnb-hover-bar{
+//     @include position(absolute, $l:0, $b:-3px);
+//     width: 22%;
+//     height: 0;
+//     background:#3c69b6;
+//     transition:height 0.2s;
+//     &.on{
+//         height: 3px;
+//     }
+// }
+
+// .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, .5);z-index:10;}
+// .overlay.on{display:block;}
+// .over-hidden{overflow:hidden !important;}
+// .over-int{overflow:initial !important;}
+
+.fp-viewing-page1{
+    header{
+        background: transparent;
+        box-shadow: none;
+        .header{
+            &__inner{
+                >div{
+                    background: transparent;
+                }
+            }
+        }
+        .logo{
+            a{
+                background: url(../images/wnc/common/img_logo_head.png) no-repeat center;
+            }
+        }
+        #gnb{
+            .depth{
+                &-1{
+                    color:#ffffff;
+                    text-shadow: 0 0 .3rem rgba(0,0,0,0.28);
+                }
+            }
+        }
+        nav{
+            a{
+                color:#ffffff;
+                
+                &+a{
+                    position:relative;
+                    &::before{
+                        background: #ffffff;
+                        opacity: .6;
+                    }
+                }
+            }
+        }
+        .button-sitemap{
+            width:3.4rem;
+            height:2.8rem;
+            margin-left: 5rem;
+            background: url(../images/wnc/common/img_btnSiteMap-white.png);
+        }
+    }
+}
+
+//content
+.fp-tableCell{
+    @include display-flex;
+    @include align-center;
+    padding-top:11rem;
+   
+}
+.section{
+    &.first{
+        background: url(../images/wnc/main/main-visual.png)no-repeat center;
+        background-size: cover;
+        .visual{
+            &-text{
+                width:100%;
+                height:100%;
+                //margin-top:17.5rem;
+                margin-left: 16.2rem;
+                h1{
+                    margin-top: 6.5rem;
+                    @include font(4.6rem,600,#fff);
+                    text-shadow: 3px 3px 19px rgba(17, 40, 87, 0.9);
+                    em{
+                        display: block;
+                        margin-bottom: 2rem;
+                        @include font(2.4rem,600,#fff);
+                    }
+                    span{
+                        @include font(4.6rem,600,#112857);
+                        text-shadow: 0 0 2.9rem rgba(255, 255, 255, 0.35);
+                    }
+                }
+            }
+            &-bottom{
+                @include position(absolute,$b:0,$r:0 );
+                &__right{
+                    width:122rem;
+                    height:30.8rem;
+                    background:#112857;
+                    ul{
+                        height: 100%;
+                        li{
+                            width: 32rem;
+                            a{
+                                @include display-flex;
+                                @include flex-column;
+                                height:100%;
+                                padding:4.5rem 4rem 2.5rem 4rem;
+                                h3{
+                                    font-size: 2.6rem;
+                                    font-weight: 600;    
+                                    color:#ffffff;
+                                    span{
+                                        display: block;
+                                        margin-bottom: 2rem;
+                                        font-size:1.8rem;
+                                        font-weight: 500;    
+                                        color:#f8d187;
+                                    }
+                                }
+                                p{
+                                    margin-top: 2.5rem;
+                                    font-size:1.6rem;
+                                    line-height: 2.6rem;
+                                    color:#bcc7dc;
+                                    word-break: keep-all;
+                                }
+                                i{
+                                    display: block;
+                                    width:3.4rem;
+                                    height: 3.4rem;
+                                    margin-top: auto;
+                                    margin-left: auto;
+                                    border: 1px solid rgba(255, 255, 255, 0.5);
+                                    border-radius: 100%;
+                                    background: icon(arrow-right, ffffff) no-repeat center;
+                                }
+                            }
+                            &:nth-child(1){
+                                background: #ffffff;
+                                h3{
+                                    color:#000000;
+                                    span{
+                                        color:#244da0;
+                                    }
+                                }
+                                p{
+                                    color:#545454;
+                                }
+                                i{
+                                    border-color: rgba(17, 40, 87, 0.5);
+                                    background: icon(arrow-right, 112857) no-repeat center;
+                                }
+                            }
+                            &:nth-child(2){
+                                background: #132e65;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.second{
+        background: #eff2f6;
+        .second{
+            &__inner{
+                max-width: 115rem;
+                margin: 0 auto;
+            }
+            &-top{
+                >div{
+                    width: calc(50% - 1rem);
+                }
+                .tit{
+                    @include font(3rem,500,#000000);
+                    &-wrap{
+                        margin-bottom:2.5rem;
+                    }
+                }
+                .board{
+                    &-box{
+                        margin: 0 -.5rem;
+                        >div{
+                            padding:0 .5rem;
+                            flex:1;
+                        }
+                        a{
+                            display: block;
+                            position: relative;
+                            padding:3.5rem 3rem;
+                            background: #ffffff;
+                            border:solid 1px #cfd6e1;
+                            box-sizing: border-box;
+                            transition: all .2s;
+                            &:hover{
+                                box-shadow: 18px 21.4px 36px 0 rgba(0, 14, 54, 0.28);
+                                border-color: #ffb73a;
+                                transition: all .2s;
+                                &::before{
+                                    @include position(absolute,$t:0,$l:0 );
+                                    width:100%;
+                                    height:100%;
+                                    border: solid 1px #ffb73a;
+                                    transition: all .2s;
+                                    content:""
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                .box{
+                    &-tit{
+                        @include text-overflow2;
+                        @include font(2.2rem,500,#000000);
+                        height: 6.4rem;
+                        margin-bottom:2rem;
+                        line-height: 1.41;
+                    }
+                    &-txt{
+                        @include text-overflow3;
+                        height: 7.6rem;
+                        font-size: 1.6rem;
+                        line-height: 1.63;
+                        letter-spacing: -0.4px;
+                        color: #606060;
+                    }
+                    &-date{
+                        margin-top: 3rem;
+                        font-size:1.4rem;
+                        color: #606060;
+                    }
+                }
+                .button-more{
+                    width:1.9rem;
+                    height:1.9rem;
+                    background: url(../images/wnc/main/icon-plus.png);
+                    background-size: cover;
+                }
+            }
+            &-bottom{
+                .menu-link{
+                    text-align: center;
+                    ul{
+                        height:100%;
+                        background: #4075af;
+                        li{
+                            width:13rem;
+                            padding:2rem;
+                            background: #4075af;
+                            transition:all .2s;
+                            >a{
+                                @include d-flex;
+                                @include flex-column;
+                                height: 100%;
+                            }
+                            .tit{
+                                @include d-flex;
+                                height: 4.2rem;
+                                margin-top: 3rem;
+                                margin-bottom: 2rem;
+                                font-size:1.8rem;
+                                font-weight: 400;
+                                color:#ffffff;
+                                line-height: 2.4rem;
+                            }
+                            .icon-wrap{
+                                @include d-flex;
+                                height: 5.3rem;
+                                i{
+                                    display: block;
+                                    margin: 0 auto;
+                                }
+                            }
+                            &.v-data{
+                                .icon-wrap{
+                                    i{
+                                        width:4.9rem;
+                                        height: 5.3rem;
+                                        background: url(../images/wnc/main/icon-vdata.png);
+                                    }
+                                   
+                                }
+                            }
+                            &.drive{
+                                .icon-wrap{
+                                    i{
+                                        width:6rem;
+                                        height: 3.7rem;
+                                        background: url(../images/wnc/main/icon-video.png);
+                                    }
+                                }
+                                
+                            }
+                            &.sensor{
+                                .icon-wrap{
+                                    i{
+                                        width:6.7rem;
+                                        height: 5.3rem;
+                                        background: url(../images/wnc/main/icon-sensor.png);
+                                    }
+                                }
+                            }
+                            &.learn{
+                                .icon-wrap{
+                                    i{
+                                        width:5.5rem;
+                                        height: 5.3rem;
+                                        background: url(../images/wnc/main/icon-learn.png);
+                                    }
+                                }
+                                
+                            }
+                            &.ta{
+                                .icon-wrap{
+                                    i{
+                                        width:7.3rem;
+                                        height: 5.2rem;
+                                        background: url(../images/wnc/main/icon-ta.png);
+                                    }
+                                }
+                            }
+                            &.report{
+                                .icon-wrap{
+                                    i{
+                                        width:7.5rem;
+                                        height: 4.8rem;
+                                        background: url(../images/wnc/main/icon-report.png);
+                                    }
+                                }   
+                            }
+                            &:hover{
+                                position: relative;
+                                background: #ffb73a;
+                                box-shadow: 12.2px 14.6px 24px 0 rgba(0, 0, 0, 0.34);
+                                transition:all .2s;
+                                transform: translateY(-1rem);
+                                &::before{
+                                    position: absolute;
+                                    left:50%;
+                                    bottom:2rem;
+                                    width:3.4rem;
+                                    height:3.4rem;
+                                    background: url(../images/wnc/main/icon-clicklink.png)no-repeat;
+                                    background-size: 100%;
+                                    transform: translateX(-50%);
+                                    content: "";
+                                }
+                                .tit{
+                                    color:#000000;
+                                }
+                                >a{
+                                    transform: translateY(-1rem);
+                                }
+                                &.v-data{
+                                    .icon-wrap{
+                                        i{
+                                            width:4.9rem;
+                                            height: 5.3rem;
+                                            background: url(../images/wnc/main/icon-vdata__on.png);
+                                        }
+                                       
+                                    }
+                                }
+                                &.drive{
+                                    .icon-wrap{
+                                        i{
+                                            width:6rem;
+                                            height: 3.7rem;
+                                            background: url(../images/wnc/main/icon-video__on.png);
+                                        }
+                                    }
+                                    
+                                }
+                                &.sensor{
+                                    .icon-wrap{
+                                        i{
+                                            width:6.7rem;
+                                            height: 5.3rem;
+                                            background: url(../images/wnc/main/icon-sensor__on.png);
+                                        }
+                                    }
+                                }
+                                &.learn{
+                                    .icon-wrap{
+                                        i{
+                                            width:5.5rem;
+                                            height: 5.3rem;
+                                            background: url(../images/wnc/main/icon-learn__on.png);
+                                        }
+                                    }
+                                    
+                                }
+                                &.ta{
+                                    .icon-wrap{
+                                        i{
+                                            width:7.3rem;
+                                            height: 5.2rem;
+                                            background: url(../images/wnc/main/icon-ta__on.png);
+                                        }
+                                    }
+                                }
+                                &.report{
+                                    .icon-wrap{
+                                        i{
+                                            width:7.5rem;
+                                            height: 4.8rem;
+                                            background: url(../images/wnc/main/icon-report__on.png);
+                                        }
+                                    }   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .board-box{
+            >div{
+                .tit{
+                    font-size:2.2rem;
+                }
+            }
+            
+        }
+    }
+    &.footer{
+        height: 19.5rem !important;
+        .fp-tableCell{
+            height: 100% !important;
+        }
+        
+    }
+    &-paging{
+        @include position(absolute,$b:0,$l:0 );
+        >div{
+            @include d-flex;
+            width:6rem;
+            height:6rem;
+            background: #ffffff;
+            &.num{
+                background: #112857;
+                font-size: 1.8rem;
+                color:#ffffff;
+                letter-spacing: 2px;
+                strong{
+                    font-size:3rem;
+                    color:#ffd284;
+                }
+            }
+            &.next{
+                background:#ffffff icon(arrow-bottom, ffffff) no-repeat center;
+            }
+            &.prev{
+                background:#ffffff icon(arrow-bottom, ffffff) no-repeat center;
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+//footer
+.footer{
+    .fp-tableCell{
+        display: table-cell;
+        vertical-align: middle;
+        padding-top: 0;
+    }
+    background: #112857;
+    &__inner{
+        max-width: 140rem;
+        height: 19.4rem;
+        margin: 0 auto;
+        
+    }
+    &-banner{
+        >div{
+            width:17rem;
+            height: 5rem;
+            a{
+                @include d-flex;
+                width:100%;
+                height:100%;
+                background: #ffffff;
+            }
+            &+div{
+                margin-left: 1px;
+            }
+        }
+    }
+    address{
+        margin-top: 3rem;
+        p{
+            font-size:1.7rem;
+            color:#e2e5eb;
+            span{
+                font-size:1.7rem;
+                font-weight: 500;
+            }
+        }
+        .copyright{
+            margin-top: 1.5rem;
+            font-size:1.6rem;
+            color:#b4bcc7;
+        }
+    }
+}
+.gnb-header, .mobile-user{
+    display: none;
+}
+/*================ responsive ====================*/
+@media (max-width: 1400px) {
+    header{
+        .logo{
+            width:18%;
+            flex:none;
+            a{
+                background-size: 100% !important;
+            }
+        }
+        #gnb {
+            .depth{
+                &-1{
+                    font-size: 1.8rem;
+                }
+            }
+        }
+        nav{
+            a{
+                padding:0.75rem;
+            }
+        }
+    }
+    .section{
+        &.first{
+            .visual{
+                &-bottom{
+                    width:calc(100% - 6rem);
+                    
+                    &__right{
+                        width: 100%;
+                        height:auto;
+                    }
+                }
+            }
+        }
+    } 
+  }
+
+@media (max-width: 1200px){
+    header{
+        .logo{
+            width:32.4rem;
+            flex:none;
+            a{
+                background-size: 100% !important;
+            }
+        }
+        #gnb{
+            display: none;
+        }
+        .gnb-bg{
+            display: none !important;
+        }
+        
+        nav{
+            a{
+                padding:1.75rem;
+            }
+        } 
+    }
+    .header{
+        &__inner{
+            >div{
+                justify-content: space-between;
+            }
+            .depth-1{
+                display: none !important;
+            }
+            &.on{
+                #gnb{
+                    @include display-flex;
+                    position: absolute;
+                    top: 11rem;
+                    left: 0;
+                    width: 100%;
+                    height: auto;
+                    .depth-1{
+                        position: absolute;
+                        top: 0;
+                        display: block !important;
+                        height: 6rem;
+                        padding: 3rem 0;
+                        &+ul{
+                            top: 6rem;
+                            padding:0 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    
+}
+
+@media (max-width: 720px){
+    .fp-tableCell{
+        align-items: flex-start;
+        padding-top: 0;
+    }
+    header{
+        height: 12rem;
+        .logo{
+            flex: 1;
+        }
+        nav{
+            display: none;
+        } 
+        .button-sitemap{
+            width: 4.7rem !important; 
+            height: 3.9rem !important;
+        }
+    }
+    .header{
+        &__inner{
+            height: 100% !important;
+            >div{
+                height: 100% !important;
+                //background: none !important;
+            }
+            #gnb{
+                right: -200% !important;
+            }
+            &.on{
+                #gnb{
+                    display: block;
+                    position: fixed;
+                    top: 0;
+                    left: auto;
+                    right: 0;
+                    height: 100vh;
+                    width:87.5%;
+                    z-index: 999;
+                    background: #ffffff;
+                    .gnb{
+                        flex-direction: column;
+                        &-bg{
+                            display: none;
+                        }
+                        >div{
+                            flex-direction: column;
+                            &.on{
+                                &::before{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .depth{
+                        &-1{
+                            position: unset;
+                            top: 0;
+                            height:auto;
+                            padding:2rem 0;
+                            font-size:3rem;
+                            color: #4075af;
+                            background: #eff2f6;
+                            text-shadow: none;
+                            &+ul{
+                                @include display-flex;
+                                flex-wrap: wrap;
+                                position: unset;
+                                top: 0;
+                                height: 100%;
+                                visibility: visible;
+                                li{
+                                    width: 50%;
+                                    border-bottom:1px solid #eff2f6;
+                                    &:nth-child(odd){
+                                        border-right:1px solid #eff2f6;
+                                    }
+                                    // &:nth-last-child(-n+2){
+                                    //     border-bottom:none;
+                                    // }
+                                }
+                            }
+                        }
+                        &-2{
+                            @include d-flex;
+                            height: 7rem;
+                            a{
+                                font-size: 2.2rem;
+                            }
+                        }
+                    }
+                }
+            }
+            &.open{
+                background: transparent !important;
+                >div{
+                    background: none !important;
+                }
+                #gnb{
+                    right: 0 !important;
+                    .gnb{
+                        height: calc(100vh - 33rem);
+                        overflow-y: scroll;
+                        padding-bottom:10rem;
+                    }
+                    .depth{
+                        &-1{
+                            &+ul{
+                                height: auto !important;
+                                padding: 0 !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .gnb-header{
+        display: flex;
+        justify-content: space-between;
+        padding: 4.5rem 3rem;
+        height:12rem;
+        .logo{
+            width: 3.19rem !important;
+            height: 2.4rem !important;
+            a{
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .button-close{
+            width: 2.8rem;
+            height: 2.8rem;
+            background: icon(close, '000')no-repeat center;
+            background-size: cover;
+        }
+    }
+    .mobile-user{
+        @include display-flex;
+        height: 21rem;
+        >div{
+            flex:1;
+            height: 100%;
+            a{
+                @include d-flex;
+                @include flex-column;
+                background: #4075af;
+                span{
+                    display: inline-block;
+                    margin-top: 2.7rem;
+                    font-size: 2.2rem;
+                    color:#ffffff;
+                }
+            }
+            i{
+                display: block;
+                width: 5.5rem;
+                height: 5.5rem;
+                background-position: center !important;
+            }
+            &.join{
+                i{
+                    background: url(../images/wnc/common/icon-join.png)no-repeat;
+                    background-size: 5.5rem;
+                }
+            }
+            &.idpw{
+                i{
+                    background: url(../images/wnc/common/icon-idpw.png)no-repeat;
+                    background-size: 3.6rem 4.9rem;
+                }
+            }
+            &.login{
+                i{
+                    width:3.2rem;
+                    height:4.9rem;
+                    background: url(../images/wnc/common/icon-login.png)no-repeat;
+                    background-size: 3.2rem 4.9rem;
+                }
+            }
+        }
+    }
+    .section{
+        &-paging{
+            display:none;
+        }
+        &.first{
+            height: 100vh;
+            .fp-tableCell{
+                padding-top: 12rem;
+            }
+            background: url(../images/wnc/main/main-visual__mobile.png) no-repeat center;
+            .visual{
+                &-text{
+                    //margin-top: 6rem;
+                    margin-left: 5rem;
+                }
+                &-bottom{
+                    bottom: 3rem;
+                    width:calc(100% - 3rem);
+                    &__right{
+                        width: 100%;
+                        height:25rem;
+                        ul{
+                            li{
+                                a{
+                                    padding:4rem 2rem;
+                                    h3{
+                                        word-break: keep-all;
+                                        line-height: 3.6rem;
+                                    }
+                                    p{
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.second{
+            height: auto !important;
+            padding: 6rem 3rem;
+            .fp-tableCell{
+                height: auto !important;
+            }
+            .second{
+                
+                &__inner{
+                    max-width: none;
+                    width:100%;
+                }
+                &-top{
+                    flex-direction: column;
+                    >div{
+                        width:100%;
+                        &+div{
+                            margin-top: 8rem;
+                        }
+                    }
+                    .board{
+                        &-box{
+                            margin: 0 -0.7rem;
+                            >div{
+                                padding:0 .7rem;
+                            }
+                        }
+                    }
+                    .box{
+                        &-txt{
+                            //height: 8.1rem;
+                            font-size:1.8rem;
+                            line-height: 2.7rem;
+                        }
+                    }
+                }
+                &-bottom{
+                    flex-direction: column;
+                    .menu-link{
+                        ul{
+                            flex-wrap: wrap;
+                            li{
+                                width: calc(100% / 3);
+                                padding:4.4rem 0 3.5rem 0;
+                                
+                                &+li{
+                                    border-left:1px solid rgba(255,255,255, 0.3);
+                                }
+                                &:nth-child(4){
+                                    border-left: none;
+                                }
+                                &:nth-child(n+4){
+                                    border-top:1px solid rgba(255,255,255, 0.3);
+                                }
+                                .icon-wrap{
+                                    i{
+                                        background-size: 100% !important;
+                                    }
+                                }
+                                .tit{
+                                    margin-top: 4rem;
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    } 
+                    .banner{
+                        margin-top: 2rem;
+                        height: 39.4rem;
+                        >div{
+                            height: 100%;
+                        }
+                        a{
+                            display: block;
+                            height: 100%;
+                            img{
+                                width: 100%;
+                                max-height: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer{
+        &__inner{
+            align-items: flex-start !important;
+            flex-direction: column;
+            padding:5rem 3rem;
+            height: auto;
+            address{
+                margin-bottom: 4rem;
+                >div{
+                    flex-direction: column;
+                    p{
+                        margin-left: 0 !important;
+                        line-height: 2.8rem;
+                        
+                    }
+                }
+                .copyright{
+                    margin-top: 4rem;
+                }
+            }
+        }
+        &-banner{
+            width:100%;
+            >div{
+                flex:1;
+                height:7rem;
+            }
+        }
+    }
+}

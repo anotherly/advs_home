@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="publicDset">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="publicDsetMap" class="java.util.HashMap">
+		<result property="bSeq" column="B_SEQ" />
+		<result property="bbsSeq" column="BBS_SEQ" />
+		<result property="bFromDay" column="B_FROM_DAY" />
+		<result property="bToDay" column="B_TO_DAY" />
+		<result property="bImportantYn" column="B_IMPORTANT_YN" />
+		<result property="bTitle" column="B_TITLE" />
+		<result property="bContent" column="B_CONTENT"	jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="bAttachCnt" column="B_ATTACH_CNT" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="bPassword" column="B_PASSWORD" />
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="weather" column="WEATHER" />
+		<result property="roadSituation" column="ROAD_SITUATION" />
+		<result property="roadTypeCd" column="ROAD_TYPE_CD" />
+		<result property="actInfoType" column="ACT_INFO_TYPE" />
+		<result property="etcInfo" column="ETC_INFO" />
+		<result property="bdwrSeq" column="BDWR_SEQ" />
+		<result property="saveNm" column="SAVE_NM" />
+		<result property="realNm" column="REAL_NM" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="carType" column="CAR_TYPE" />
+		<result property="carModel" column="CAR_MODEL" />
+		<result property="movieSensorModel" column="MOVIE_SENSOR_MODEL" />
+		<result property="lidarModel" column="LIDAR_MODEL" />
+		<result property="radarModel" column="RADAR_MODEL" />
+		<result property="weatherView" column="WEATHER_VIEW" />
+		<result property="roadSituationView" column="ROAD_SITUATION_VIEW" />
+		<result property="roadTypeCdView" column="ROAD_TYPE_CD_VIEW" />
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="drivingModeView" column="DRIVING_MODE_VIEW" />
+		<result property="actInfoTypeView" column="ACT_INFO_TYPE_VIEW" />
+		<result property="dataType" column="DATA_TYPE" />
+		<result property="dataTypeView" column="DATA_TYPE_VIEW" />
+		<result property="fileSizeView" column="FILE_SIZE_VIEW" />
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="bdwrTtlNm" column="BDWR_TTL_NM" />
+		<result property="collectLoc" column="COLLECT_LOC" />
+		<result property="collectScenario" column="COLLECT_SCENARIO" />
+		<result property="collectTime" column="COLLECT_TIME" />
+		<result property="listcnt" column="LISTCNT" />
+		<result property="downloadcnt" column="DOWNLOADCNT" />
+	</resultMap>
+
+	<resultMap id="datasetMap" class="java.util.HashMap">
+		<result property="bdwrSeq" column="BDWR_SEQ" />
+		<result property="bbsSeq" column="BBS_SEQ" />
+		<result property="bdwrTtlNm" column="BDWR_TTL_NM" />
+		<result property="bdwrCts" column="BDWR_CTS"		jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="dataForm" column="DATA_FORM" />
+		<result property="iqurNctn" column="IQUR_NCTN" />
+		<result property="attachFilename" column="ATTACH_FILENAME" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="fileSizeView" column="FILE_SIZE_VIEW" />
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="regId" column="REG_ID" />
+		<result property="bbsGroupSeq" column="BBS_GROUP_SEQ" />
+	</resultMap>
+
+	<parameterMap id="datasetParamMap" class="java.util.HashMap">
+		<parameter property="bbs_seq"/>
+		<parameter property="bbs_seq"/>
+		<parameter property="bdwr_ttl_nm"/>
+		<parameter property="bdwr_cts" jdbcType="CLOB"/>
+		<parameter property="data_form"/>
+		<parameter property="iqur_nctn"/>
+		<parameter property="attach_filename"/>
+		<parameter property="file_size"/>
+		<parameter property="reg_id"/>
+		<parameter property="bbs_group_seq"/>
+	</parameterMap>
+
+	<!-- 목록 조회 -->
+	<select id="publicDsetDAO.selectPublicDsetList" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*QueryID: publicDsetDAO.selectPublicDsetList*/
+		SELECT *
+		  FROM (
+		        SELECT A.*
+				      ,(SELECT CODE_DETL_NM FROM TB_CM_CT_DETAILCODE WHERE CODE_CD= #scenario_code1# AND A.COLLECT_LOC = CODE_DETL_CD ) AS SCENARIO_CODE1
+					  ,(SELECT CODE_DETL_NM FROM TB_CM_CT_DETAILCODE WHERE CODE_CD= #scenario_code2# AND A.COLLECT_TIME = CODE_DETL_CD ) AS SCENARIO_CODE2
+					  ,(SELECT CODE_DETL_NM FROM TB_CM_CT_DETAILCODE WHERE CODE_CD= #scenario_code3# AND A.COLLECT_SCENARIO = CODE_DETL_CD ) AS SCENARIO_CODE3
+ 		              ,B.MXFILE
+		              ,B.FILE_SIZE
+		              ,C.CAR_TYPE
+		              ,C.CAR_MODEL
+		              ,C.MOVIE_SENSOR_MODEL
+		              ,C.LIDAR_MODEL
+		              ,C.RADAR_MODEL
+		              ,fn_ct_get_code_name('weather', A.WEATHER ) AS WEATHER_VIEW
+		              ,fn_ct_get_code_name('road_situation', A.ROAD_SITUATION ) AS ROAD_SITUATION_VIEW
+		              ,fn_ct_get_code_name('road_type_cd', A.ROAD_TYPE_CD ) AS ROAD_TYPE_CD_VIEW
+		              ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
+		              ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
+		              ,fn_ct_get_code_name('data_type', A.DATA_TYPE ) AS DATA_TYPE_VIEW
+ 					  ,IFNULL(FORMAT(IFNULL(B.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+		              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		              ,D.BDWR_TTL_NM
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.B_SEQ ASC) ) LISTCNT
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.B_SEQ DESC) / 10 ) PAGECNT
+		              ,(SELECT COUNT(W.B_SEQ) CNT
+		                 FROM TB_WEB_HT_DOWNLOAD W
+		                WHERE A.B_SEQ = W.B_SEQ
+		               ) DOWNLOADCNT
+		          FROM TB_WEB_HT_APPEND_FILE B, TB_WEB_HT_BBS E, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+					WHERE 1=1 
+					AND A.B_SEQ = B.B_SEQ 
+					AND A.BBS_SEQ = E.BBS_SEQ
+		           AND E.BBS_GROUP_SEQ = #bbs_group_seq#
+						<isNotEmpty property="searchWord">
+							<isEqual prepend="AND" property="searchType" compareValue="0">
+								(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%') OR A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+							<isEqual prepend="AND" property="searchType" compareValue="1">
+								(A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+							<isEqual prepend="AND" property="searchType" compareValue="2">
+								(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode1">
+							A.COLLECT_LOC = #searchScenarioCode1#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode2">
+							A.COLLECT_TIME = #searchScenarioCode2#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode3">
+							A.COLLECT_SCENARIO = #searchScenarioCode3#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="bbs_seq">
+							A.BBS_SEQ = #bbs_seq#
+						</isNotEmpty>
+		         ORDER BY A.B_SEQ DESC
+		       ) F
+		 WHERE PAGECNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="publicDsetDAO.selectPublicDsetListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+	/*QueryID: publicDsetDAO.selectPublicDsetListTotCnt*/
+        SELECT COUNT(*) totcnt
+          FROM TB_WEB_HT_APPEND_FILE B, TB_WEB_HT_BBS E, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+					WHERE 1=1 
+					AND A.B_SEQ = B.B_SEQ 
+					AND A.BBS_SEQ = E.BBS_SEQ
+           AND E.BBS_GROUP_SEQ = #bbs_group_seq#
+						<isNotEmpty property="searchWord">
+							<isEqual prepend="AND" property="searchType" compareValue="0">
+								(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%') OR A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+							<isEqual prepend="AND" property="searchType" compareValue="1">
+								(A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+							<isEqual prepend="AND" property="searchType" compareValue="2">
+								(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%'))
+							</isEqual>
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode1">
+							A.COLLECT_LOC = #searchScenarioCode1#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode2">
+							A.COLLECT_TIME = #searchScenarioCode2#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchScenarioCode3">
+							A.COLLECT_SCENARIO = #searchScenarioCode3#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="bbs_seq">
+							A.BBS_SEQ = #bbs_seq#
+						</isNotEmpty>
+				
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="publicDsetDAO.selectPublicDsetInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*QueryID: publicDsetDAO.selectPublicDsetInfo*/
+		SELECT SUBSTR(A.B_CONTENT, 1, CHAR_LENGTH(A.B_CONTENT)) AS B_CONTENT
+              ,A.*
+              ,B.MXFILE
+<!--               ,B.REAL_NM -->
+              ,B.FILE_SIZE
+              ,C.CAR_TYPE
+              ,C.CAR_MODEL
+              ,C.MOVIE_SENSOR_MODEL
+              ,C.LIDAR_MODEL
+              ,C.RADAR_MODEL
+              ,fn_ct_get_code_name('weather', A.WEATHER ) AS WEATHER_VIEW
+              ,fn_ct_get_code_name('road_situation', A.ROAD_SITUATION ) AS ROAD_SITUATION_VIEW
+              ,fn_ct_get_code_name('road_type_cd', A.ROAD_TYPE_CD ) AS ROAD_TYPE_CD_VIEW
+              ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
+              ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
+              ,fn_ct_get_code_name('data_type', A.DATA_TYPE ) AS DATA_TYPE_VIEW
+              ,IFNULL(FORMAT(IFNULL(B.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+              ,D.BDWR_TTL_NM
+              ,(SELECT COUNT(W.B_SEQ) CNT
+                 FROM TB_WEB_HT_DOWNLOAD W
+                WHERE A.B_SEQ = W.B_SEQ
+               ) DOWNLOADCNT
+          FROM TB_WEB_HT_APPEND_FILE B, TB_WEB_HT_BBS E, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+					WHERE 1=1 
+					AND A.B_SEQ = B.B_SEQ 
+					AND A.BBS_SEQ = E.BBS_SEQ
+	       AND A.B_SEQ = #b_seq#
+	       AND A.BBS_SEQ = #bbs_seq#
+	</select>
+
+	<!-- 게시글 등록 -->
+	<insert id="publicDsetDAO.insertPublicDset" parameterClass="java.util.HashMap">
+		/*publicDsetDAO.insertPublicDset*/
+		INSERT 
+		  INTO TB_WEB_HT_BOARD 
+		       (B_SEQ
+		       ,BBS_SEQ
+		       ,B_FROM_DAY
+		       ,B_TO_DAY
+		       ,B_IMPORTANT_YN
+		       ,B_TITLE
+		       ,B_CONTENT
+		       ,B_ATTACH_CNT
+		       ,VEHICLE_ID
+		       ,B_PASSWORD
+		       ,DRIVING_MODE
+		       ,WEATHER
+		       ,ROAD_SITUATION
+		       ,ROAD_TYPE_CD
+		       ,ACT_INFO_TYPE
+		       ,ETC_INFO
+		       ,BDWR_SEQ
+		       ,DATA_TYPE
+		       ,COLLECT_LOC
+		       ,COLLECT_SCENARIO
+		       ,COLLECT_DAY
+		       ,COLLECT_TIME
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES (#b_seq#
+		       ,#bbs_seq#
+		       ,DATE_FORMAT(#b_from_day#,'%Y-%m-%d')
+		       ,DATE_FORMAT(#b_to_day#,'%Y-%m-%d')
+		       ,#b_important_yn#
+		       ,#b_title#
+		       ,#b_content#
+		       ,#b_attach_cnt#
+		       ,#vehicle_id#
+		       ,#b_password#
+		       ,#driving_mode#
+		       ,#weather#
+		       ,#road_situation#
+		       ,#road_type_cd#
+		       ,#act_info_type#
+		       ,#etc_info#
+		       ,#bdwr_seq#
+		       ,#data_type#
+		       ,#collect_loc#
+		       ,#collect_scenario#
+		       ,#collect_day#
+		       ,#collect_time#
+		       ,#reg_id#
+		       ,NOW())
+	</insert>
+
+	<!-- CHANGE_ID.nextval -->
+	<select id="publicDsetDAO.sequenceBseq" parameterClass="java.util.HashMap" resultClass="String">
+		/*publicDsetDAO.sequenceBseq*/
+		SELECT IFNULL(MAX(B_SEQ),0)+1 FROM TB_WEB_HT_BOARD
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="publicDsetDAO.updatePublicDset" parameterClass="java.util.HashMap">
+		/*publicDsetDAO.updatePublicDset*/
+		UPDATE TB_WEB_HT_BOARD
+		   SET B_FROM_DAY			= DATE_FORMAT(#b_from_day#,'%Y-%m-%d %H:%i:%s')
+		      ,B_TO_DAY				= DATE_FORMAT(#b_to_day#,'%Y-%m-%d %H:%i:%s')
+		      ,B_IMPORTANT_YN	= #b_important_yn#
+		      ,B_TITLE				= #b_title#
+		      ,B_CONTENT			= #b_content#
+		      ,B_ATTACH_CNT		= #b_attach_cnt#
+		      ,VEHICLE_ID			= #vehicle_id#
+		      ,B_PASSWORD			= #b_password#
+		      ,DRIVING_MODE		= #driving_mode#
+		      ,WEATHER				= #weather#
+		      ,ROAD_SITUATION	= #road_situation#
+		      ,ROAD_TYPE_CD		= #road_type_cd#
+		      ,ACT_INFO_TYPE	= #act_info_type#
+		      ,ETC_INFO				= #etc_info#
+		      ,BDWR_SEQ				= #bdwr_seq#
+		      ,DATA_TYPE			= #data_type#
+		      ,COLLECT_LOC			= #collect_loc#
+		      ,COLLECT_SCENARIO		= #collect_scenario#
+		      ,COLLECT_DAY               = #collect_day#
+		      ,COLLECT_TIME			= #collect_time#
+		      ,UPDATE_ID			= #reg_id#
+		      ,UPDATE_DATE		= NOW()
+		WHERE 1=1
+		  AND B_SEQ		= #b_seq#
+		  AND BBS_SEQ	= #bbs_seq#
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="publicDsetDAO.deletePublicDset" parameterClass="java.util.HashMap">
+		/*publicDsetDAO.deletePublicDset*/
+		DELETE FROM TB_WEB_HT_BOARD
+		 WHERE 1=1
+		   AND B_SEQ = #b_seq#
+		   AND BBS_SEQ = #bbs_seq#
+	</delete>
+
+	<!-- 첨부파일 등록 -->
+	<insert id="publicDsetDAO.insertAppend" parameterClass="java.util.HashMap">
+	/*QueryID: publicDsetDAO.insertAppend*/
+		INSERT 
+		  INTO TB_WEB_HT_APPEND 
+		       (FILE_SEQ
+		       ,B_SEQ
+		       ,SAVE_NM
+		       ,REAL_NM
+		       ,FILE_SIZE
+		       ,FILE_TYPE
+		       ,FILE_EXT
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES ((SELECT IFNULL(MAX(FILE_SEQ),0)+1 FROM TB_WEB_HT_APPEND a)
+		       ,#b_seq#
+		       ,#save_nm#
+		       ,#real_nm#
+		       ,#file_size#
+		       ,#file_type#
+		       ,#file_ext#
+		       ,#reg_id#
+		       ,NOW())
+	</insert>
+
+	<!-- 첨부파일 삭제 -->
+	<delete id="publicDsetDAO.deleteAppend" parameterClass="java.util.HashMap">
+		/*publicDsetDAO.deleteAppend*/
+		DELETE FROM TB_WEB_HT_APPEND_FILE
+		 WHERE 1=1
+		   AND B_SEQ = #b_seq#
+	</delete>
+	
+	<!-- 사고영상 등록 -->
+	<insert id="publicDsetDAO.insertMxFile" parameterClass="java.util.HashMap">
+		/*publicDsetDAO.insertMxFile*/
+		INSERT 
+		  INTO TB_WEB_HT_APPEND_FILE 
+		       (B_SEQ
+		       ,BBS_SEQ
+		       ,SEQ
+		       ,MXFILE
+		       ,FILE_SIZE
+		       ,FILE_TYPE
+		       ,FILE_PATH)
+		VALUES (#b_seq#
+		       ,#bbs_seq#
+		       ,#seq#
+		       ,#mxfile#
+		       ,#file_size#
+		       ,#file_type#
+		       ,#file_path#)
+	</insert>
+	
+	<!-- 사고동영상 목록 조회 -->
+	<select id="publicDsetDAO.selectMxFileList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*publicDsetDAO.selectMxFileList*/
+		SELECT A.*
+		      ,IFNULL(FORMAT(IFNULL(A.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+		      ,fn_ct_get_code_name('file_type', A.FILE_TYPE ) AS FILE_TYPE_VIEW
+		  FROM TB_WEB_HT_APPEND_FILE A
+		 WHERE 1=1
+		   AND A.B_SEQ = #b_seq#
+		   AND A.BBS_SEQ = #bbs_seq#
+		 ORDER BY A.SEQ
+	</select>
+
+</sqlMap>

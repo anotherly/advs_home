@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//http://ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="downhistory">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="dwhsMap" class="java.util.HashMap">
+		<result property="bSeq" column="B_SEQ" />
+		<result property="bbsSeq" column="BBS_SEQ" />
+		<result property="bFromDay" column="B_FROM_DAY" />
+		<result property="bToDay" column="B_TO_DAY" />
+		<result property="bImportantYn" column="B_IMPORTANT_YN" />
+		<result property="bTitle" column="B_TITLE" />
+		<result property="bContent" column="B_CONTENT"		jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="bAttachCnt" column="B_ATTACH_CNT" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="bPassword" column="B_PASSWORD" />
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="weather" column="WEATHER" />
+		<result property="roadSituation" column="ROAD_SITUATION" />
+		<result property="roadTypeCd" column="ROAD_TYPE_CD" />
+		<result property="actInfoType" column="ACT_INFO_TYPE" />
+		<result property="etcInfo" column="ETC_INFO" />
+		<result property="saveNm" column="SAVE_NM" />
+		<result property="realNm" column="REAL_NM" />
+		<result property="evalPoint" column="EVAL_POINT" />
+		<result property="content" column="CONTENT" />
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="fileSizeView" column="FILE_SIZE_VIEW" />
+		<result property="bbsNm" column="BBS_NM" />
+		<result property="cnt" column="CNT" />
+	</resultMap>
+
+	<!-- 목록 조회 -->
+	<select id="dwhsDAO.selectDwhsList" parameterClass="java.util.HashMap" resultMap="dwhsMap">
+		/*dwhsDAO.selectDwhsList*/
+		SELECT *
+		  FROM (
+		        SELECT A.*
+		        	  ,(SELECT (CONCAT(IFNULL(E.GROUP_NM, '') , '-' , IFNULL(D.BBS_NM, ''))) FROM TB_WEB_HT_BBS D, TB_WEB_HT_BBSGROUP E  WHERE A.BBS_SEQ = D.BBS_SEQ AND D.BBS_GROUP_SEQ = E.BBS_GROUP_SEQ) AS BBS_NM
+		              ,B.SAVE_NM
+		              ,B.REAL_NM
+		              ,C.EVAL_POINT
+		              ,C.B_CONTENT AS CONTENT
+		              ,C.CNT
+		              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		              ,IFNULL(FORMAT(ROUND(IFNULL(B.FILE_SIZE,0)/1024,0), 0),'-') AS FILE_SIZE_VIEW
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.REG_DATE DESC) / 10 ) LISTCNT
+		          FROM TB_WEB_HT_APPEND B, TB_WEB_HT_BOARD A
+		          	   LEFT OUTER JOIN
+		          	   (SELECT W.B_SEQ, W.B_CONTENT, W.EVAL_ID, W.EVAL_POINT
+		                     ,COUNT(W.B_SEQ) CNT
+		                 FROM TB_WEB_HT_DOWNLOAD W
+		                 WHERE W.EVAL_ID = #userid#  
+		                GROUP BY W.B_SEQ) C ON A.B_SEQ = C.B_SEQ
+		         WHERE 1=1
+		           AND A.B_SEQ = B.B_SEQ
+		           AND A.B_SEQ = C.B_SEQ
+				   <isNotEmpty prepend="AND" property="searchBord">
+					  A.BBS_SEQ = #searchBord#
+				   </isNotEmpty>
+				   <isEqual prepend="AND" property="searchType" compareValue="1">
+					  A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+				   <isEqual prepend="AND" property="searchType" compareValue="2">
+					  A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+		         ORDER BY A.REG_DATE DESC
+		       ) D
+		 WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="dwhsDAO.selectDwhsListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+		/*dwhsDAO.selectDwhsListTotCnt*/
+        SELECT COUNT(*) totcnt
+          FROM TB_WEB_HT_BOARD A, TB_WEB_HT_APPEND B, TB_WEB_HT_DOWNLOAD C
+         WHERE 1=1
+           AND A.B_SEQ = B.B_SEQ
+           AND A.B_SEQ = C.B_SEQ
+           AND C.EVAL_ID = #userid# 
+		   <isNotEmpty prepend="AND" property="searchBord">
+			  A.BBS_SEQ = #searchBord#
+		   </isNotEmpty>
+		   <isEqual prepend="AND" property="searchType" compareValue="1">
+			  A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+		   <isEqual prepend="AND" property="searchType" compareValue="2">
+			  A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="dwhsDAO.selectDwhsInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*dwhsDAO.selectDwhsInfo*/
+        SELECT A.*
+          FROM TB_WEB_HT_BOARD A, TB_WEB_HT_APPEND B, TB_WEB_HT_DOWNLOAD C
+         WHERE 1=1
+           AND A.B_SEQ = B.B_SEQ
+           AND A.B_SEQ = C.B_SEQ
+           AND A.B_SEQ = #b_seq# 
+	</select>
+
+	<!-- 중복확인 -->
+	<select id="dwhsDAO.selectDwhsIsExist" parameterClass="java.util.HashMap" resultClass="int">
+		/*dwhsDAO.selectDwhsIsExist*/
+		SELECT COUNT(*) selcnt
+		  FROM TB_WEB_HT_DOWNLOAD A
+		 WHERE 1=1
+		   AND A.B_SEQ = #b_seq#
+		   AND A.EVAL_ID = #eval_id#
+	</select>
+
+	<!-- 등록 -->
+	<insert id="dwhsDAO.insertDwhs" parameterClass="java.util.HashMap">
+		/*dwhsDAO.insertDwhs*/
+		INSERT 
+		  INTO TB_WEB_HT_DOWNLOAD 
+		       (B_SEQ
+		       ,EVAL_ID
+		       ,EVAL_POINT
+		       ,B_CONTENT
+		       ,EVAL_DATE
+		       ,REG_DATE
+		       ,FILE_SIZE
+		       )
+		VALUES (#b_seq#
+		       ,#eval_id#
+		       ,null
+		       ,null
+		       ,null
+		       ,NOW()
+		       ,#file_size#
+		       )
+	</insert>
+
+	<!-- 성과 등록 -->
+	<insert id="dwhsDAO.insertDlResult" parameterClass="java.util.HashMap">
+		/*dwhsDAO.insertDlResult*/
+		INSERT 
+		  INTO TB_WEB_HT_DL_RESULT
+		       (B_SEQ
+		       ,DL_ID
+		       ,REG_DATE)
+    VALUES (#b_seq#
+           ,#dl_id#
+           ,NOW())
+	</insert>
+
+	<!-- 평가점수 등록 -->
+	<update id="dwhsDAO.updateDwhs" parameterClass="java.util.HashMap">
+		/*dwhsDAO.updateDwhs*/
+		UPDATE TB_WEB_HT_DOWNLOAD 
+		   SET EVAL_POINT= #eval_point#
+		      ,B_CONTENT = #b_content#
+		      ,EVAL_DATE = NOW()
+		 WHERE 1=1
+		   AND B_SEQ      = #b_seq#
+		   AND EVAL_ID    = #eval_id#
+	</update>
+
+</sqlMap>

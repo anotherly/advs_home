@@ -1,0 +1,9 @@
+.table-wrap {
+  margin-top: 20px;
+}
+.table--myUpload td {
+  text-align: center;
+}
+.table--myUpload td:first-child, .table--myUpload td:nth-child(2) {
+  text-align: left;
+}

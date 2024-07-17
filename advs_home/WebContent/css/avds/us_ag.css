@@ -1,0 +1,16 @@
+.table-wrap {
+  margin-top: 20px;
+}
+.table--us_ag_01_list td {
+  text-align: center;
+}
+.table--us_ag_01_list td:nth-child(3) {
+  text-align: left;
+}
+.table--us_ag_05_list td {
+  text-align: center;
+}
+
+.layout-content__subtit + .sch-area {
+  margin-top: 20px;
+}

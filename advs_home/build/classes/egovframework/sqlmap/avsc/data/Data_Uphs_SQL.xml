@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="uploadhistory">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="dataMap" class="java.util.HashMap">
+		<result property="bSeq" column="B_SEQ" />
+		<result property="bbsSeq" column="BBS_SEQ" />
+		<result property="bFromDay" column="B_FROM_DAY" />
+		<result property="bToDay" column="B_TO_DAY" />
+		<result property="bImportantYn" column="B_IMPORTANT_YN" />
+		<result property="bTitle" column="B_TITLE" />
+		<result property="bContent" column="B_CONTENT"	jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="bAttachCnt" column="B_ATTACH_CNT" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="bPassword" column="B_PASSWORD" />
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="weather" column="WEATHER" />
+		<result property="roadSituation" column="ROAD_SITUATION" />
+		<result property="roadTypeCd" column="ROAD_TYPE_CD" />
+		<result property="actInfoType" column="ACT_INFO_TYPE" />
+		<result property="etcInfo" column="ETC_INFO" />
+		<result property="bdwrSeq" column="BDWR_SEQ" />
+		<result property="saveNm" column="SAVE_NM" />
+		<result property="realNm" column="REAL_NM" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="carType" column="CAR_TYPE" />
+		<result property="carModel" column="CAR_MODEL" />
+		<result property="movieSensorModel" column="MOVIE_SENSOR_MODEL" />
+		<result property="lidarModel" column="LIDAR_MODEL" />
+		<result property="radarModel" column="RADAR_MODEL" />
+		<result property="weatherView" column="WEATHER_VIEW" />
+		<result property="roadSituationView" column="ROAD_SITUATION_VIEW" />
+		<result property="roadTypeCdView" column="ROAD_TYPE_CD_VIEW" />
+		<result property="drivingModeView" column="DRIVING_MODE_VIEW" />
+		<result property="actInfoTypeView" column="ACT_INFO_TYPE_VIEW" />
+		<result property="dataTypeView" column="DATA_TYPE_VIEW" />
+		<result property="fileSizeView" column="FILE_SIZE_VIEW" />
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="bdwrTtlNm" column="BDWR_TTL_NM" />
+		<result property="regId" column="REG_ID" />
+	</resultMap>
+
+	<!-- 목록 조회 -->
+	<select id="uphsDAO.selectUphsList" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*uphsDAO.selectUphsList*/
+		SELECT *
+		  FROM (
+		  		SELECT A.B_SEQ
+		              ,A.BBS_SEQ
+		              ,(SELECT (CONCAT(IFNULL(E.GROUP_NM,''),'-', IFNULL(D.BBS_NM,''))) FROM TB_WEB_HT_BBS D, TB_WEB_HT_BBSGROUP E  WHERE A.BBS_SEQ = D.BBS_SEQ AND D.BBS_GROUP_SEQ = E.BBS_GROUP_SEQ) AS BBS_NM
+		              ,A.B_TITLE
+		              ,A.B_CONTENT
+		              ,B.SAVE_NM
+		              ,B.REAL_NM
+		              ,DATE_FORMAT(A.REG_DATE,'%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		              ,IFNULL(FORMAT(IFNULL(B.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+		              ,C.EVAL_POINT
+		              ,IFNULL(C.CNT, 0) AS CNT
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.REG_DATE DESC) / 10 ) LISTCNT
+		          FROM TB_WEB_HT_APPEND B JOIN TB_WEB_HT_BOARD A ON A.B_SEQ = B.B_SEQ
+		          	   LEFT OUTER JOIN 
+		              (SELECT W.B_SEQ
+		                     ,FORMAT(ROUND(AVG(IFNULL(W.EVAL_POINT, 0)), 1),'1') AS EVAL_POINT 
+		                     ,COUNT(W.B_SEQ) CNT
+		                 FROM TB_WEB_HT_DOWNLOAD W
+		                GROUP BY W.B_SEQ
+		               ) C ON A.B_SEQ = C.B_SEQ
+		               JOIN TB_WEB_HT_BBS D ON A.BBS_SEQ = D.BBS_SEQ
+		         WHERE 1=1
+		           AND A.B_SEQ = B.B_SEQ
+<!-- 		           AND A.B_SEQ = C.B_SEQ(+) -->
+		           AND A.BBS_SEQ = D.BBS_SEQ
+		           AND A.REG_ID = #userid#
+				   <isNotEmpty prepend="AND" property="searchBord">
+					  A.BBS_SEQ = #searchBord#
+				   </isNotEmpty>
+				   <isEqual prepend="AND" property="searchType" compareValue="1">
+					  A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+				   <isEqual prepend="AND" property="searchType" compareValue="2">
+					  A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+		         ORDER BY A.REG_DATE DESC
+		       )AB
+		 WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="uphsDAO.selectUphsListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+        SELECT COUNT(*) totcnt
+          FROM TB_WEB_HT_APPEND B, TB_WEB_HT_BOARD A
+          	   LEFT OUTER JOIN 
+              (SELECT W.B_SEQ
+                     ,ROUND(AVG(IFNULL(W.EVAL_POINT,0)),1) AS EVAL_POINT 
+                     ,COUNT(W.B_SEQ) CNT
+                 FROM TB_WEB_HT_DOWNLOAD W
+                GROUP BY W.B_SEQ
+               ) C ON A.B_SEQ = C.B_SEQ
+               , TB_WEB_HT_BBS D
+         WHERE 1=1
+           AND A.B_SEQ = B.B_SEQ
+<!--            AND A.B_SEQ = C.B_SEQ(+) -->
+           AND A.BBS_SEQ = D.BBS_SEQ
+           AND A.REG_ID = #userid#
+		   <isNotEmpty prepend="AND" property="searchBord">
+			  A.BBS_SEQ = #searchBord#
+		   </isNotEmpty>
+		   <isEqual prepend="AND" property="searchType" compareValue="1">
+			  A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+		   <isEqual prepend="AND" property="searchType" compareValue="2">
+			  A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%')
+		   </isEqual>
+	</select>
+
+
+	<!-- 관리자 목록 조회 -->
+	<select id="uphsDAO.selectDtmgList" parameterClass="java.util.HashMap" resultMap="dataMap">
+	 /*uphsDAO.selectDtmgList*/
+		SELECT *
+		  FROM (
+		        SELECT A.*
+		              ,B.SAVE_NM
+		              ,B.REAL_NM
+		              ,B.FILE_SIZE
+		              ,C.CAR_TYPE
+		              ,C.CAR_MODEL
+		              ,C.MOVIE_SENSOR_MODEL
+		              ,C.LIDAR_MODEL
+		              ,C.RADAR_MODEL
+		              ,fn_ct_get_code_name('weather', A.WEATHER ) AS WEATHER_VIEW
+		              ,fn_ct_get_code_name('road_situation', A.ROAD_SITUATION ) AS ROAD_SITUATION_VIEW
+		              ,fn_ct_get_code_name('road_type_cd', A.ROAD_TYPE_CD ) AS ROAD_TYPE_CD_VIEW
+		              ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
+		              ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
+		              ,fn_ct_get_code_name('data_type', A.DATA_TYPE ) AS DATA_TYPE_VIEW
+		              ,IFNULL(FORMAT(ROUND(IFNULL(B.FILE_SIZE,0)/1024,0), 0),'-') AS FILE_SIZE_VIEW
+		              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		              ,D.BDWR_TTL_NM
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.B_SEQ DESC) / 10 ) LISTCNT
+		          FROM TB_WEB_HT_APPEND B, TB_WEB_HT_BBS E, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+		         WHERE 1=1
+		           AND A.B_SEQ = B.B_SEQ
+		           AND A.BBS_SEQ = E.BBS_SEQ
+						<isNotEmpty prepend="AND" property="searchWord">
+							(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%') OR A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchBseq">
+							A.BBS_SEQ = #searchBseq#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchMode">
+							A.DRIVING_MODE = #searchMode#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchWeth">
+							A.WEATHER = #searchWeth#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchSitu">
+							A.ROAD_SITUATION = #searchSitu#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchRoad">
+							A.ROAD_TYPE_CD = #searchRoad#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="searchBdwr">
+							A.BDWR_SEQ = #searchBdwr#
+						</isNotEmpty>
+		         ORDER BY A.B_SEQ DESC
+		       )
+		 WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="uphsDAO.selectDtmgListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+	  /*uphsDAO.selectDtmgListTotCnt*/
+        SELECT COUNT(*) totcnt
+          FROM TB_WEB_HT_APPEND B, TB_WEB_HT_BBS E, TB_WEB_HT_BOARD A
+					LEFT OUTER JOIN TB_WEB_HT_CAR C
+					ON A.VEHICLE_ID = C.VEHICLE_ID
+					LEFT OUTER JOIN TB_WEB_HT_DATASET D
+					ON A.BDWR_SEQ = D.BDWR_SEQ
+		         WHERE 1=1
+           AND A.B_SEQ = B.B_SEQ
+           AND A.BBS_SEQ = E.BBS_SEQ
+				<isNotEmpty prepend="AND" property="searchWord">
+					(A.B_CONTENT LIKE CONCAT('%' , #searchWord# , '%') OR A.B_TITLE LIKE CONCAT('%' , #searchWord# , '%'))
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchBseq">
+					A.BBS_SEQ = #searchBseq#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchMode">
+					A.DRIVING_MODE = #searchMode#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchWeth">
+					A.WEATHER = #searchWeth#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchSitu">
+					A.ROAD_SITUATION = #searchSitu#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchRoad">
+					A.ROAD_TYPE_CD = #searchRoad#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchBdwr">
+					A.BDWR_SEQ = #searchBdwr#
+				</isNotEmpty>
+	</select>
+
+
+</sqlMap>

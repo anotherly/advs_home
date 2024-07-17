@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<!-- 공통 : 코드정보 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Code_SQL.xml"/>
+	<!-- 공통 : 메인 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Main_SQL.xml"/>
+	<!-- 공통 : 권한신청 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Auth_SQL.xml"/>
+	<!-- 공통 : 파라미터 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Param_SQL.xml"/>
+	<!-- 공통 : 스케줄러 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Task_SQL.xml"/>
+	<!-- 공공데이터 : C-ITS -->
+	<sqlMap resource="egovframework/sqlmap/avsc/open/Open_Cits_SQL.xml"/>
+	<!-- 협의체기관 : 협의체기관 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/agency/Agency_Cons_SQL.xml"/>
+	<!-- 운행정보 보고 : 교통사고 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/duty/Duty_Incd_SQL.xml"/>
+	<!-- 운행정보 보고 : 운행정보 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/duty/Duty_Drvg_SQL.xml"/>
+	<!-- 운행정보 보고 : 장치기능변경 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/duty/Duty_Devc_SQL.xml"/>
+	<!-- My Data : 내가받은자료 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/data/Data_Dwhs_SQL.xml"/>
+	<!-- My Data : 내가올린자료 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/data/Data_Uphs_SQL.xml"/>
+	<!-- My Data : 데이터업로드 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/data/Data_Dtup_SQL.xml"/>
+	<!-- My Data : 요청이력 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/data/Data_Rqhs_SQL.xml"/>
+	<!-- 게시판 : 자율주행최신동향 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/board/Board_Trnd_SQL.xml"/>
+	<!-- OpenAPI : OpenAPI -->
+<!-- 	<sqlMap resource="egovframework/sqlmap/avsc/openapi/OpenApi_SQL.xml"/> -->
+	<!-- 공공데이터 : 시나리오 데이터셋 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/open/Public_Dset_SQL.xml"/>
+	<!-- My Data : 차량등록 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/data/Car_Inst_SQL.xml"/>
+	<!-- 공통 : 메뉴 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/admin/Admin_Menu_SQL.xml"/>	
+	<!-- 안내 : 차량플랫폼 예약 -->
+	<sqlMap resource="egovframework/sqlmap/avsc/sharing/Car_Reserve_SQL.xml"/>	
+
+</sqlMapConfig>

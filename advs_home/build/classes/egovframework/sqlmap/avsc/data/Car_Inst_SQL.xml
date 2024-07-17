@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CarInst">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<resultMap id="dataupMap" class="java.util.HashMap">
+		<result property="drivingMode" column="DRIVING_MODE" />
+		<result property="actInfoType" column="ACT_INFO_TYPE" />
+		<result property="drivingModeView" column="DRIVING_MODE_VIEW" />
+		<result property="actInfoTypeView" column="ACT_INFO_TYPE_VIEW" />
+		<result property="vehicleId" column="VEHICLE_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="carType" column="CAR_TYPE" />
+		<result property="carModel" column="CAR_MODEL" />
+		<result property="autocarLevel" column="AUTOCAR_LEVEL" />
+		<result property="carTypeView" column="CAR_TYPE_VIEW" />
+		<result property="autocarLevelView" column="AUTOCAR_LEVEL_VIEW" />
+		<result property="userNm" column="USER_NM" />
+		<result property="agcyNm" column="AGCY_NM" />
+		<result property="opratStrtDt" column="OPRAT_STRT_DT" />
+		<result property="opratEndDt" column="OPRAT_END_DT" />
+		<result property="tmpRaceNum" column="TMP_RACE_NUM" />
+		<result property="insInitStrtDt" column="INS_INIT_STRT_DT" />
+		<result property="insInitEndDt" column="INS_INIT_END_DT" />
+	</resultMap>
+	
+	<parameterMap id="dataupParamMap" class="java.util.HashMap">
+		<parameter property="user_id"/>
+	</parameterMap>
+
+	<!--작성유무 -->
+	<select id="dtupDAO.selectCountYn" parameterClass="java.util.HashMap" resultClass="int">
+	/*dtupDAO.selectCount*/
+		SELECT COUNT(*) AS CNT
+		FROM TB_CM_TEMPOPER_CAR
+		WHERE 1=1
+		AND USER_ID = #user_id#
+	</select>
+
+	<!-- 차량 등록 -->
+	<insert id="dtupDAO.insertCarIns" parameterClass="java.util.HashMap">
+	/*dtupDAO.insertCarIns*/
+		INSERT 
+		  INTO TB_CM_TEMPOPER_CAR
+		       (TMP_RACE_NUM
+		       ,USER_ID
+		       ,AGCY_NM
+		       ,USER_NM
+		       ,CAR_TYPE
+		       ,CAR_MODEL
+		       ,AUTOCAR_LEVEL
+		       ,OPRAT_STRT_DT
+		       ,OPRAT_END_DT
+		       ,OPRAT_PURPS 
+		       ,OPRAT_INTRVL
+		       ,REG_ID
+		       ,ADRES
+		       ,INS_INIT_STRT_DT
+		       ,INS_INIT_END_DT
+		       ,REG_DT
+		       )
+		VALUES (#tmp_race_num#
+		       ,#user_id#
+		       ,#agcy_nm#
+		       ,#user_nm#
+		       ,#car_type#
+		       ,#car_model#
+		       ,#autocar_level#
+		       ,#oprat_strt_dt#
+		       ,#oprat_end_dt#
+		       ,#oprat_purps#
+		       ,#oprat_intrvl#
+		       ,#reg_id#
+		       ,#adres#
+		       ,#ins_init_strt_dt#
+		       ,#ins_init_end_dt#
+		       ,NOW())
+	</insert>
+	
+	<!-- 차량수정조회 -->
+	<select id="dtupDAO.selectCarInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*dtupDAO.selectCarInfo*/
+		SELECT USER_NM
+			  ,AGCY_NM
+			  ,USER_ID
+			  ,DATE_FORMAT(OPRAT_STRT_DT,'%Y-%m-%d') AS OPRAT_STRT_DT
+			  ,DATE_FORMAT(OPRAT_END_DT,'%Y-%m-%d') AS OPRAT_END_DT
+		      ,fn_ct_get_code_name('car_type', CAR_TYPE ) AS CAR_TYPE_VIEW
+		      ,fn_ct_get_code_name('autocar_level', AUTOCAR_LEVEL ) AS AUTOCAR_LEVEL_VIEW
+		      ,CAR_MODEL
+		      ,TMP_RACE_NUM
+		      ,DATE_FORMAT(INS_INIT_STRT_DT,'%Y-%m-%d') AS INS_INIT_STRT_DT
+			  ,DATE_FORMAT(INS_INIT_END_DT,'%Y-%m-%d') AS INS_INIT_END_DT
+			  ,ADRES
+			  ,OPRAT_INTRVL
+			  ,OPRAT_PURPS
+		FROM TB_CM_TEMPOPER_CAR
+		WHERE USER_ID = #user_id#
+	</select>
+	
+	<!-- 차량 수정 -->
+	<update id="dtupDAO.updateCarInfo" parameterClass="java.util.HashMap">
+        UPDATE TB_CM_TEMPOPER_CAR
+           SET USER_NM					= #user_nm#
+           	  ,TMP_RACE_NUM				= #tmp_race_num#
+		      ,INS_INIT_STRT_DT			= #ins_init_strt_dt#
+		      ,INS_INIT_END_DT		= #ins_init_end_dt#
+		 WHERE 1=1
+		   AND USER_ID = #user_id#
+	</update>
+
+</sqlMap>
+

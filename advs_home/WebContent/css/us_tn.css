@@ -1,0 +1,9 @@
+.table-wrap {
+  margin-top: 20px;
+}
+.table-basic.table-us_du_03_list td {
+  text-align: center;
+}
+.table-basic.table-us_du_03_list td:nth-child(2) {
+  text-align: left;
+}

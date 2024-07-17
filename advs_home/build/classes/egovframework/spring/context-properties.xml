@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean name="propertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+		<property name="properties">
+	        <map>
+	        	<!-- 한 페이지에 표출되는 리스트 건수 -->
+	        	<entry key="pageUnit" value="10"/>
+
+	        	<!-- 한 페이지에 표출되는 페이지 블럭 건수 -->
+	        	<entry key="pageSize" value="10"/>
+
+	        	<!-- 파일 업로드 경로 -->
+						<!-- 파일 업로드 경로 : 개발서버
+						<entry key="pathUpload" value="D:\\eGovFrame\\src\\AVSC\\src\\main\\webapp\\upload\\" />-->
+						<!-- 파일 업로드 경로 : 운영서버-->
+						<entry key="pathUpload" value="/home/app/avds_web/upload/" />
+						
+
+	        	<!-- 업로드 구분자 --> 
+						<!-- 업로드 구분자 : 개발서버-->
+						<entry key="pathLetter" value="\\" />
+						<!-- 업로드 구분자 : 운영서버-->
+						<!--
+						<entry key="pathLetter" value="/" />
+						-->
+
+	        	<!-- 파일업로드 사이즈 제한 (Kbyte) --> 
+	        	<entry key="uploadSize" value="1048576"/>
+
+	        	<!-- SMTP메일 전송 정보 -->
+	        	<entry key="mailHost" value="smtp.gmail.com"/>
+	        	<entry key="mailPort" value="465"/>
+	        	<!-- 자동메일 계정 정보 -->
+	        	<entry key="mailUser" value="avsc.master@gmail.com"/>
+	        	<entry key="mailPwrd" value="!@ts2020"/>
+	        	<!-- 담당자 메일 정보 -->
+	        	<entry key="mailAdmn" value="avsc.master@gmail.com"/>
+
+	        </map>
+		</property>
+	</bean>
+	
+</beans>

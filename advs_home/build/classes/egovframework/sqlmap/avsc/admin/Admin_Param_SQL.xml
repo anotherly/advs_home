@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Parameter">
+
+	<typeAlias	alias="egovMap"  type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<select id="paraDAO.selectParaList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* ParaDAO.selectParaList */
+		SELECT A.*
+		      ,fn_ct_get_code_name('system_type', A.SYSTEM_TYPE ) AS SYSTEM_TYPE_VIEW
+		  FROM TB_CM_MT_PARAMETER A
+		 WHERE 1=1
+	    <isNotEmpty prepend="AND" property="sParaId">
+			AUTH_ID = #sParaId#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="sParaNm">
+			A.PARAM_NM LIKE '%'||#sParaNm#||'%'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="sUseYn">
+			USE_YN = #sUseYn#
+		</isNotEmpty>
+         ORDER BY A.PARAM_ID
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="paraDAO.selectParaInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT A.*
+		      ,fn_ct_get_code_name('system_type', A.SYSTEM_TYPE ) AS SYSTEM_TYPE_VIEW
+		  FROM TB_CM_MT_PARAMETER A
+		 WHERE 1=1
+		   AND PARAM_ID = #param_id#
+	</select>
+
+	<insert id="paraDAO.insertPara">
+		/* ParaDAO.insertPara */
+		INSERT 
+		  INTO TB_CM_MT_PARAMETER 
+		       (PARAM_ID
+		       ,SYSTEM_TYPE
+		       ,PARAM_NM
+		       ,PARAM_DESC
+		       ,DATA1
+		       ,DATA2
+		       ,DATA3
+		       ,USE_YN
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES (#param_id#
+		       ,#system_type#
+		       ,#param_nm#
+		       ,#param_desc#
+		       ,#data1#
+		       ,#data2#
+		       ,#data3#
+		       ,#use_yn#
+		       ,#reg_id#
+		       ,SYSDATE)
+	</insert>
+	
+	<update id="paraDAO.updatePara">
+		/* ParaDAO.updatePara */
+		UPDATE TB_CM_MT_PARAMETER 
+		   SET PARAM_ID
+		      ,SYSTEM_TYPE	= #system_type#
+		      ,PARAM_NM		= #param_nm#
+		      ,PARAM_DESC	= #param_desc#
+		      ,DATA1		= #data1#
+		      ,DATA2		= #data2#
+		      ,DATA3		= #data3#
+		      ,USE_YN		= #use_yn#
+		      ,UPDATE_ID	= #reg_id#
+		      ,UPDATE_DATE	= SYSDATE
+		 WHERE 1=1
+		   AND PARAM_ID = #param_id#
+	</update>
+	
+	<delete id="paraDAO.deletePara">
+		/* ParaDAO.deletePara */
+		DELETE FROM TB_CM_MT_PARAMETER
+		 WHERE 1=1
+		   AND PARAM_ID = #param_id#
+	</delete>
+	
+</sqlMap>

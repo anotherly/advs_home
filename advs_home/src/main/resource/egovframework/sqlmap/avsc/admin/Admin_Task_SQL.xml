@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="scheduler">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<!-- 운행보고스케쥴 -->
+	<select id="taskDAO.selectScheInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT A.DATA1
+		      ,A.DATA2
+		  FROM TB_CM_MT_PARAMETER A
+		 WHERE 1=1
+		   AND A.PARAM_ID IN ('oper_input_sch_1','oper_input_sch_2')
+		   AND SYSDATE BETWEEN DATE_FORMAT(A.DATA1, '%m-%d') AND DATE_FORMAT(A.DATA2, '%m-%d')
+	</select>
+
+	<!-- 운행보고 등록 조회 -->
+	<select id="taskDAO.selectDvrgRegList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT B.TMP_RACE_NUMBER
+		      ,B.TMP_RACE_AGENCY
+		      ,DATE_FORMAT(A.STND_DT, '%Y-%m-%d') AS STND_DT_VIEW
+		      ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		      ,IFNULL(A.TMP_RACE_NUMBER,'미등록') AS REG_DIV
+		  FROM TB_CL_HT_DRIVING A
+		      ,( SELECT E.TMP_RACE_NUMBER
+		               ,E.TMP_RACE_AGENCY 
+		           FROM TB_CM_HT_TEMPOPER E
+		          WHERE E.APPOR_STATUS = '102'
+				   ) B
+		 WHERE 1=1
+		   AND B.TMP_RACE_NUMBER = A.TMP_RACE_NUMBER(+)
+		   AND A.STND_DT(+) = (TO_DATE(#data1#, 'MMDD')-1)
+		 ORDER BY A.REG_DATE, B.TMP_RACE_AGENCY
+	</select>
+
+</sqlMap>

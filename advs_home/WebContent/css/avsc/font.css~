@@ -1,0 +1,158 @@
+/*@charset "utf-8";*/
+
+
+/* icon font cdn 서버 */
+/*
+@import url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('//maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css');
+@import url('//cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css');
+*/
+
+
+/* icon font 내서버 직접 불러오기 ------------------------------------------------------------------------------------------------ */
+@import url(font-awesome.min.css);
+/*
+@import url(simple-line-icons.css);
+@import url(line-awesome-font-awesome.min.css);
+*/
+
+
+
+/* roboto 구글 서버  */
+/*@import url("http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700");  */
+
+/* roboto 내서버 직접 불러오기 */
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Thin.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Thin.woff?v=2.137") format("woff");
+font-weight: 100;
+font-style: normal; }
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Light.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Light.woff?v=2.137") format("woff");
+font-weight: 300;
+font-style: normal; }
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Regular.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Regular.woff?v=2.137") format("woff");
+font-weight: 400;
+font-style: normal; }
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Medium.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Medium.woff?v=2.137") format("woff");
+font-weight: 500;
+font-style: normal; }
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Bold.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Bold.woff?v=2.137") format("woff");
+font-weight: 700;
+font-style: normal; }
+@font-face {
+font-family: 'Roboto';
+src: url("/fonts/roboto/Roboto-Black.woff2?v=2.137") format("woff2"), url("/fonts/roboto/Roboto-Black.woff?v=2.137") format("woff");
+font-weight: 900;
+font-style: normal; }
+
+
+
+/* noto sans kr 구글서버 불러오기 */
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),
+      url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),
+      url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),
+      url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),
+      url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+ }
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');
+ }
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');
+ }
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),
+        url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');
+ }
+
+
+
+/* noto sans kr 내서버 직접 불러오기 */
+@font-face {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 100;
+src: url(/fonts/notosanskr/NotoSansKR-Thin.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Thin.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Thin.otf) format('opentype');
+}
+@font-face {
+font-family: 'Noto Sans KRa';
+font-style: normal;
+font-weight: 300;
+src: url(/fonts/notosanskr/NotoSansKR-Light.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Light.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Light.otf) format('opentype');
+}
+@font-face {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+src: url(/fonts/notosanskr/NotoSansKR-Regular.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Regular.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Regular.otf) format('opentype');
+}
+@font-face {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+src: url(/fonts/notosanskr/NotoSansKR-Medium.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Medium.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Medium.otf) format('opentype');
+}
+@font-face {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+src: url(/fonts/notosanskr/NotoSansKR-Bold.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Bold.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Bold.otf) format('opentype');
+}
+@font-face {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 900;
+src: url(/fonts/notosanskr/NotoSansKR-Black.woff2) format('woff2'),
+url(/fonts/notosanskr/NotoSansKR-Black.woff) format('woff'),
+url(/fonts/notosanskr/NotoSansKR-Black.otf) format('opentype');
+}

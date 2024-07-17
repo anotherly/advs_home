@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/html/resource/css/lib/fullpage.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/ux-common.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/sub.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/us_ce.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+        <w2:type>COMPONENT</w2:type>
+        <w2:buildDate/>
+        <w2:MSA/>
+        <xf:model>
+            <w2:dataCollection baseNode="map"/>
+            <w2:workflowCollection/>
+        </xf:model>
+        <w2:layoutInfo/>
+        <w2:publicInfo method=""/>
+        <script type="text/javascript" src="/html/resource/js/lib/jquery/jquery-3.6.1.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/fullpage.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/tweenmax.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/common.js"></script>
+        <script lazy="false" type="text/javascript"><![CDATA[
+	scwin.onpageload = function() {
+		($(function(){
+			lnbFn();
+			scrollFn();
+			$('header, footer').addClass('sub');
+		}))
+		
+		function lnbFn(){
+		    const aDepth1 = $('.lnb-item.is-active > a');
+		    const newEl = document.createElement('span');
+			$('.lnb-depth--02').prev('a').attr('href', 'javascript:void(0)').parents('.lnb-item').addClass('hasChild');
+		    aDepth1.prepend(newEl);
+		}
+		
+		function scrollFn(){			
+			var tabList = $(".tab-wrap").offset().top - $('header').height();
+ 
+			  $(window).scroll(function() {
+			    var window = $(this).scrollTop();
+			    if(tabList <= window) {
+			      $(".tab-list").addClass("solid");
+			    }else{
+			      $(".tab-list").removeClass("solid");
+			    }
+			  });
+			
+			
+			(function (global, $) {
+			    var $menu     = $('.tab-item'),
+			        $contents = $('.tab-cont'),
+			        $doc      = $('html, body');
+			    $(function () {
+			        // 해당 섹션으로 스크롤 이동
+			        $menu.on('click','button', function(e){
+			            var $target = $(this).parent(),
+			                idx     = $target.index(),
+			                section = $contents.eq(idx),
+			                offsetTop = section.offset().top - $('header').height()*2;
+			            $doc.stop()
+			                    .animate({
+			                        scrollTop :offsetTop
+			                    }, 800);
+			            return false;
+			        });
+			    });
+			    // menu class 추가
+			    $(window).scroll(function(){
+			        var scltop = $(window).scrollTop() + $('header').height()*3;
+			        $.each($contents, function(idx, item){
+			            var $target   = $contents.eq(idx),
+			                i         = $target.index(),
+			                targetTop = $target.offset().top;
+			
+			            if (targetTop <= scltop) {
+			                $menu.removeClass('is-click');
+			                $menu.eq(idx).addClass('is-click');
+			            }
+			            if (!(500 <= scltop)) {
+			                $menu.removeClass('is-click');
+			            }
+			        })
+			
+			    });
+			}(window, window.jQuery));
+		}
+	
+	};
+	scwin.side_menu_onclick = function(e) {
+	    $('.side-menu__btn').addClass('is-click');
+	};
+	
+scwin.btnDownload_onclick = function(e) {
+        document.location.href = "/templetFile/협의체 가입 서류.zip"
+};
+
+/*
+scwin.lnk01_onclick = function(e) {
+	window.open('http://www.molit.go.kr/');
+};
+
+scwin.lnk02_onclick = function(e) {
+	window.open('http://www.kotsa.or.kr/');
+};
+
+scwin.lnk03_onclick = function(e) {
+	window.open('https://www.hyundai.com/kr/ko');
+};
+
+scwin.lnk04_onclick = function(e) {
+	window.open('http://www.snu.ac.kr/');
+};
+
+scwin.lnk05_onclick = function(e) {
+	window.open('http://www.mobis.co.kr/');
+};
+
+scwin.lnk06_onclick = function(e) {
+	window.open('https://www.kaist.ac.kr/');
+};
+
+scwin.lnk07_onclick = function(e) {
+	window.open('https://www.mando.com/');
+};
+
+scwin.lnk08_onclick = function(e) {
+	window.open('https://www.sktelecom.com/');
+};
+
+scwin.lnk09_onclick = function(e) {
+	window.open('https://www.kt.com/');
+};
+
+scwin.lnk10_onclick = function(e) {
+	window.open('http://www.katech.re.kr/');
+};
+
+scwin.lnk11_onclick = function(e) {
+	window.open('https://www.etri.re.kr/');
+};
+
+scwin.lnk12_onclick = function(e) {
+	window.open('http://sonnet.ai/');
+};
+
+scwin.lnk13_onclick = function(e) {
+	window.open('http://www.prosensetek.com/');
+};
+
+scwin.lnk14_onclick = function(e) {
+	window.open('https://www.yonsei.ac.kr/sc/');
+};
+
+scwin.lnk15_onclick = function(e) {
+	window.open('http://www.carnavi.com/');
+};
+
+scwin.lnk16_onclick = function(e) {
+	window.open('http://www.it-telecom.co.kr/');
+};
+
+scwin.lnk17_onclick = function(e) {
+	window.open('http://www.wayties.com/');
+};
+
+scwin.lnk18_onclick = function(e) {
+	window.open('http://www.ilmilecorp.com/');
+};
+
+scwin.lnk19_onclick = function(e) {
+	window.open('http://www.mobiltech.io/');
+};
+
+scwin.lnk20_onclick = function(e) {
+	window.open('http://www.morai.ai/');
+}; */
+]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload">
+    	<xf:group class="wrap" id="" style="">
+    		<w2:wframe id="" src="/sp5_ui/header.xml" style=""></w2:wframe><xf:group class="container" id="" style="">
+    			<xf:group class="container__inner" id="" style="">
+    				<xf:group class="content" id="" style="">
+    					<xf:group class="content__inner" id="" style="">
+    						<xf:group style="" id="" class="layout-container layout-full">
+    							<xf:group style="" id="" class="layout-container__inner layout-container--row">
+    								<xf:group style="" id="" class="lnb">
+    									<w2:tag tagname="h3" style="" id="" class="lnb__tit">이용안내</w2:tag>
+    									<xf:group style="" id="" class="lnb-list">
+    										<xf:group style="" id="" class="lnb-item">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Avsc_View_sp5.do">
+    												<xf:label><![CDATA[데이터 공유센터 소개]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group style="" id="" class="lnb-item">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Cits_View_sp5.do">
+    												<xf:label><![CDATA[자율주행 AI 학습용 데이터]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item is-active is-open" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Cons_View_sp5.do">
+    												<xf:label><![CDATA[데이터공유협의체]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Legl_View_sp5.do">
+    												<xf:label><![CDATA[법령 및 지침]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Rept_View_sp5.do">
+    												<xf:label><![CDATA[자율주행차 임시운행허가]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    								<xf:group style="" id="" class="layout-content">
+    									<xf:group style="" id="" class="layout-content__inner">
+    										<xf:group style="" id="" class="layout-content__top">
+    											<w2:tag tagname="h4" style="" id="" class="layout-content__tit">데이터공유협의체</w2:tag>
+    											<xf:group style="" id="" tagname="ul" class="location ml-auto">
+    												<xf:group style="" id="" tagname="li">
+    													<xf:image src="../resource/image/sub/icon/icon-home.png" style="" id="" alt="홈"></xf:image>
+    												</xf:group>
+    												<w2:tag tagname="li" style="" id="">이용안내</w2:tag>
+    												<w2:tag tagname="li" style="" id="">데이터공유협의체</w2:tag>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="layout-content__view">
+    											<xf:group style="" id="" class="el-platform el-platform--us_ce_03">
+    												<w2:tag tagname="h5" style="" id="" class="el-platform__tit">주행 데이터 공유 협의체</w2:tag>
+    												<xf:group style="" id="" class="el-platform__txt">
+    													<strong>자율주행 기술</strong>을 <strong>개발</strong>하는 산·학·연 기관이 개별적으로 수집하고 있는 <strong>주행 관련 데이터</strong>를 상호 공유하여 
+    													중복투자를 방지하고, 고가의 자율주행차 운영이 곤란한
+    													<strong>스타트업· 중소기업</strong>
+    													등의
+    													<strong>데이터 수집 가공</strong>
+    													을 지원하여
+    													<strong>국내 자율주행 기술 개발 가속화 지원</strong>
+    													<xf:group style="" id="" tagname="div" class="btn-wrap mt-20">
+    														<xf:group style="" id="btnDownload" tagname="button"
+    															class="btn btn-color--navy px-30" ev:onclick="scwin.btnDownload_onclick">
+    															<w2:attributes>
+    																<w2:type>button</w2:type>
+    															</w2:attributes>
+    															<xf:image src="/html/resource/image/common/icon/icon-download--white.png" style="" id=""></xf:image>
+    															가입신청서 다운로드
+    														</xf:group>
+    													</xf:group>
+    												</xf:group>
+    											</xf:group>
+    											<xf:group style="" id="" class="layout-content__tab mt-250">
+
+	    												<xf:group style="" id="" class="tab-wrap">
+	    													<xf:group style="" id="" class="tab-list d-flex">
+	    														<xf:group style="" id="" class="tab-item flex-1">
+	    															<xf:group style="" id="" class="tab-item__btn" tagname="button">
+	    																<w2:attributes>
+	    																	<w2:type>button</w2:type>
+	    																	<w2:data-anchor>mf_us_ce_03--01</w2:data-anchor>
+	    																</w2:attributes>
+	    																공유 데이터
+	    															</xf:group>
+	    														</xf:group>
+	    														<xf:group class="tab-item nextItem flex-1" id="" style="">
+	    															<xf:group class="tab-item__btn" id="" style="" tagname="button">
+	    																<w2:attributes>
+	    																	<w2:type>button</w2:type>
+	    																	<w2:data-anchor>mf_us_ce_03--02</w2:data-anchor>
+	    																</w2:attributes>
+	    																주요데이터
+	    															</xf:group>
+	    														</xf:group>
+	    														<xf:group class="tab-item flex-1" id="" style="">
+	    															<xf:group class="tab-item__btn" id="" style="" tagname="button">
+	    																<w2:attributes>
+	    																	<w2:type>button</w2:type>
+	    																	<w2:data-anchor>mf_us_ce_03--03</w2:data-anchor>
+	    																</w2:attributes>
+	    																참여기관
+	    															</xf:group>
+	    														</xf:group>
+	    													</xf:group>
+	    													<xf:group style="" id="us_ce_03--01" class="tab-cont">
+																<w2:tag tagname="h5" style="" id="" class="tab-cont__tit">공유 데이터</w2:tag>
+<!--																<w2:tag tagname="div" style="" id=""-->
+<!--	    															class="tab-cont__txt">-->
+<!--	    															주행 데이터 공유센터 구축, 국토교통 혁신성장추진계획, ‘18년 정부업무보고-->
+<!--	    														</w2:tag>-->
+	    														<xf:group style="" id="" class="el-box-group d-flex">
+	    															<xf:group style="" id=""
+	    																class="el-box--border box-group-ce02--01 w-50">
+	    																<xf:group style="" id="" class="box-imgInfo__tit" tagname="p">
+	    																	<w2:tag tagname="strong" style="" id="">자율주행</w2:tag>
+	    																	인지 성능 향상
+	    																	<w2:tag tagname="strong" style="" id="">을 위한 딥러닝 학습 데이터</w2:tag>
+	    																</xf:group>
+	    																<xf:group style="" id="" class="el-box__img">
+	    																	<xf:image src="/html/resource/image/sub/img-us_ce_03--img02.jpg" style="" id=""></xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group style="" id=""
+	    																class="el-box--border box-group-ce02--02 w-50">
+	    																<xf:group class="box-imgInfo__tit" id="" style="" tagname="p">
+	    																	End to End
+	    																	<w2:tag id="" style="" tagname="strong">딥러닝을 위한 학습 데이터</w2:tag>
+	    																</xf:group>
+	    																<xf:group class="el-box__img" id="" style="">
+	    																	<xf:image id=""
+	    																		src="/html/resource/image/sub/img-us_ce_03--img03.jpg" style="">
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group style="" id=""
+	    																class="el-box--border box-group-ce02--03 w-50">
+	    																<xf:group class="box-imgInfo__tit" id="" style="" tagname="p">
+	    																	<w2:tag id="" style="" tagname="strong">자율주행</w2:tag>
+	    																	정밀 지도
+	    																	<w2:tag id="" style="" tagname="strong">및</w2:tag>
+	    																	도로 구조
+	    																	<w2:tag id="" style="" tagname="strong">정보</w2:tag>
+	    																</xf:group>
+	    																<xf:group class="el-box__img" id="" style="">
+	    																	<xf:image id=""
+	    																		src="/html/resource/image/sub/img-us_ce_03--img04.jpg" style="">
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="el-box--border box-group-ce02--04 w-50" id=""
+	    																style="">
+	    																<xf:group class="box-imgInfo__tit" id="" style="" tagname="p">
+	    																	<w2:tag id="" style="" tagname="strong">자율주행</w2:tag>
+	    																	실증 사업(FOT)
+	    																	<w2:tag id="" style="" tagname="strong">수집 데이터</w2:tag>
+	    																</xf:group>
+	    																<xf:group class="el-box__img" id="" style="">
+	    																	<xf:image id=""
+	    																		src="/html/resource/image/sub/img-us_ce_03--img05.jpg" style="">
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    														</xf:group>
+	    													</xf:group>
+	    													<xf:group style="" id="us_ce_03--02" class="tab-cont">
+	    														<w2:tag tagname="h5" style="" id="" class="tab-cont__tit">주요데이터</w2:tag>
+<!--																<w2:tag tagname="div" style="" id=""-->
+<!--	    															class="tab-cont__txt">-->
+<!--	    															주행 데이터 공유센터 구축, 국토교통 혁신성장추진계획, ‘18년 정부업무보고-->
+<!--	    														</w2:tag>-->
+	    														<xf:group style="" id="" class="el-box">
+	    															<xf:group style="" id="" tagname="ul" class="box-imgInfo__ul lists lists-dot">
+	    																<w2:tag tagname="li" style="" id="">
+	    																	자율주행차 운행을 통해 수집한 주행 영상, 라이다 등의 원시 데이터
+	    																</w2:tag>
+	    																<w2:tag id="" style="" tagname="li">
+	    																	자율주행 인지 성능 향상 및 딥러닝 기술개발을 위한 AI 학습용 데이터
+	    																</w2:tag>
+	    																<w2:tag id="" style="" tagname="li">
+	    																	V2X 단말 개발을 위한 통신을 통하여 수집된 BSM, PVD 데이터
+	    																</w2:tag>
+	    															</xf:group>
+	    														</xf:group>
+	    													</xf:group>
+	    													<xf:group style="" id="us_ce_03--03" class="tab-cont ce03_pb">
+	    														<w2:tag tagname="h5" style="" id="" class="tab-cont__tit">참여기관</w2:tag>
+<!--																<w2:tag tagname="div" style="" id=""-->
+<!--	    															class="tab-cont__txt">-->
+<!--	    															주행 데이터 공유센터 구축, 국토교통 혁신성장추진계획, ‘18년 정부업무보고-->
+<!--	    														</w2:tag>-->
+	    														<xf:group style="" id="" class="company-list">
+	    															<xf:group style="" id="" class="company-item">
+	    																<xf:group style="" id="" class="company-item__img el-box--border"
+	    																	tagname="span">
+	    																	<xf:image
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--01.jpg" style="" alt="국토교통부" id="lnk01" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk02"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--02.jpg" style="" alt="TS한국교통안전공단" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item bg-color--navy" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk03"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--03.jpg" style="" alt="HYUNDAI" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk04"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--04.jpg" style="" alt="서울대" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk05"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--05.jpg" style="" alt="HYUNDAI MOBIS" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk06"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--06.jpg" style="" alt="KAIST" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk07"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--07.jpg" style="" alt="Mando" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk08"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--08.jpg" style="" alt="SK telecom" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk09"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--09.jpg" style="" alt="kt" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk10"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--10.jpg" style="" alt="katech" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk11"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--11.jpg" style="" alt="ETRI" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item bg-color-raisinBlack" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk12"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--12.jpg" style="" alt="SONNET.ai" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk13"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--13.jpg" style="" alt="PROSENSE" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk14"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--14.jpg" style="" alt="연세대학교" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk15"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--15.jpg" style="" alt="cainavi.com" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk16"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--16.jpg" style="" alt="iTtelecom" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk17"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--17.jpg" style="" alt="wayties" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk18"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--18.jpg" style="" alt="Dtonic" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk19"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--19.jpg" style="" alt="MOBILTECH" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    															<xf:group class="company-item" id="" style="">
+	    																<xf:group class="company-item__img el-box--border" id="" style=""
+	    																	tagname="span">
+	    																	<xf:image id="lnk20"
+	    																		src="/html/resource/image/sub/img-us_ce_03-com--20.jpg" style="" alt="MORAI" >
+	    																	</xf:image>
+	    																</xf:group>
+	    															</xf:group>
+	    														</xf:group>
+	    													</xf:group>
+	    												</xf:group>
+
+    											</xf:group>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<footer style="" id="">
+    			<xf:group style="" id="" class="footer__inner">
+    				<xf:group style="" id="" class="footer-logo" tagname="span">
+    					<xf:image src="../resource/image/main/img-logo-head-color.png" style="" id=""></xf:image>
+    				</xf:group>
+    				<xf:group style="" id="" class="d-flex align-end">
+    					<xf:group style="" id="" tagname="address">
+    						<w2:span label="" style="" id="">주소</w2:span>
+    						18247) 경기도 화성시 송산면 삼존로 200 자동차안전연구원｜
+    						<w2:span label="" style="" id="">문의전화</w2:span>
+    						1577-0990
+    					</xf:group>
+    					<w2:tag tagname="button" style="" id="" class="btn btn--report">
+    						<w2:attributes>
+    							<w2:type>button</w2:type>
+    						</w2:attributes>
+    						품질오류 신고 및 확인
+    					</w2:tag>
+    					<xf:group style="" id="" class="footer-link" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image src="../resource/image/common/img-main-visual--logo01.png" style="" id=""></xf:image>
+    					</xf:group>
+    					<xf:group class="footer-link" id="" style="" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image id="" src="../resource/image/common/img-main-visual--logo02.png" style=""></xf:image>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" id="" class="copyRight" tagname="p">
+    					©2022.
+    					<w2:span label="" style="" id="">TS Corp.</w2:span>
+    					All rights reserved.
+    				</xf:group>
+    			</xf:group>
+    		</footer>
+    	</xf:group>
+    </body>
+</html>

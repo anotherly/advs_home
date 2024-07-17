@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="./resource/css/lib/fullpage.css" type="text/css"?>
+<?xml-stylesheet href="./resource/css/ux-common.css" type="text/css"?>
+<?xml-stylesheet href="./resource/css/main.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head meta_type="메인">
+    	<w2:type>COMPONENT</w2:type>
+    	<w2:buildDate />
+    	<w2:MSA />
+    	<xf:model>
+    		<w2:dataCollection baseNode="map" />
+    		<w2:workflowCollection />
+    	</xf:model>
+    	<w2:layoutInfo />
+    	<w2:publicInfo method="" />
+    	<script type="text/javascript" src="./resource/js/lib/jquery/jquery-3.6.1.min.js"></script>
+    	<script type="text/javascript" src="./resource/js/lib/fullpage.js"></script>
+    	<script type="text/javascript" src="./resource/js/lib/tweenmax.min.js"></script>
+    	<script type="text/javascript" src="./resource/js/common.js"></script>
+    	<script type="text/javascript" src="./resource/js/main.js"></script>
+    	<script lazy="false" type="text/javascript"><![CDATA[
+/**
+ * @component
+ * @company 
+ * @developer parksungjae
+ * @variableClone false
+ * @notSupportBrowser 
+ * @version 
+ * @htmlRender 
+ * @icon 
+ * @disableIcon 
+ * @width 
+ * @height 
+ * @description 
+ */ 
+
+scwin.onpageload = function() {
+            // json 형식으로 데이터 set
+    // var params = {
+    //                 name      : $("#name").val()
+    //                 , sex       : $("#sex").val()
+    //                 , age       : $("#age").val()
+    //                 , tellPh    : $("#tellPh").val()
+    //             }
+                
+            // ajax 통신
+    $.ajax({
+                type : "GET",            // HTTP method type(GET, POST) 형식이다.
+                url : "/main/Main_SP5.do",      // 컨트롤러에서 대기중인 URL 주소이다.
+//                data : params,            // Json 형식의 데이터이다.
+                //dataType : "json",
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                // 응답코드 > 0000
+                console.log(res);
+//                scwin.Board_Notc_List();
+                },
+            error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+        });    
+};
+
+scwin.onpageunload = function() {
+	
+};
+scwin.side_menu_onclick = function(e) {
+    $('.side-menu__btn').addClass('is-click');
+};
+
+scwin.Board_Notc_List = function(){
+    $.ajax({
+                type : "POST",            // HTTP method type(GET, POST) 형식이다.
+                url : "/bbs/notice/Board_Notc_List.do",      // 컨트롤러에서 대기중인 URL 주소이다.
+//                data : params,            // Json 형식의 데이터이다.
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                // 응답코드 > 0000
+                alert(res);
+                },
+            error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+        });    
+};
+]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload">
+    	<xf:group class="wrap" id="" style="">
+    		<header style="" id="">
+    			<nav style="" id="" class="nav">
+    				<xf:group style="" id="" class="nav__inner">
+    					<w2:anchor outerDiv="false" id="" style="">
+    						<xf:label><![CDATA[001 테스트기관]]></xf:label>
+    					</w2:anchor>
+    					<w2:anchor outerDiv="false" id="" style="">
+    						<xf:label><![CDATA[로그아웃]]></xf:label>
+    					</w2:anchor>
+    					<w2:anchor outerDiv="false" id="" style="">
+    						<xf:label><![CDATA[개인정보수정]]></xf:label>
+    					</w2:anchor>
+    					<w2:anchor outerDiv="false" id="" style="">
+    						<xf:label><![CDATA[My Data]]></xf:label>
+    					</w2:anchor>
+    					<w2:anchor outerDiv="false" id="" style="">
+    						<xf:label><![CDATA[Open API]]></xf:label>
+    					</w2:anchor>
+    				</xf:group>
+    			</nav>
+    			<xf:group style="" id="" class="header-menuWrap">
+    				<xf:group style="" id="" class="header__inner">
+    					<h1 class="header__logo">
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[]]></xf:label>
+    						</w2:anchor>
+    						<w2:span label="TS 한국교통안전공단 자동차안전연구원" style="" id="" class="hidden"></w2:span>
+    					</h1>
+    					<xf:group style="" id="" class="gnb">
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[공공데이터]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group style="" id="" class="gnb-depth--02__inner">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group style="" id="" class="gnb-depth--03">
+    									<xf:group style="" id="" class="gnb-depth--03__item">
+    										<w2:tag tagname="h1" style="" id="" class="gnb-depth--03__tit">일반 시나리오<br/>데이터셋</w2:tag>
+    									</xf:group>
+    									<xf:group style="" id="" class="gnb-depth--03__item">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											엣지케이스 시나리오
+    											<br />
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group style="" id="" class="gnb-depth--03__item">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											V2X
+    											<br />
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[협의체 데이터]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group class="gnb-depth--02__inner" id="" style="">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group class="gnb-depth--03" id="" style="">
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											일반 시나리오
+    											<br />
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											엣지케이스 시나리오
+    											<br />
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											V2X
+    											<br />
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											공강정보 안내
+    											<br />
+    											및 신청
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											자율주행 데이터
+    											<br />
+    											업로드
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											데이터셋
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[운행정보 보고]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group class="gnb-depth--02__inner" id="" style="">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group class="gnb-depth--03" id="" style="">
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											교통사고
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											운행정보 보고서
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											장치 및 기능변경
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[자율주행 공지사항]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group class="gnb-depth--02__inner" id="" style="">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group class="gnb-depth--03" id="" style="">
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											자율주행 공지사항
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											공지사항
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[데이터 공유센터 시설이용]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group class="gnb-depth--02__inner" id="" style="">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group class="gnb-depth--03" id="" style="">
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											차량 플랫폼 공유
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											공유센터 이용안내
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    						<w2:anchor outerDiv="false" id="" style="">
+    							<xf:label><![CDATA[이용안내]]></xf:label>
+    						</w2:anchor>
+    						<xf:group style="" id="" class="gnb-depth--02">
+    							<xf:group class="gnb-depth--02__inner" id="" style="">
+    								<h2 class="gnb-depth--02__tit">공공데이터</h2>
+    								<xf:group class="gnb-depth--03" id="" style="">
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											데이터공유센터소개
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											공공데이터
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											데이터공유협의체
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											법령 및 지침
+    										</w2:tag>
+    									</xf:group>
+    									<xf:group class="gnb-depth--03__item" id="" style="">
+    										<w2:tag class="gnb-depth--03__tit" id="" style="" tagname="h1">
+    											자율주행차 임시운행
+    											<br/>
+    											허가
+    										</w2:tag>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    					<xf:group style="" id="" class="side-menu">
+    						<xf:group style="" id="" class="side-menu__inner">
+    							<xf:group style="" id="side_menu" class="side-menu__btn" tagname="button" ev:onclick="scwin.side_menu_onclick">
+    								<w2:attributes>
+    									<w2:type>button</w2:type>
+    									<w2:title>사이드 메뉴 열림</w2:title>
+    								</w2:attributes>
+    								<w2:span label="" style="" id=""></w2:span>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</header>
+    		<xf:group class="container" id="" style="">
+    			<xf:group class="container__inner" id="" style="">
+    				<xf:group class="content" id="" style="">
+    					<xf:group class="content__inner" id="" style="">
+
+    						<xf:group style="" id="fullpage">
+    							<xf:group style="" id="" class="fullpage-block fullpage-block--main">
+    								<xf:group style="" id="" class="fullpage-block__inner">
+
+    									<xf:group id="" tagname="span" class="fullpage-block--main__img">
+    										<xf:image src="resource/image/main/img-main-visual--logo.png" style="" id=""
+    											alt="TS 한국교통안전공단">
+    										</xf:image>
+    									</xf:group>
+    									<w2:tag tagname="h2" style="" id="" class="fullpage-block--main__tit">
+    										자율주행차
+    										<br />
+    										데이터 공유센터
+    									</w2:tag>
+    									<xf:group style="" id="" class="fullpage-block--main__boxes fullpage-box">
+    										<xf:group style="" id="" class="fullpage-box--notice">
+    											<xf:group style="" id="" class="fullpage-box__tit d-flex align-center justify-between"
+    												tagname="h4">
+    												공지사항
+    												<w2:anchor outerDiv="false" id="" style="" class="link-more" title="공지사항 더보기">
+    													<xf:label><![CDATA[]]></xf:label>
+    												</w2:anchor>
+    											</xf:group>
+    											<xf:group style="" id="" class="lists lists-cir lists-cir--s" tagname="ul">
+    												<xf:group style="" id="" tagname="li">
+    													<w2:anchor outerDiv="false" id="" style="">
+    														<xf:label><![CDATA[임시운행 자율주행차 운행 정보 보...............]]></xf:label>
+    													</w2:anchor>
+    													<w2:span label="22.11.04" style="" id=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[임시운행 자율주행차 운행 정보 보...............]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[임시운행 자율주행차 운행 정보 보...............]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[임시운행 자율주행차 운행 정보 보...............]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[임시운행 자율주행차 운행 정보 보...............]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group class="fullpage-box--trend" id="" style="">
+    											<xf:group class="fullpage-box__tit d-flex align-center justify-between" id="" style=""
+    												tagname="h4">
+    												자율주행 공지사항
+    												<w2:anchor class="link-more" id="" outerDiv="false" style="" title="자율주행 공지사항 더보기">
+    													<xf:label><![CDATA[]]></xf:label>
+    												</w2:anchor>
+    											</xf:group>
+    											<xf:group class="lists lists-cir lists-cir--s" id="" style="" tagname="ul">
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[자율주행 국내외 기술동향 (20년 1...]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[자율주행 국내외 기술동향 (20년 1...]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[자율주행 국내외 기술동향 (20년 1...]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[자율주행 국내외 기술동향 (20년 1...]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    												<xf:group id="" style="" tagname="li">
+    													<w2:anchor id="" outerDiv="false" style="">
+    														<xf:label><![CDATA[자율주행 국내외 기술동향 (20년 1...]]></xf:label>
+    													</w2:anchor>
+    													<w2:span id="" label="22.11.04" style=""></w2:span>
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--intro fullpage-box__quickLink" tagname="div">
+    											<xf:group style="" id="quickLink_01" tagname="a"
+    												ev:onmouseenter="scwin.quickLink_01_onmouseenter">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group style="" id="" class="fullpage-box__img" tagname="span">
+    													<xf:image src="./resource/image/main/img-main-box01.png" style="" id=""></xf:image>
+    												</xf:group>
+    												<xf:group style="" id="" class="fullpage-box__txt" tagname="span">
+    													<w2:tag tagname="em" style="" id="" class="fullpage-box__cap">자율주행차</w2:tag>
+    													데이터 공유센터 소개
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group class="fullpage-box--report fullpage-box__quickLink" id="" style="" tagname="div">
+    											<xf:group id="quickLink_02" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group class="fullpage-box__img" id="" style="" tagname="span">
+    													<xf:image id="" src="./resource/image/main/img-main-box02.png" style=""></xf:image>
+    												</xf:group>
+    												<xf:group class="fullpage-box__txt" id="" style="" tagname="span">
+    													<w2:tag class="fullpage-box__cap" id="" style="" tagname="em">자율주행차</w2:tag>
+    													데이터 공유센터 소개
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group class="fullpage-box--download fullpage-box__quickLink" id="" style="" tagname="div">
+    											<xf:group id="quickLink_03" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group class="fullpage-box__img" id="" style="" tagname="span">
+    													<xf:image id="" src="./resource/image/main/img-main-box03.png" style=""></xf:image>
+    												</xf:group>
+    												<xf:group class="fullpage-box__txt" id="" style="" tagname="span">
+    													<w2:tag class="fullpage-box__cap" id="" style="" tagname="em">자율주행차</w2:tag>
+    													데이터 공유센터 소개
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group class="fullpage-box--share fullpage-box__quickLink" id="" style="" tagname="div">
+    											<xf:group id="quickLink_04" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group class="fullpage-box__img" id="" style="" tagname="span">
+    													<xf:image id="" src="./resource/image/main/img-main-box04.png" style=""></xf:image>
+    												</xf:group>
+    												<xf:group class="fullpage-box__txt" id="" style="" tagname="span">
+    													<w2:tag class="fullpage-box__cap" id="" style="" tagname="em">자율주행차</w2:tag>
+    													데이터 공유센터 소개
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    							<xf:group style="" id="" class="fullpage-block fullpage-block--menu">
+    								<xf:group style="" id="" class="fullpage-block__inner">
+    									<xf:group style="" id=""
+    										class="fullpage-block--menu__boxes fullpage-box">
+    										<xf:group style="" id="" class="fullpage-box--v2x fullpage-box__quickLink">
+    											<xf:group style="" id="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag tagname="q" style="" id=""></w2:tag>
+    												<w2:tag tagname="em" style="" id=""></w2:tag>
+    												<xf:group style="" id="" tagname="span">
+    													<w2:tag tagname="em" style="" id="">V2X 데이터 영상</w2:tag>
+    													V2X Data
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--drivingImg fullpage-box__quickLink">
+    											<xf:group id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag id="" style="" tagname="q"></w2:tag>
+    												<w2:tag id="" style="" tagname="em"></w2:tag>
+    												<xf:group id="" style="" tagname="span">
+    													<w2:tag id="" style="" tagname="em">주행영상</w2:tag>
+    													Driving image
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--sensorData fullpage-box__quickLink">
+    											<xf:group id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag id="" style="" tagname="q"></w2:tag>
+    												<w2:tag id="" style="" tagname="em"></w2:tag>
+    												<xf:group id="" style="" tagname="span">
+    													<w2:tag id="" style="" tagname="em">센서 데이터</w2:tag>
+    													Sensor Data
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--learning fullpage-box__quickLink">
+    											<xf:group id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag id="" style="" tagname="q"></w2:tag>
+    												<w2:tag id="" style="" tagname="em"></w2:tag>
+    												<xf:group id="" style="" tagname="span">
+    													<w2:tag id="" style="" tagname="em">학습 데이터</w2:tag>
+    													Learning Data
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--accident fullpage-box__quickLink">
+    											<xf:group id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag id="" style="" tagname="q"></w2:tag>
+    												<w2:tag id="" style="" tagname="em"></w2:tag>
+    												<xf:group id="" style="" tagname="span">
+    													<w2:tag id="" style="" tagname="em">교통사고</w2:tag>
+    													a traffic accident
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--report fullpage-box__quickLink">
+    											<xf:group id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<w2:tag id="" style="" tagname="q"></w2:tag>
+    												<w2:tag id="" style="" tagname="em"></w2:tag>
+    												<xf:group id="" style="" tagname="span">
+    													<w2:tag id="" style="" tagname="em">운행정보 보고서</w2:tag>
+    													Operation Information Report
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--shareCenter">
+    											<xf:group style="" id="" tagname="a" class="banner-link">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group style="" id="" class="banner-link__tit" tagname="span">
+    													<xf:group style="" id="" tagname="q">
+    														<w2:tag tagname="em" style="" id="">자율주행차</w2:tag>
+    														데이터 공유센터
+    													</xf:group>
+    													<xf:group style="" id="" tagname="em">
+    														<w2:tag tagname="b" style="" id="">open</w2:tag>
+    														<w2:tag tagname="strong" style="" id="">API</w2:tag>
+    													</xf:group>
+    													바로가기
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--admit">
+    											<xf:group style="" id="" class='banner-link' tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group style="" id="" class="banner-link__tit" tagname="span">
+    													<xf:group style="" id="" tagname="q">
+    														<w2:tag tagname="em" style="" id="">My Data 데이터 공유센터</w2:tag>
+    													</xf:group>
+    													임시운행 차량등록
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="fullpage-box--useGuide">
+    											<xf:group class="banner-link" id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:group class="banner-link__tit" id="" style="" tagname="span">
+    													<xf:group id="" style="" tagname="q">
+    														<w2:tag id="" style="" tagname="em">데이터 공유센터</w2:tag>
+    													</xf:group>
+    													공유센터 이용안내
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    							<xf:group style="" id="" class="fullpage-block  fullpage-block--footer">
+    								<footer style="" id="">
+    									<xf:group style="" id="" class="footer__inner">
+    										<xf:group style="" id="" class="footer-logo" tagname="span">
+    											<xf:image src="resource/image/common/img-logo-head.png" style="" id=""></xf:image>
+    										</xf:group>
+    										<xf:group style="" id="" class="d-flex align-end">
+    											<xf:group style="" id="" tagname="address">
+    												<w2:span label="" style="" id="">주소</w2:span>
+    												18247) 경기도 화성시 송산면 삼존로 200 자동차안전연구원｜
+    												<w2:span label="" style="" id="">문의전화</w2:span>
+    												1577-0990
+    											</xf:group>
+    											<xf:group style="" id="" class="btn btn--report" tagname="button">
+    												<w2:attributes>
+    													<w2:type>button</w2:type>
+    												</w2:attributes>
+    												품질오류 신고 및 확인
+    											</xf:group><xf:group style="" id="" class="footer-link" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:image src="resource/image/common/img-main-visual--logo01.png" style="" id=""></xf:image>
+    											</xf:group>
+    											<xf:group class="footer-link" id="" style="" tagname="a">
+    												<w2:attributes>
+    													<w2:href></w2:href>
+    												</w2:attributes>
+    												<xf:image id="" src="resource/image/common/img-main-visual--logo02.png" style=""></xf:image>
+    											</xf:group>
+
+    											
+    										</xf:group>
+    										<xf:group style="" id="" class="copyRight" tagname="p">
+    											©2022.
+    											<w2:span label="" style="" id="">TS Corp.</w2:span>
+    											All rights reserved.
+    										</xf:group>
+    									</xf:group>
+    								</footer>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    	</xf:group>
+    </body>
+</html>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="homeMain">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="trendMap" class="java.util.HashMap">
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="blbdDivCd" column="BLBD_DIV_CD" />
+		<result property="bdwrSeq" column="BDWR_SEQ" />
+		<result property="bdwrTtlNm" column="BDWR_TTL_NM" />
+		<result property="bdwrCts" column="BDWR_CTS"		jdbcType="CLOB"		javaType="java.lang.String"/>
+	</resultMap>
+
+	<!-- 임시등록번호 갯수 -->
+	<select id="mainDAO.selectTempOperTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+		/* QUERY ID : mainDAO.selectTempOperTotCnt */
+		SELECT COUNT(*) selcnt
+		  FROM TB_CM_HT_TEMPOPER E
+		 WHERE 1=1
+		   AND E.APPOR_STATUS = '102'
+	</select>
+
+	<!-- 주행거리 정보 -->
+	<select id="mainDAO.selectDrivingInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/* QUERY ID : mainDAO.selectDrivingInfo */
+    SELECT IFNULL(FORMAT(ROUND(SUM(A.Total_Driving_Dist), '999,999,999,999,999'), 0),'-') AS TOTAL_VIEW
+     		     ,IFNULL(FORMAT(ROUND(SUM(A.Auto_Driving_Dist), '999,999,999,999,999'), 0),'-') AS AUTO_VIEW
+          		 ,IFNULL(FORMAT(ROUND(SUM(A.Nomal_Driving_Dist), '999,999,999,999,999'), 0),'-') AS NOMAL_VIEW
+      FROM TB_CL_HT_DRIVING A
+     WHERE 1=1
+	</select>
+
+	<!-- 데이터 건수 -->
+	<select id="mainDAO.selectDataTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+		/* QUERY ID : mainDAO.selectDataTotCnt */
+		SELECT COUNT(*) totcnt
+		  FROM TB_WEB_HT_BOARD A
+	</select>
+
+	<!-- 데이터 용량 -->
+	<select id="mainDAO.selectDataTotVolume" parameterClass="java.util.HashMap" resultClass="String">
+		/* QUERY ID : mainDAO.selectDataTotVolume */
+		SELECT FORMAT(ROUND(SUM(A.FILE_SIZE)/1024/1024/1024, '999,999,999,999,990.9'),1) AS FILE_SIZE
+		  FROM TB_WEB_HT_APPEND A
+	</select>
+
+	<!-- 게시판 조회 -->
+	<select id="mainDAO.selectNoticeList" parameterClass="java.util.HashMap" resultMap="trendMap">
+		/* QUERY ID : mainDAO.selectNoticeList */
+		<!-- SELECT DATE_FORMAT(T2.REG_DATE,'%Y.%m.%d') AS REG_DATE_VIEW 
+		      ,T2.BLBD_DIV_CD
+		      ,T2.BDWR_SEQ
+		      ,T2.BDWR_TTL_NM
+		      ,T2.BDWR_CTS
+		  FROM (SELECT T1.*
+		          FROM (SELECT *, <![CDATA[@ROWNUM:=@ROWNUM+1]]>  AS ROWIDX
+		                  FROM TB_WEB_HT_BLBD
+		                 WHERE BLBD_DIV_CD = #blbd_div_cd#
+		                   AND GPBC_YN = 'Y'
+		               ORDER BY BDWR_SEQ DESC
+		               ) T1
+		       ) T2
+		       , <![CDATA[(select @rownum:=0) TMP]]>
+		 WHERE 1=1
+		      AND T2.ROWIDX BETWEEN 1 AND 5
+		 ORDER BY T2.REG_DATE DESC -->
+		  
+			SELECT 
+						DATE_FORMAT(T1.REG_DATE,'%Y.%m.%d') AS REG_DATE_VIEW 
+				      ,T1.BLBD_DIV_CD
+				      ,T1.BDWR_SEQ
+				      ,T1.BDWR_TTL_NM
+				      ,T1.BDWR_CTS 
+			  FROM (
+						SELECT WHB.*
+						   FROM TB_WEB_HT_BLBD WHB
+						 WHERE BLBD_DIV_CD =  #blbd_div_cd#
+						      AND GPBC_YN = 'Y'   
+						) T1
+				WHERE 1=1  
+				ORDER BY T1.BDWR_SEQ DESC
+				LIMIT 0, 5
+	</select>
+
+	<!-- 조회순/평가점수순 조회 -->
+	<select id="mainDAO.selectPopulList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QUERY ID : mainDAO.selectPopulList */
+		SELECT T1.* FROM ( 
+		SELECT  <![CDATA[@ROWNUM:=@ROWNUM+1]]> AS ROWNUM
+		      ,T.*
+		  FROM (
+		        SELECT A.B_SEQ
+		              ,A.BBS_SEQ
+		              ,D.BBS_NM
+		              ,A.B_TITLE
+		              ,DATE_FORMAT(A.REG_DATE, '[ %Y-%m-%d ] ') AS REG_DATE_VIEW
+		              ,C.EVAL_POINT
+		              ,C.CNT
+		          FROM TB_WEB_HT_BOARD A, TB_WEB_HT_APPEND B,
+		              (SELECT W.B_SEQ
+		                     ,ROUND(AVG(IFNULL(W.EVAL_POINT,0)),1) AS EVAL_POINT 
+		                     ,COUNT(W.B_SEQ) CNT
+		                 FROM TB_WEB_HT_DOWNLOAD W
+		                GROUP BY W.B_SEQ
+		               ) C, TB_WEB_HT_BBS D, <![CDATA[(select @rownum:=0) TMP]]>
+		         WHERE 1=1
+		           AND A.B_SEQ = B.B_SEQ
+		           AND A.B_SEQ = C.B_SEQ
+		           AND A.BBS_SEQ = D.BBS_SEQ
+		           AND A.REG_DATE > (SYSDATE() - 30)
+				   <isEqual property="popul" compareValue="point">
+		         ORDER BY C.EVAL_POINT DESC, A.REG_DATE DESC
+				   </isEqual>
+				   <isNotEqual property="popul" compareValue="point">
+		         ORDER BY C.CNT DESC, A.REG_DATE DESC
+				   </isNotEqual>
+		        ) T
+		        )T1
+		        , <![CDATA[(select @rownum:=0) TMP]]>
+		 WHERE 1=1
+		   AND ROWNUM BETWEEN 1 AND IFNULL( #board_cnt#, 5 )
+	</select>
+
+	<!-- 최신자료 조회 -->
+	<select id="mainDAO.selectRecentList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QUERY ID : mainDAO.selectRecentList */
+		SELECT T1.* FROM ( 
+			SELECT <![CDATA[@ROWNUM:=@ROWNUM+1]]> AS ROWNUM
+			      ,T.*
+			  FROM (
+			        SELECT A.B_SEQ
+			              ,A.BBS_SEQ
+			              ,D.BBS_NM
+			              ,A.B_TITLE
+			              ,DATE_FORMAT(A.REG_DATE, '[ %Y-%m-%d ] ') AS REG_DATE_VIEW
+			          FROM TB_WEB_HT_BOARD A, TB_WEB_HT_APPEND B, TB_WEB_HT_BBS D, <![CDATA[(select @rownum:=0) TMP]]>
+			         WHERE 1=1
+			           AND A.B_SEQ = B.B_SEQ
+			           AND A.BBS_SEQ = D.BBS_SEQ
+			         ORDER BY A.REG_DATE DESC
+			        ) T
+			    )T1
+			    
+			 WHERE 1=1
+			   AND ROWNUM BETWEEN 1 AND IFNULL( #board_cnt#, 5 )
+	</select>
+
+	<!-- 로그이력 등록 -->
+	<insert id="mainDAO.insertConnnectLog" parameterClass="java.util.HashMap">
+		/* QUERY ID : mainDAO.insertConnnectLog */
+		INSERT
+		  INTO TB_WEB_IT_USERCONNECT
+		       (USER_ID
+		       ,LOG_ID
+		       ,CREAT_DT
+		       ,CONECT_MTHD
+		       ,CONNECT_IP
+		       ,ERR_OCCRR_AT
+		       ,ERROR_CODE) 
+    VALUES (#userId#
+           ,#logId#
+           ,SYSDATE()
+           ,#conectMthd#
+           ,#connectIp#
+           ,#errOccrrAt#
+           ,null)
+	</insert>
+	
+	<!-- 데이터 건수 -->
+	<select id="mainDAO.selectAttachFileList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QUERY ID : mainDAO.selectAttachFileList */
+		SELECT A.*  FROM TB_WEB_HT_BLBD A
+		WHERE BLBD_DIV_CD ='101'
+			AND BDWR_SEQ = '5'
+			AND GPBC_YN = 'N'
+	</select>
+
+</sqlMap>

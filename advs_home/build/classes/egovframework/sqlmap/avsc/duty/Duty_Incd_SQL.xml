@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="incident">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="incidentMap" class="java.util.HashMap">
+		<result property="tmpRaceNumber" column="TMP_RACE_NUMBER" />
+		<result property="accId" column="ACC_ID" />
+		<result property="accDate" column="ACC_DATE" />
+		<result property="tmpRaceAgency" column="TMP_RACE_AGENCY" />
+		<result property="place" column="PLACE" />
+		<result property="weather" column="WEATHER" />
+		<result property="roadSituation" column="ROAD_SITUATION" />
+		<result property="roadTypeCd" column="ROAD_TYPE_CD" />
+		<result property="autocarDrivingMode" column="AUTOCAR_DRIVING_MODE" />
+		<result property="autocarDrivingStatusCd" column="AUTOCAR_DRIVING_STATUS_CD" />
+		<result property="autocarSpeed" column="AUTOCAR_SPEED" />
+		<result property="autocarRideNumber" column="AUTOCAR_RIDE_NUMBER" />
+		<result property="autocarLoadVol" column="AUTOCAR_LOAD_VOL" />
+		<result property="autocarDamage" column="AUTOCAR_DAMAGE" />
+		<result property="autocarHumanSex" column="AUTOCAR_HUMAN_SEX" />
+		<result property="autocarHumanAge" column="AUTOCAR_HUMAN_AGE" />
+		<result property="drivingInfoFile" column="DRIVING_INFO_FILE" />
+		<result property="accRecDeviceFile" column="ACC_REC_DEVICE_FILE" />
+		<result property="humanInjuryType" column="HUMAN_INJURY_TYPE" />
+		<result property="accDetailInfo" column="ACC_DETAIL_INFO"		jdbcType="CLOB"		javaType="java.lang.String"/>
+		<result property="etcFilename" column="ETC_FILENAME" />
+		<result property="accDateView" column="ACC_DATE_VIEW" />
+		<result property="regDateView" column="REG_DATE_VIEW" />
+		<result property="weatherView" column="WEATHER_VIEW" />
+		<result property="roadSituationView" column="ROAD_SITUATION_VIEW" />
+		<result property="roadTypeCdView" column="ROAD_TYPE_CD_VIEW" />
+		<result property="autocarDrivingModeView" column="AUTOCAR_DRIVING_MODE_VIEW" />
+		<result property="autocarDrivingStatusCdView" column="AUTOCAR_DRIVING_STATUS_CD_VIEW" />
+		<result property="autocarDamageView" column="AUTOCAR_DAMAGE_VIEW" />
+		<result property="autocarHumanSexView" column="AUTOCAR_HUMAN_SEX_VIEW" />
+		<result property="humanInjuryTypeView" column="HUMAN_INJURY_TYPE_VIEW" />
+	</resultMap>
+
+	<parameterMap id="incidentParamMap" class="java.util.HashMap">
+		<parameter property="tmp_race_number"/>
+		<parameter property="acc_id"/>
+		<parameter property="acc_date"/>
+		<parameter property="tmp_race_agency"/>
+		<parameter property="place"/>
+		<parameter property="weather"/>
+		<parameter property="road_situation"/>
+		<parameter property="road_type_cd"/>
+		<parameter property="autocar_driving_mode"/>
+		<parameter property="autocar_driving_status_cd"/>
+		<parameter property="autocar_speed"/>
+		<parameter property="autocar_ride_number"/>
+		<parameter property="autocar_load_vol"/>
+		<parameter property="autocar_damage"/>
+		<parameter property="human_injury_type"/>
+		<parameter property="autocar_human_sex"/>
+		<parameter property="autocar_human_age"/>
+		<parameter property="acc_detail_info" jdbcType="CLOB"/>
+		<parameter property="driving_info_file"/>
+		<parameter property="acc_rec_device_file"/>
+		<parameter property="etc_filename"/>
+		<parameter property="reg_id"/>
+	</parameterMap>
+
+	<!-- 목록 조회 -->
+	<select id="incdDAO.selectIncdList" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*incdDAO.selectIncdList*/
+		SELECT *
+		  FROM (
+		        SELECT A.*
+		        	,DATE_FORMAT(A.ACC_DATE,'%Y-%m-%d %H:%i') AS ACC_DATE_VIEW
+ 					,DATE_FORMAT(A.REG_DATE,'%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+ 					,ROUND(DATEDIFF(A.REG_DATE, A.ACC_DATE), 1) AS COLDIFF
+		            ,CEIL( ROW_NUMBER() OVER (ORDER BY A.ACC_DATE DESC) / 10 ) LISTCNT
+		        FROM TB_CL_HT_ACCIDENT A
+		        		,( SELECT E.TMP_RACE_NUMBER 
+		                   FROM TB_CM_HT_TEMPOPER E
+		                  WHERE 1=1
+							   <isNotEqual prepend="AND" property="authid" compareValue="103">
+							         E.USER_ID = #userid#
+							   </isNotEqual>
+		                  AND E.APPOR_STATUS = '102'
+		               	  ) B
+		         WHERE 1=1
+		           AND A.TMP_RACE_NUMBER = B.TMP_RACE_NUMBER
+				   <isEqual prepend="AND" property="searchType" compareValue="1">
+				      A.TMP_RACE_AGENCY LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+				   <isEqual prepend="AND" property="searchType" compareValue="2">
+				      A.TMP_RACE_NUMBER LIKE CONCAT('%' , #searchWord# , '%')
+				   </isEqual>
+		         ORDER BY A.ACC_DATE DESC
+		       )AB
+         WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="incdDAO.selectIncdListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+	/*incdDAO.selectIncdListTotCnt*/
+        SELECT COUNT(*) totcnt
+          FROM TB_CL_HT_ACCIDENT A
+              ,( SELECT E.TMP_RACE_NUMBER 
+                   FROM TB_CM_HT_TEMPOPER E
+                  WHERE 1=1
+							   <isNotEqual prepend="AND" property="authid" compareValue="103">
+					         E.USER_ID = #userid#
+							   </isNotEqual>
+                    AND E.APPOR_STATUS = '102'
+               ) B
+         WHERE 1=1
+           AND A.TMP_RACE_NUMBER = B.TMP_RACE_NUMBER
+		   <isEqual prepend="AND" property="searchType" compareValue="1">
+		      A.TMP_RACE_AGENCY LIKE Concat('%' , #searchWord# , '%')
+		   </isEqual>
+		   <isEqual prepend="AND" property="searchType" compareValue="2">
+		      A.TMP_RACE_NUMBER LIKE Concat('%' , #searchWord# , '%')
+		   </isEqual>
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="incdDAO.selectIncdInfo" parameterClass="java.util.HashMap" resultMap="incidentMap">
+	/*incdDAO.selectIncdInfo*/
+		SELECT A.*
+		      ,DATE_FORMAT(A.ACC_DATE, '%Y-%m-%d %H:%i') AS ACC_DATE_VIEW
+		      ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		      ,fn_ct_get_code_name('weather', A.WEATHER ) AS WEATHER_VIEW
+		      ,fn_ct_get_code_name('road_situation', A.ROAD_SITUATION ) AS ROAD_SITUATION_VIEW
+		      ,fn_ct_get_code_name('road_type_cd', A.ROAD_TYPE_CD ) AS ROAD_TYPE_CD_VIEW
+		      ,fn_ct_get_code_name('autocar_driving_mode', A.AUTOCAR_DRIVING_MODE ) AS AUTOCAR_DRIVING_MODE_VIEW
+		      ,fn_ct_get_code_name('autocar_driving_status_cd', A.AUTOCAR_DRIVING_STATUS_CD ) AS AUTOCAR_DRIVING_STATUS_CD_VIEW
+		      ,fn_ct_get_code_name('autocar_damage', A.AUTOCAR_DAMAGE ) AS AUTOCAR_DAMAGE_VIEW
+		      ,fn_ct_get_code_name('autocar_human_sex', A.AUTOCAR_HUMAN_SEX ) AS AUTOCAR_HUMAN_SEX_VIEW
+		      ,fn_ct_get_code_name('human_injury_type', A.HUMAN_INJURY_TYPE ) AS HUMAN_INJURY_TYPE_VIEW
+		  FROM TB_CL_HT_ACCIDENT A
+		 WHERE 1=1
+		   AND A.TMP_RACE_NUMBER = #drv_no#
+		   AND A.ACC_ID = #acc_id#
+	</select>
+
+	<!-- 사고차량 목록 조회 -->
+	<select id="incdDAO.selectAccCarList" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*incdDAO.selectAccCarList*/
+		SELECT A.*
+		      ,fn_ct_get_code_name('acccar_car_type', A.ACCCAR_CAR_TYPE ) AS ACCCAR_CAR_TYPE_VIEW
+		      ,fn_ct_get_code_name('acccar_driving_mode', A.ACCCAR_DRIVING_MODE ) AS ACCCAR_DRIVING_MODE_VIEW
+		      ,fn_ct_get_code_name('acccar_driving_status_cd', A.ACCCAR_DRIVING_STATUS_CD ) AS ACCCAR_DRIVING_STATUS_CD_VIEW
+		      ,fn_ct_get_code_name('acccar_damage', A.ACCCAR_DAMAGE ) AS ACCCAR_DAMAGE_VIEW
+		      ,fn_ct_get_code_name('acccar_human_sex', A.ACCCAR_HUMAN_SEX ) AS ACCCAR_HUMAN_SEX_VIEW
+		      ,fn_ct_get_code_name('human_injury_type', A.HUMAN_INJURY_TYPE ) AS HUMAN_INJURY_TYPE_VIEW
+		  FROM TB_CL_HT_ACCIDENTCAR A
+		 WHERE 1=1
+		   AND A.TMP_RACE_NUMBER = #drv_no#
+		   AND A.ACC_ID = #acc_id#
+		 ORDER BY A.SEQ
+	</select>
+
+	<!-- 사고동영상 목록 조회 -->
+	<select id="incdDAO.selectAccVideoList" parameterClass="java.util.HashMap" resultClass="egovMap">
+	/*incdDAO.selectAccVideoList*/
+		SELECT A.*
+		      ,IFNULL(FORMAT(IFNULL(A.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+		      ,fn_ct_get_code_name('file_type', A.FILE_TYPE ) AS FILE_TYPE_VIEW
+		  FROM TB_CL_HT_ACCIDENTMOVIE A
+		 WHERE 1=1
+		   AND A.TMP_RACE_NUMBER = #drv_no#
+		   AND A.ACC_ID = #acc_id#
+		 ORDER BY A.SEQ
+	</select>
+
+	<!-- 사고정보 등록 -->
+	<insert id="incdDAO.insertIncd" parameterClass="java.util.HashMap">
+	/*incdDAO.insertIncd*/
+		INSERT 
+		  INTO TB_CL_HT_ACCIDENT 
+		       (TMP_RACE_NUMBER
+		       ,ACC_ID
+		       ,ACC_DATE
+		       ,TMP_RACE_AGENCY
+		       ,PLACE
+		       ,WEATHER
+		       ,ROAD_SITUATION
+		       ,ROAD_TYPE_CD
+		       ,AUTOCAR_DRIVING_MODE
+		       ,AUTOCAR_DRIVING_STATUS_CD
+		       ,AUTOCAR_SPEED
+		       ,AUTOCAR_RIDE_NUMBER
+		       ,AUTOCAR_LOAD_VOL
+		       ,AUTOCAR_DAMAGE
+		       ,HUMAN_INJURY_TYPE
+		       ,AUTOCAR_HUMAN_SEX
+		       ,AUTOCAR_HUMAN_AGE
+		       ,ACC_DETAIL_INFO
+		       ,DRIVING_INFO_FILE
+		       ,ACC_REC_DEVICE_FILE
+		       ,ETC_FILENAME
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES (#tmp_race_number#
+		       ,#acc_id#
+		       ,STR_TO_DATE(#acc_date#,'%Y-%m-%d %H:%i:%s')
+		       ,#tmp_race_agency#
+		       ,#place#
+		       ,#weather#
+		       ,#road_situation#
+		       ,#road_type_cd#
+		       ,#autocar_driving_mode#
+		       ,#autocar_driving_status_cd#
+		       ,#autocar_speed#
+		       ,#autocar_ride_number#
+		       ,#autocar_load_vol#
+		       ,#autocar_damage#
+		       ,#human_injury_type#
+		       ,#autocar_human_sex#
+		       ,#autocar_human_age#
+		       ,#acc_detail_info#
+		       ,#driving_info_file#
+		       ,#acc_rec_device_file#
+		       ,#etc_filename#
+		       ,#reg_id#
+		       ,NOW())
+	</insert>
+
+	<!-- 수정 -->
+	<update id="incdDAO.updateIncd" parameterClass="java.util.HashMap">
+	/*incdDAO.updateIncd*/
+        UPDATE TB_CL_HT_ACCIDENT
+           SET ACC_DATE					= STR_TO_DATE(#acc_date#,'%Y-%m-%d %H:%i:%s')
+		      ,TMP_RACE_AGENCY			= #tmp_race_agency#
+		      ,PLACE					= #place#
+		      ,WEATHER					= #weather#
+		      ,ROAD_SITUATION			= #road_situation#
+		      ,ROAD_TYPE_CD				= #road_type_cd#
+		      ,AUTOCAR_DRIVING_MODE		= #autocar_driving_mode#
+		      ,AUTOCAR_DRIVING_STATUS_CD= #autocar_driving_status_cd#
+		      ,AUTOCAR_SPEED			= #autocar_speed#
+		      ,AUTOCAR_RIDE_NUMBER		= #autocar_ride_number#
+		      ,AUTOCAR_LOAD_VOL			= #autocar_load_vol#
+		      ,AUTOCAR_DAMAGE			= #autocar_damage#
+		      ,HUMAN_INJURY_TYPE		= #human_injury_type#
+		      ,AUTOCAR_HUMAN_SEX		= #autocar_human_sex#
+		      ,AUTOCAR_HUMAN_AGE		= #autocar_human_age#
+		      ,ACC_DETAIL_INFO			= #acc_detail_info#
+		   <isEqual property="dr_file_yn" compareValue="Y">
+		      ,DRIVING_INFO_FILE		= #driving_info_file#
+		   </isEqual>
+		   <isEqual property="ac_file_yn" compareValue="Y">
+		      ,ACC_REC_DEVICE_FILE		= #acc_rec_device_file#
+		   </isEqual>
+		   <isEqual property="et_file_yn" compareValue="Y">
+		      ,ETC_FILENAME				= #etc_filename#
+		   </isEqual>
+		      ,UPDATE_ID				= #reg_id#
+		      ,UPDATE_DATE				= NOW()
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND ACC_ID = #acc_id#
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="incdDAO.deleteIncd" parameterClass="java.util.HashMap">
+	/*incdDAO.deleteIncd*/
+		DELETE FROM TB_CL_HT_ACCIDENT
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND ACC_ID = #acc_id#
+	</delete>
+
+	<!-- 사고차량 등록 -->
+	<insert id="incdDAO.insertAccCar" parameterClass="java.util.HashMap">
+	/*incdDAO.insertAccCar*/
+		INSERT 
+		  INTO TB_CL_HT_ACCIDENTCAR 
+		       (TMP_RACE_NUMBER
+		       ,ACC_ID
+		       ,SEQ
+		       ,ACCCAR_CAR_TYPE
+		       ,ACCCAR_DRIVING_MODE
+		       ,ACCCAR_DRIVING_STATUS_CD
+		       ,ACCCAR_SPEED
+		       ,ACCCAR_RIDE_NUMBER
+		       ,ACCCAR_LOAD_VOL
+		       ,ACCCAR_DAMAGE
+		       ,ACCCAR_HUMAN_SEX
+		       ,ACCCAR_HUMAN_AGE
+		       ,HUMAN_INJURY_TYPE)
+		VALUES (#tmp_race_number#
+		       ,#acc_id#
+		       ,#seq#
+		       ,#acccar_car_type#
+		       ,#acccar_driving_mode#
+		       ,#acccar_driving_status_cd#
+		       ,#acccar_speed#
+		       ,#acccar_ride_number#
+		       ,#acccar_load_vol#
+		       ,#acccar_damage#
+		       ,#acccar_human_sex#
+		       ,#acccar_human_age#
+		       ,#acccar_human_injury_type#)
+	</insert>
+
+	<!-- 사고차량 삭제 -->
+	<delete id="incdDAO.deleteAccCar" parameterClass="java.util.HashMap">
+	/*incdDAO.deleteAccCar*/
+		DELETE FROM TB_CL_HT_ACCIDENTCAR
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND ACC_ID = #acc_id#
+	</delete>
+
+	<!-- 사고영상 등록 -->
+	<insert id="incdDAO.insertAccVideo" parameterClass="java.util.HashMap">
+	/*incdDAO.insertAccVideo*/
+		INSERT 
+		  INTO TB_CL_HT_ACCIDENTMOVIE 
+		       (TMP_RACE_NUMBER
+		       ,ACC_ID
+		       ,SEQ
+		       ,DRIVING_VIDEO_FILE
+		       ,FILE_SIZE
+		       ,FILE_TYPE)
+		VALUES (#tmp_race_number#
+		       ,#acc_id#
+		       ,#seq#
+		       ,#driving_video_file#
+		       ,#file_size#
+		       ,#file_type#)
+	</insert>
+
+	<!-- 사고영상 삭제 -->
+	<delete id="incdDAO.deleteAccVideo" parameterClass="java.util.HashMap">
+	/*incdDAO.deleteAccVideo*/
+		DELETE FROM TB_CL_HT_ACCIDENTMOVIE
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND ACC_ID = #acc_id#
+	</delete>
+
+	<!-- ACC_ID.nextval -->
+	<select id="incdDAO.sequenceAccId" parameterClass="java.util.HashMap" resultClass="String">
+	/*incdDAO.sequenceAccId*/
+<!-- 		SELECT IFNULL(MAX(TO_NUMBER(ACC_ID)),0)+1 AS ACC_ID FROM TB_CL_HT_ACCIDENT -->
+		SELECT IFNULL(MAX(CAST(ACC_ID AS FLOAT)),0)+1 AS ACC_ID FROM TB_CL_HT_ACCIDENT
+	</select>
+
+</sqlMap>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+
+	<!-- 테스트 실행용
+	<jdbc:embedded-database id="dataSource" type="HSQL">
+		<jdbc:script location= "classpath:/db/sampledb.sql"/>
+	</jdbc:embedded-database>
+	-->
+
+  <!-- hsql (테스트용 메모리 DB)
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+      <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/>
+      <property name="url" value="jdbc:log4jdbc:hsqldb:hsql://localhost/sampledb"/>
+      <property name="username" value="sa"/>
+  </bean>
+  -->
+
+  <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 )
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://127.0.0.1:3306/example" />
+      <property name="username" value="user"/>
+      <property name="password" value="password"/>
+  </bean>
+  -->
+
+  <!-- oracle (POM에서 commons-dbcp, ojdbc(라이센스 사항으로 별도로 배포되지 않음) 관련 라이브러리 설정)
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:example" />
+      <property name="username" value="user"/>
+      <property name="password" value="password"/>
+  </bean>
+  -->
+
+	<!-- oracle : 디버그용 접속정보
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@14.35.204.33:1521:NZERO"/>
+		<property name="username" value="tsasc"/>
+		<property name="password" value="tsasc"/>
+		<property name="maxActive" value="300"/>
+		<property name="maxWait" value="10000"/>
+		<property name="maxIdle" value="30"/>
+		<property name="minIdle" value="20"/>
+		<property name="validationQuery" value="select 1 from dual"></property>
+	</bean>
+	-->
+
+	<!-- oracle 접속정보 -->
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@14.35.204.33:1521:NZERO"/>
+		<property name="username" value="tsasc"/>
+		<property name="password" value="tsasc"/>
+		<property name="maxActive" value="300"/>
+		<property name="maxWait" value="10000"/>
+		<property name="maxIdle" value="30"/>
+		<property name="minIdle" value="20"/>
+		<property name="validationQuery" value="select 1 from dual"></property>
+	</bean> -->
+
+	<!-- Tibero 접속정보
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver"/>
+		<property name="url" value="jdbc:tibero:thin:@221.158.18.80:8629:tsasc"/>
+		<property name="username" value="avds"/>
+		<property name="password" value="avds"/>
+		<property name="maxActive" value="300"/>
+		<property name="maxWait" value="10000"/>
+		<property name="maxIdle" value="30"/>
+		<property name="minIdle" value="20"/>
+		<property name="validationQuery" value="select 1 from dual"></property>
+	</bean>
+			-->
+	
+	<!-- MariaDB
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	  	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://titsoft.synology.me:33066/tsasc"></property>
+        <property name="username" value="avds"/>
+        <property name="password" value="Titsoft123!@#"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testWhileIdle" value="true"/>
+    </bean> -->  
+    <!-- MariaDB 운영  -->
+    <!--  --><bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <!-- <property name="driverClassName" value="org.mariadb.jdbc.Driver"/> -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!-- 서버 반영용 -->
+        <!-- <property name="url" value="jdbc:mysql://192.168.1.42:3306/tsasc"></property> -->
+        <!-- 개발환경용 -->
+        <property name="url" value="jdbc:mysql://grkeeper.kr:11003/tsasc"></property>
+        <property name="username" value="avds"/>
+        <property name="password" value="avds"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testWhileIdle" value="true"/>
+    </bean>
+
+</beans>

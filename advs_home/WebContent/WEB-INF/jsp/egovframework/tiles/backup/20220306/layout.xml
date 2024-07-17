@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 로컬 인터넷
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+-->
+<!-- 인터넷 연결안될 경우(로컬)-->
+<!--
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
+	"file:///D://eGovFrame//src//AVSC//src//main//webapp//WEB-INF//tld//tiles-config_2_1.dtd">
+-->
+
+<!-- 인터넷 연결안될 경우(운영서버용)-->
+<!-- <!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
+	"file:///home//app//avds_web//WEB-INF//tld//tiles-config_2_1.dtd">
+ -->
+
+<!-- 인터넷 연결안될 경우(운영서버용)-->
+ <!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+ 
+<tiles-definitions>
+
+<!-- 홈페이지 tiles -->
+<definition name="layouts-tiles" template="/WEB-INF/jsp/egovframework/tiles/Layout.jsp">
+	<put-attribute name="header" 	 value="/WEB-INF/jsp/egovframework/tiles/Header.jsp" />
+	<put-attribute name="content"  value="" />
+	<put-attribute name="footer" 	 value="/WEB-INF/jsp/egovframework/tiles/Footer.jsp" />
+</definition>
+
+<!-- 홈페이지 tiles -->
+<definition name="*.tiles" extends="layouts-tiles">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}.jsp" />
+</definition>
+<definition name="*/*.tiles" extends="layouts-tiles">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}.jsp" />
+</definition>
+<definition name="*/*/*.tiles" extends="layouts-tiles">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}/{3}.jsp" />
+</definition>
+<definition name="*/*/*/*.tiles" extends="layouts-tiles">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}/{3}/{4}.jsp" />
+</definition>
+
+<!-- 홈페이지 tiles 미적용 -->
+<definition name="normalLayout" template="/WEB-INF/jsp/egovframework/tiles/NormalLayout.jsp">
+	<put-attribute name="content" 	 value="" />
+</definition>
+
+<!-- 홈페이지 tiles 미적용 -->
+<definition name="*.jsp" extends="normalLayout">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}.jsp" />
+</definition>
+<definition name="*/*.jsp" extends="normalLayout">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}.jsp" />
+</definition>
+<definition name="*/*/*.jsp" extends="normalLayout">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}/{3}.jsp" />
+</definition>
+<definition name="*/*/*/*.jsp" extends="normalLayout">
+	<put-attribute name="content" value="/WEB-INF/jsp/egovframework/{1}/{2}/{3}/{4}.jsp" />
+</definition>
+
+</tiles-definitions>

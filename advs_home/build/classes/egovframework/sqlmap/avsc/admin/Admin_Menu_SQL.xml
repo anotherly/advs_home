@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="menu">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<!-- 권한별 메뉴조회 -->
+	<select id="menuDAO.selectMenuList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT DISTINCT A.DISP_ORDR ORD, A.MENU_ID, A.MENU_NM, A.MENU_PRNT_ID, A.DISP_ORDR, A.MENU_OBJECT, A.MENU_DESC, A.MENU_LEVEL, A.USE_YN, A.SCRIPT_YN, A.SCRIPT_METHOD
+		  FROM TB_WEB_MENU A
+		 WHERE A.USE_YN = 'Y'
+		 AND DISP_ORDR != 0
+		 AND MENU_LEVEL = #menuLevel#
+		START WITH MENU_ID IN (SELECT MENU_ID FROM TB_WEB_MENU_MAP WHERE AUTH_ID = #authId#)
+		CONNECT BY PRIOR MENU_PRNT_ID = A.MENU_ID
+		ORDER BY 1,2
+	</select>
+	
+	<select id="menuDAO.selectMenuSubList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT DISTINCT A.DISP_ORDR ORD, A.MENU_ID, A.MENU_NM, A.MENU_PRNT_ID, A.DISP_ORDR, A.MENU_OBJECT, A.MENU_DESC, A.MENU_LEVEL, A.USE_YN, A.SCRIPT_YN, A.SCRIPT_METHOD
+		  FROM TB_WEB_MENU A
+		 WHERE A.USE_YN = 'Y'
+		 AND DISP_ORDR != 0
+		 AND MENU_LEVEL = #menuLevel#
+		 AND MENU_ID IN (SELECT MENU_ID FROM TB_WEB_MENU_MAP WHERE AUTH_ID = #authId#)
+		 AND MENU_PRNT_ID = #menuPrntId#
+		ORDER BY 1,2
+	</select>
+
+	<select id="menuDAO.selectLeftMenuList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT DISTINCT A.DISP_ORDR ORD, A.MENU_ID, A.MENU_NM, A.MENU_PRNT_ID, A.DISP_ORDR, A.MENU_OBJECT, A.MENU_DESC, A.MENU_LEVEL, A.USE_YN, A.SCRIPT_YN, A.SCRIPT_METHOD
+		  FROM TB_WEB_MENU A
+		 WHERE A.USE_YN = 'Y'
+		 AND DISP_ORDR != 0
+		 AND MENU_LEVEL = #menuLevel#
+		 AND MENU_ID = #menuId#
+		ORDER BY 1,2
+	</select>
+	
+	<select id="menuDAO.selectLeftMenuSubList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT DISTINCT A.DISP_ORDR ORD, A.MENU_ID, A.MENU_NM, A.MENU_PRNT_ID, A.DISP_ORDR, A.MENU_OBJECT, A.MENU_DESC, A.MENU_LEVEL, A.USE_YN, A.SCRIPT_YN, A.SCRIPT_METHOD
+		  FROM TB_WEB_MENU A
+		 WHERE A.USE_YN = 'Y'
+		 AND DISP_ORDR != 0
+		 AND MENU_LEVEL = #menuLevel#
+		 AND MENU_ID IN (SELECT MENU_ID FROM TB_WEB_MENU_MAP WHERE AUTH_ID = #authId#)
+		 AND MENU_PRNT_ID = #menuPrntId#
+		ORDER BY 1,2
+	</select>
+</sqlMap>

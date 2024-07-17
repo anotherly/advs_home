@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/html/resource/css/lib/fullpage.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/ux-common.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/sub.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/us_ce.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+        <w2:type>COMPONENT</w2:type>
+        <w2:buildDate/>
+        <w2:MSA/>
+        <xf:model>
+            <w2:dataCollection baseNode="map"/>
+            <w2:workflowCollection/>
+        </xf:model>
+        <w2:layoutInfo/>
+        <w2:publicInfo method=""/>
+        <script type="text/javascript" src="/html/resource/js/lib/jquery/jquery-3.6.1.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/fullpage.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/tweenmax.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/common.js"></script>
+        <script lazy="false" type="text/javascript" charset="UTF-8" ><![CDATA[
+scwin.onpageload = function() {
+	($(function(){
+		lnbFn();
+		scrollFn();
+		$('header, footer').addClass('sub');
+	}))
+	
+	function lnbFn(){
+	    const aDepth1 = $('.lnb-item.is-active > a');
+	    const newEl = document.createElement('span');
+		$('.lnb-depth--02').prev('a').attr('href', 'javascript:void(0)').parents('.lnb-item').addClass('hasChild');
+	    aDepth1.prepend(newEl);
+	}
+	
+	function scrollFn(){			
+			var tabList = $(".tab-wrap").offset().top - $('header').height();
+ 
+			  $(window).scroll(function() {
+			    var window = $(this).scrollTop();
+			    if(tabList <= window) {
+			      $(".tab-list").addClass("solid");
+			    }else{
+			      $(".tab-list").removeClass("solid");
+			    }
+			  });
+			
+			
+			(function (global, $) {
+			    var $menu     = $('.tab-item'),
+			        $contents = $('.tab-cont'),
+			        $doc      = $('html, body');
+			    $(function () {
+			        // 해당 섹션으로 스크롤 이동
+			        $menu.on('click','button', function(e){
+			            var $target = $(this).parent(),
+			                idx     = $target.index(),
+			                section = $contents.eq(idx),
+			                offsetTop = section.offset().top - $('header').height()*2;
+			            $doc.stop()
+			                    .animate({
+			                        scrollTop :offsetTop
+			                    }, 800);
+			            return false;
+			        });
+			    });
+			    // menu class 추가
+			    $(window).scroll(function(){
+			        var scltop = $(window).scrollTop() + $('header').height()*3;
+			        $.each($contents, function(idx, item){
+			            var $target   = $contents.eq(idx),
+			                i         = $target.index(),
+			                targetTop = $target.offset().top;
+			
+			            if (targetTop <= scltop) {
+			                $menu.removeClass('is-click');
+			                $menu.eq(idx).addClass('is-click');
+			            }
+			            if (!(500 <= scltop)) {
+			                $menu.removeClass('is-click');
+			            }
+			        })
+			
+			    });
+			}(window, window.jQuery));
+		}
+		
+  var content = decodeURIComponent($w.getParameter("content"));
+  var telNo = decodeURIComponent($w.getParameter("telNo"));
+  var faxNo = decodeURIComponent($w.getParameter("faxNo"));
+  var email = decodeURIComponent($w.getParameter("email"));
+  
+  var content = content.replaceAll("+","\u00A0");
+   
+  textarea2.setValue(content);
+  textarea3.setValue(telNo);
+  textarea4.setValue(faxNo);
+  textarea5.setValue(email);
+		
+};
+scwin.side_menu_onclick = function(e) {
+    $('.side-menu__btn').addClass('is-click');
+};
+ 
+]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload">
+    	<xf:group class="wrap" id="" style="">
+    		<w2:wframe id="" src="/sp5_ui/header.xml" style=""></w2:wframe><xf:group class="container" id="" style="">
+    			<xf:group class="container__inner" id="" style="">
+    				<xf:group class="content" id="" style="">
+    					<xf:group class="content__inner" id="" style="">
+    						<xf:group style="" id="" class="layout-container layout-full">
+    							<xf:group style="" id="" class="layout-container__inner layout-container--row">
+    								<xf:group style="" id="" class="lnb">
+    									<w2:tag tagname="h3" style="" id="" class="lnb__tit">이용안내</w2:tag>
+    									<xf:group style="" id="" class="lnb-list">
+    										<xf:group style="" id="" class="lnb-item is-active is-open">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Avsc_View_sp5.do">
+    												<xf:label><![CDATA[데이터 공유센터 소개]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group style="" id="" class="lnb-item">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Cits_View_sp5.do">
+    												<xf:label><![CDATA[자율주행 AI 학습용 데이터]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Cons_View_sp5.do">
+    												<xf:label><![CDATA[데이터공유협의체]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Legl_View_sp5.do">
+    												<xf:label><![CDATA[법령 및 지침]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Rept_View_sp5.do">
+    												<xf:label><![CDATA[자율주행차 임시운행허가]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    								<xf:group style="" id="" class="layout-content">
+    									<xf:group style="" id="" class="layout-content__inner">
+    										<xf:group style="" id="" class="layout-content__top">
+    											<w2:tag tagname="h4" style="" id="" class="layout-content__tit">데이터 공유센터 소개</w2:tag>
+    											<xf:group style="" id="" tagname="ul" class="location ml-auto">
+    												<xf:group style="" id="" tagname="li">
+    													<xf:image src="../resource/image/sub/icon/icon-home.png" style="" id="" alt="홈"></xf:image>
+    												</xf:group>
+    												<w2:tag tagname="li" style="" id="">이용안내</w2:tag>
+    												<w2:tag tagname="li" style="" id="">데이터 공유센터 소개</w2:tag>
+    											</xf:group>
+    										</xf:group>
+    										<xf:group style="" id="" class="layout-content__view">
+    											<xf:group style="" id="" class="el-platform el-platform--us_ce_01">
+    												<w2:tag tagname="h5" style="" id="" class="el-platform__tit">자율주행 데이터 공유센터</w2:tag>
+    												<xf:group style="" id="" class="el-platform__txt">
+    													<strong>공유센터</strong>
+    													는 공공·민간의 자율주행차 시험운행을 통해 생성된
+    													<strong>주행데이터</strong>
+    													를
+    													<strong>수집 ·분석</strong>
+    													하여 산학연 공유하여
+    													<strong>국내 자율주행 기술개발 지원</strong>
+    													하며, 포털에서는 자율주행 기술개발 기관이 데이터를 이용할 수 있도록, 주행 영상데이터, 레이더 등
+    													<strong>센서 데이터</strong>
+    													를 주행환경, 기상 조건등에 따라
+    													<strong>쉽고 편리</strong>
+    													하게
+    													<strong>데이터</strong>
+    													를
+    													<strong>확인</strong>
+    													할 수 있습니다.
+    												</xf:group>
+    											</xf:group>
+    											<xf:group style="" id="" class="layout-content__tab mt-180">
+
+    												<xf:group style="" id="" class="tab-wrap">
+    													<xf:group style="" id="" class="tab-list d-flex">
+    														<xf:group style="" id="" class="tab-item flex-1">
+    															<xf:group style="" id="" class="tab-item__btn" tagname="button">
+    																<w2:attributes>
+    																	<w2:type>button</w2:type>
+    																	<w2:data-anchor>mf_us_ce_01--01</w2:data-anchor>
+    																</w2:attributes>
+    																구축 · 운영근거
+    															</xf:group>
+    														</xf:group>
+    														<xf:group class="tab-item nextItem flex-1" id="" style="">
+    															<xf:group class="tab-item__btn" id="" style="" tagname="button">
+    																<w2:attributes>
+    																	<w2:type>button</w2:type>
+    																	<w2:data-anchor>mf_us_ce_01--02</w2:data-anchor>
+    																</w2:attributes>
+    																공유 시스템 구성
+    															</xf:group>
+    														</xf:group>
+    														<xf:group class="tab-item flex-1" id="" style="">
+    															<xf:group class="tab-item__btn" id="" style="" tagname="button">
+    																<w2:attributes>
+    																	<w2:type>button</w2:type>
+    																	<w2:data-anchor>mf_us_ce_01--03</w2:data-anchor>
+    																</w2:attributes>
+    																문의 및 연락처
+    															</xf:group>
+    														</xf:group>
+    													</xf:group>
+    													<xf:group style="" id="us_ce_01--01" class="tab-cont">
+    														<w2:tag tagname="h5" style="" id="" class="tab-cont__tit">구축 및 운영근거</w2:tag>
+    														<w2:tag tagname="div" style="" id="" class="tab-cont__txt">
+    															주행 데이터 공유센터 구축, 국토교통 혁신성장추진계획, ‘18년 정부업무보고
+    														</w2:tag>
+    														<xf:group style="" id="" class="el-box mt-20">
+    															<w2:tag tagname="p" style="" id="" class="el-box__tit color-blue">
+    																자동차관리법 제27조 5항
+    															</w2:tag>
+    															<w2:tag tagname="p" style="" id="" class="el-box__txt">
+    																<strong>임시운행허가를 받은 자</strong>
+    																는 자율주행자동차의 안전한 운행을 위하여
+    																<strong>
+    																	주요 장치 및 기능의 변경 사항, 운행기록 등 운행에 관한 정보 및 교통사고와 관련한 정보 등 국토교통부령으로 정하는 사항
+    																</strong>
+    																을 국토교통부령으로 정하는 바에 따라
+    																<strong>국토교통부장관에게 보고</strong>
+    																하여야 한다.
+    															</w2:tag>
+    														</xf:group>
+    													</xf:group>
+    													<xf:group style="" id="us_ce_01--02" class="tab-cont">
+    														<w2:tag class="tab-cont__tit" id="" style="" tagname="h5">공유 시스템 구성</w2:tag>
+    														<xf:group style="" id="" class="tab-cont__img" tagname="span">
+    															<xf:image src="/html/resource/image/sub/img-us_ce_01--img02.png" style=""
+    																id="">
+    															</xf:image>
+    														</xf:group>
+
+    													</xf:group>
+    													<xf:group style="" id="us_ce_01--03" class="tab-cont ce01_pb">
+    														<w2:tag tagname="h5" style="" id="" class="tab-cont__tit">문의 및 연락처</w2:tag>
+    														<w2:span id="textarea2" label="" style="" class="tab-cont__txt"></w2:span>
+    														<xf:group style="" id="" class="el-box mt-20">
+    															<xf:group style="" id="" class="el-box__dl" tagname="dl">
+    																<w2:tag tagname="dt" style="" id="">문의</w2:tag>
+    																<w2:span id="textarea3" label="" style="" class="tab-cont__txt"></w2:span>
+    																<w2:tag tagname="dt" style="" id="" class="ml-50">FAX</w2:tag>
+    																<w2:span id="textarea4" label="" style="" class="tab-cont__txt"></w2:span>
+    																<w2:tag tagname="dt" style="" id="" class="ml-50">E-mail</w2:tag>
+    																<w2:span id="textarea5" label="" style="" class="tab-cont__txt"></w2:span>
+    															</xf:group>
+    														</xf:group>
+    													</xf:group>
+    												</xf:group>
+
+    											</xf:group>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<footer style="" id="">
+    			<xf:group style="" id="" class="footer__inner">
+    				<xf:group style="" id="" class="footer-logo" tagname="span">
+    					<xf:image src="../resource/image/main/img-logo-head-color.png" style="" id=""></xf:image>
+    				</xf:group>
+    				<xf:group style="" id="" class="d-flex align-end">
+    					<xf:group style="" id="" tagname="address">
+    						<w2:span label="" style="" id="">주소</w2:span>
+    						18247) 경기도 화성시 송산면 삼존로 200 자동차안전연구원｜
+    						<w2:span label="" style="" id="">문의전화</w2:span>
+    						1577-0990
+    					</xf:group>
+    					<w2:tag tagname="button" style="" id="" class="btn btn--report">
+    						<w2:attributes>
+    							<w2:type>button</w2:type>
+    						</w2:attributes>
+    						품질오류 신고 및 확인
+    					</w2:tag>
+    					<xf:group style="" id="" class="footer-link" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image src="../resource/image/common/img-main-visual--logo01.png" style="" id=""></xf:image>
+    					</xf:group>
+    					<xf:group class="footer-link" id="" style="" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image id="" src="../resource/image/common/img-main-visual--logo02.png" style=""></xf:image>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" id="" class="copyRight" tagname="p">
+    					©2022.
+    					<w2:span label="" style="" id="">TS Corp.</w2:span>
+    					All rights reserved.
+    				</xf:group>
+    			</xf:group>
+    		</footer>
+    		
+    	</xf:group>
+    </body>
+</html>

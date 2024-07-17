@@ -1,0 +1,3 @@
+/*amd /cm/template/snippets/05_입출력테이블/5_07 에러메시지.xml 660 90b1bede948cebfeb545697ec2550c9cd0af6a22c6fd729604bd2a96ea2a86bc */
+define({E:[{T:1,N:'html',A:{xmlns:'http://www.w3.org/1999/xhtml','xmlns:ev':'http://www.w3.org/2001/xml-events','xmlns:w2':'http://www.inswave.com/websquare','xmlns:xf':'http://www.w3.org/2002/xforms'},E:[{T:1,N:'head',E:[{T:1,N:'w2:buildDate'},{T:1,N:'w2:userPalette',A:{defaultIcon:'i_textbox.png',desc:'5.07 에러메시지'}},{T:1,N:'xf:model'},{T:1,N:'script',A:{type:'text/javascript',lazy:'false'},E:[{T:4,cdata:function(scopeObj){with(scopeObj){scwin.onpageload = function(){ }
+}}}]}]},{T:1,N:'body',A:{'ev:onpageload':'scwin.onpageload'},E:[{T:1,N:'w2:textbox',A:{class:'txt_warning',dataType:'',id:'',label:'형식에 맞지 않습니다.',style:''}}]}]}]})

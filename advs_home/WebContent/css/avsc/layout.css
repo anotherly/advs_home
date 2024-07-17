@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+
+body {height:100%; min-width: 1280px;}
+body#pop_body {height:100%; min-width: 700px;}
+
+.wrapBase{margin:0 auto; width:1200px; }
+.wrapBase:after{content:""; display:block; clear:both;}
+
+.wrap{}
+.wrap:after{content:""; display:block; clear:both;}
+
+
+#header{width:100%; z-index: 9; position:relative;}
+#header .t{height:75px; line-height: 75px;}
+#header h1{display:inline-block; height:inherit; line-height: inherit; vertical-align: top;}
+#header h1 a{display:block; overflow: hidden; padding-left:220px; height:inherit; background: url(/images/avsc/h1.png) 0 50% no-repeat; vertical-align: top; }
+#header h1 i{text-indent:-99999px;display:block;overflow:hidden;top:-1000em;position:absolute;}
+#header h1 em{display:inline-block; margin-top:5px; color:#88898c; font-weight: bold; font-size:18px;}
+
+#header .smenu{float:right; height:inherit; line-height:inherit;}
+#header .smenu a{display: inline-block; height:inherit; line-height:inherit; margin-left:20px; text-align: center; color:#777; font-size:14px;}
+#header .smenu a:hover{color:#00a5e2;}
+
+#header .nav{position:relative; height:55px; line-height: 55px; text-align: center;
+background: #00b7ef; /* Old browsers */
+background: -moz-linear-gradient(left, #00b7ef 0%, #008cce 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #00b7ef 0%,#008cce 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #00b7ef 0%,#008cce 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ef', endColorstr='#008cce',GradientType=1 ); /* IE6-9 */
+}
+#header .nav ul{width:1050px;}
+#header .nav i{position:absolute; left:0;top:55px; clear:both; display:block; content: ''; height:0px; width:100%; background: #fff; opacity: 0; transition: all 0.3s; z-index: 1; box-shadow: 0 3px 5px rgba(0,0,0,0.07); }
+
+#header .nav li{position:relative; display:inline-block; width:auto; height:55px; line-height:55px; margin:0 50px; z-index: 99;}
+#header .nav li > a{position:relative; display:inline-block; width:auto; height:55px; line-height:55px; color:#fff; font-size:17px;}
+#header .nav li > a:after{clear:both; display:block; content:''; position:absolute; bottom:0; left:50%; width:1px; height:3px; background: #fff; transition: all 0.3s; opacity: 0;}
+#header .nav li.active > a:after, #header .nav li:hover > a:after{left:0; right:0; width:100%; opacity: 1;}
+
+#header .nav li > div{overflow: hidden; display:block; position:absolute; left:-52px; right:-52px; height:0px; border-right:1px solid #eee; opacity: 0; transition: all 0.3s;}
+#header .nav li:last-child > div{border: none;}
+#header .nav div > a{display:block; height:30px; line-height: 30px;}
+#header .nav div > a:hover{color:#00a5e2 ; text-decoration: underline;}
+
+#header .nav ul:hover div{height:280px; opacity: 1; padding:15px 0; }
+#header .nav ul:hover i{height:290px; opacity: 1;}
+
+
+
+#container{clear: both; margin:0 auto;  width:1200px; padding: 50px 0; position:relative; z-index: 1;}
+#container:after{clear: both; display:block; content: '';}
+
+
+#footer{display:block; height:auto; border-top:1px solid #eee; text-align: center; background: #323639;}
+#footer .t{padding:13px 0; background: #fff; }
+#footer .t li{display:inline-block;}
+#footer > div{padding:30px 0 50px 0; text-align: left;}
+#footer h1{display:inline-block; width:250px; height:40px; background: url(/images/avsc/footer_h1.png) 0 50% no-repeat;}
+#footer .r{display:inline-block;}
+#footer .r ul{}
+#footer .r li{display:inline-block;}
+#footer .r ul a{display:inline-block; height:auto; line-height:1.4em; padding:10px 20px 10px 0; color:#fff; }
+#footer .r ul a:hover{color:#00a5e2;}
+#footer .r em{ color:rgba(255,255,255,0.5);}
+#footer .logo{float:right;}
+#footer .logo li{display:inline-block;margin-left:30px;}
+
+
+
+
+
+
+
+
+/* leftmenu 기본 */
+.lmenu{float:left; position:relative; width:230px; height:auto;}
+.lmenu .depth1, .lmenu .depth2{display:block;}
+.lmenu .depth1{display:table; width:100%; height:145px; text-align: center;  font-size:26px; color:#fff; background: #3f5171 url(/images/avsc/lmenu_bg.png) 15px 15px no-repeat;  }
+.lmenu .depth1 i{display:table-cell; height:100%; vertical-align: middle;}
+
+.lmenu .depth2{background: #fff; border:1px solid #e1e1e1; border-top:none; border-bottom:none;}
+.lmenu .depth2 li{margin-left:-1px; margin-right:-1px; border-bottom:1px solid #e1e1e1;}
+.lmenu .depth2 li > a{display:block; height:50px; line-height: 50px; padding-left:15px; letter-spacing: -1px; color:#333; font-size:15px; text-align:left;}
+
+.lmenu .depth2 li.active > a, .lmenu .depth2 li > a:hover{color:#fff; background:#feba12;  }
+
+.lmenu .depth3{padding:5px 0;}
+.lmenu .depth3 a{display:block; height:40px; line-height: 40px; padding-left:15px; color:#999;}
+.lmenu .depth3 a:hover, .lmenu .depth3 a.active{color:#333; font-weight: bold;}
+
+
+
+.contWrap{float:right; width:930px;}
+.contents{float:right; width:930px; min-height:600px;}
+
+
+
+
+/* location
+.location{height:40px; line-height: 40px; margin-bottom:40px;}
+.location:after{clear:both; display:block; content: '';}
+.location b{float:left; height:inherit; line-height:inherit; font-size:35px; color:#333; font-weight: normal; letter-spacing:-0.075em;}
+.location ul{float:right;}
+.location li{display: inline-block; width:auto; height:40px; line-height: 40px; padding:0 15px 0 10px; font-size:14px;  background: url(/images/avsc/location_arrow.png) right 50% no-repeat; vertical-align: middle; color:#777;}
+.location li:last-child{background: none;}
+.location li:first-child{padding:0 10px 0 0px;}
+.location li:first-child:before{clear:both; display: inline-block; content:' '; width:20px; height:inherit; line-height: inherit; background: url(/images/avsc/location_home.png) 0 50% no-repeat;}
+*/
+
+
+
+
+
+/* 팝업 - modal*/
+.modal_xs{width:350px;}
+.modal_sm{width:450px;}
+.modal_md{width:600px;}
+.modal_lg{width:800px;}
+
+.modal-content{width:500px; border:1px solid #ddd; border-radius:5px;  background: #fff; }
+.modal-content2{width:700px; border:1px solid #ddd; border-radius:5px;  background: #fff; }
+
+
+
+.modal-header {overflow: hidden; position:relative; height:60px; line-height: 60px; padding-left:20px; margin-top:0; color:#333; font-size:18px; text-align: left; border-bottom:1px solid #ddd; }
+.pop_close{position:absolute; right:10px; height:60px; width:50px; background: url(/images/avsc/close.png) 50% 50% no-repeat;}
+
+/* .modal-body{position: relative; overflow-y: auto; padding:30px; padding-bottom:0; } */
+.modal-body{position: relative; padding:30px; padding-bottom:0; }
+
+/* .modal-footer{padding:30px 0 30px 0; text-align: center;} */
+.modal-footer{padding:30px 0 30px 0; text-align: center; display:block; border-top:none;}
+

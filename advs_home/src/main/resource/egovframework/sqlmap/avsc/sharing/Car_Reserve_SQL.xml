@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sharing">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<resultMap id="carReserveMap" class="java.util.HashMap">
+		<result property="reservationNumber" column="RESERVATION_NUMBER" />
+		<result property="applyCompanyCode" column="APPLY_COMPANY_CODE" />
+		<result property="applyDate" column="APPLY_DATE" />
+		<result property="applyType" column="APPLY_TYPE" />
+		<result property="bizNumber" column="BIZ_NUMBER" />
+		<result property="agencyAdres" column="AGENCY_ADRES" />
+		<result property="rentDt" column="RENT_DT" />
+		<result property="returnDt" column="RETURN_DT" />
+		<result property="rentCarCode" column="RENT_CAR_CODE" />
+		<result property="rentTime" column="RENT_TIME" />
+		<result property="returnTime" column="RETURN_TIME" />
+		<result property="drivingSchedulePlace" column="DRIVING_SCHEDULE_PLACE" />
+		<result property="collectData" column="COLLECT_DATA" />
+		<result property="uploadScheduleDate" column="UPLOAD_SCHEDULE_DATE" />
+		<result property="attachFile" column="ATTACH_FILE" />
+		<result property="etc" column="ETC" />
+		<result property="adminMemo" column="ADMIN_MEMO" />
+		<result property="reservationStatus" column="RESERVATION_STATUS" />
+		<result property="regId" column="REG_ID" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="updateId" column="UPDATE_ID" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="attachFl" column="ATTACH_FL" />
+
+		
+	</resultMap>
+
+	<!-- 목록 조회 -->
+	<select id="carReserveDAO.selectCarReserveList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QEURY ID : carReserveDAO.selectCarReserveList */
+		SELECT *
+		  FROM (
+		        SELECT A.*
+		              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d') AS REG_DATE_VIEW
+		              ,IF((SELECT COUNT(*) FROM TB_CL_HT_CARRESERVATION_FILE B WHERE A.RESERVATION_NUMBER = B.RESERVATION_NUMBER) > 0, 1, 0) AS ATTACHYN
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.RESERVATION_NUMBER ASC) ) LISTCNT
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.RESERVATION_NUMBER DESC) / 10 ) PAGECNT
+		          FROM TB_CL_HT_CARRESERVATION A
+		         WHERE 1=1
+					   <isEqual prepend="AND" property="searchType" compareValue="1">
+					    A.APPLY_COMPANY_CODE LIKE CONCAT('%' , #searchWord# , '%')
+					   </isEqual>
+					   <isEqual prepend="AND" property="searchType" compareValue="2">
+					    A.RENT_CAR_CODE LIKE CONCAT('%' , #searchWord# , '%')
+					   </isEqual>
+		         ORDER BY A.REG_DATE DESC
+		       ) B
+		 WHERE PAGECNT = #iPageNo#
+	</select>
+	
+	<select id="carReserveDAO.selectReserveList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QUERY ID : carReserveDAO.selectReserveList */
+		SELECT A.*
+					,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d') AS REG_DATE_VIEW
+					,IF((SELECT COUNT(*) FROM TB_CL_HT_CARRESERVATION_FILE B WHERE A.RESERVATION_NUMBER = B.RESERVATION_NUMBER) > 0, 1, 0) AS ATTACHYN
+		  FROM TB_CL_HT_CARRESERVATION A
+	    WHERE 1=1
+		 <!-- <isNotEmpty prepend="AND" property="curToday" >
+			A.RENT_DT BETWEEN DATE_FORMAT(CONCAT(#curToday#, '00'), '%Y-%m-%01') and DATE_FORMAT(CONCAT(#curToday#, '00'), '%Y-%m-%31')
+		</isNotEmpty> -->
+			ORDER BY A.REG_DATE DESC
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="carReserveDAO.selectCarReserveListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+		/* QUERY ID : carReserveDAO.selectCarReserveListTotCnt */ 
+		SELECT COUNT(*) totcnt
+		  FROM TB_CL_HT_CARRESERVATION A
+		 WHERE 1=1
+		 <!-- <isEqual prepend="AND" property="searchType" compareValue="1">
+		  A.BDWR_TTL_NM LIKE CONCAT('%' , #searchWord# , '%')
+		 </isEqual>
+		 <isEqual prepend="AND" property="searchType" compareValue="2">
+		  A.BDWR_CTS LIKE CONCAT('%' , #searchWord# , '%')
+		 </isEqual> -->
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="carReserveDAO.selectCarReserveInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*carReserveDAO.selectCarReserveInfo*/
+		SELECT A.*, DATEDIFF(RETURN_DT,RENT_DT)+1 AS RENT_DAY, DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+		  FROM TB_CL_HT_CARRESERVATION A
+		 WHERE 1=1
+		 	  AND A.RESERVATION_NUMBER 		= #reservationNumber#
+	</select>
+	<!-- 상세내용 -->
+	<select id="carReserveDAO.selectCarReserveInfoList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*carReserveDAO.selectCarReserveInfoList*/
+		SELECT RENT_DT, RETURN_DT 
+		   FROM TB_CL_HT_CARRESERVATION A
+		 WHERE 1=1
+		 	 AND A.RENT_CAR_CODE = #rentCarCode#
+		 	 AND A.RENT_DT >= DATE_FORMAT(NOW(), '%Y-%m-%d')
+	</select>
+	
+		<!-- 차량예약 등록 -->
+	<insert id="carReserveDAO.insertCarReserve" parameterClass="java.util.HashMap">
+		/*carReserveDAO.insertCarReserve*/
+		INSERT 
+		  INTO TB_CL_HT_CARRESERVATION 
+		       (RESERVATION_NUMBER
+				,APPLY_COMPANY_CODE
+				,APPLY_DATE
+				,APPLY_TYPE
+				,BIZ_NUMBER
+				,AGENCY_ADRES
+				,RENT_DT
+				,RETURN_DT
+				,RENT_CAR_CODE
+				,RENT_TIME
+				,RETURN_TIME
+				,DRIVING_SCHEDULE_PLACE
+				,COLLECT_DATA
+				,UPLOAD_SCHEDULE_DATE
+				,ATTACH_FILE
+				,ETC
+				,ADMIN_MEMO
+				,RESERVATION_STATUS
+				,REG_ID
+				,REG_DATE
+				,UPDATE_ID
+				,UPDATE_DATE)
+		VALUES (#reservationNumber#
+				,#apply_company_code#
+				,DATE_FORMAT(NOW(),'%Y-%m-%d')
+				,#apply_type#
+				,#biz_number#
+				,#agency_adres#
+				,#rent_dt#
+				,#return_dt#
+				,#rent_car_code#
+				,#rent_time#
+				,#return_time#
+				,#driving_schedule_place#
+				,#collect_data#
+				,#upload_schedule_date#
+				,#attach_file#
+				,#etc#
+				,#admin_memo#
+				,1
+				,#reg_id#
+				,NOW()
+				,#update_id#
+				,NOW())
+	</insert>
+	
+	<!-- CHANGE_ID.nextval -->
+	<select id="carReserveDAO.sequenceReserveNum" parameterClass="java.util.HashMap" resultClass="String">
+		/*carReserveDAO.sequenceReserveNum*/
+		SELECT IFNULL(MAX(RESERVATION_NUMBER),0)+1 FROM TB_CL_HT_CARRESERVATION
+	</select>
+
+	<!-- 예약취소 -->
+	<update id="carReserveDAO.updateCarReserveCancel" parameterClass="java.util.HashMap">
+		UPDATE TB_CL_HT_CARRESERVATION
+		   SET RESERVATION_STATUS = 0
+		 WHERE 1=1
+		   AND RESERVATION_NUMBER 	= #reservationNumber#
+	</update>
+
+	<!-- 첨부파일 조회 -->
+	<select id="carReserveDAO.selectAttachFileList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*carReserveDAO.selectAttachFileList*/
+		SELECT A.*
+		      ,IFNULL(FORMAT(IFNULL(A.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
+		      ,fn_ct_get_code_name('file_type', A.FILE_TYPE ) AS FILE_TYPE_VIEW
+		  FROM TB_CL_HT_CARRESERVATION_FILE A
+		 WHERE 1=1
+		   AND A.RESERVATION_NUMBER = #reservationNumber#
+		 ORDER BY A.SEQ
+	</select>
+
+	<!-- 첨부파일 삭제 -->
+	<delete id="carReserveDAO.deleteAttachFile" parameterClass="java.util.HashMap">
+		/*carReserveDAO.deleteAttachFile*/
+		DELETE FROM TB_CL_HT_CARRESERVATION_FILE
+		 WHERE 1=1
+		   AND RESERVATION_NUMBER = #reservationNumber#
+		   AND SEQ = #seq#
+	</delete>
+	
+	<!-- 첨부파일 등록 -->
+	<insert id="carReserveDAO.insertAttachFile" parameterClass="java.util.HashMap">
+		/*carReserveDAO.insertAttachFile*/
+		INSERT 
+		  INTO TB_CL_HT_CARRESERVATION_FILE 
+		       (RESERVATION_NUMBER
+		       ,SEQ
+		       ,ATTACH_FILE
+		       ,FILE_SIZE
+		       ,FILE_TYPE
+		       ,FILE_PATH)
+		VALUES (#reservationNumber#
+		       ,#seq#
+		       ,#attach_file#
+		       ,#file_size#
+		       ,#file_type#
+		       ,#file_path#)
+	</insert>
+	
+
+
+</sqlMap>

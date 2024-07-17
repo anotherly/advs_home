@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/html/resource/css/lib/fullpage.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/ux-common.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/sub.css" type="text/css"?>
+<?xml-stylesheet href="/html/resource/css/us_ce.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+        <w2:type>COMPONENT</w2:type>
+        <w2:buildDate/>
+        <w2:MSA/>
+        <xf:model>
+            <w2:dataCollection baseNode="map"/>
+            <w2:workflowCollection/>
+        </xf:model>
+        <w2:layoutInfo/>
+        <w2:publicInfo method=""/>
+        <script type="text/javascript" src="/html/resource/js/lib/jquery/jquery-3.6.1.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/fullpage.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/lib/tweenmax.min.js"></script>
+    	<script type="text/javascript" src="/html/resource/js/common.js"></script>
+        <script lazy="false" type="text/javascript"><![CDATA[
+	scwin.onpageload = function() {
+        ($(function(){
+			lnbFn();
+			$('header, footer').addClass('sub');
+		}))
+		
+		function lnbFn(){
+		    const aDepth1 = $('.lnb-item.is-active > a');
+		    const newEl = document.createElement('span');
+			$('.lnb-depth--02').prev('a').attr('href', 'javascript:void(0)').parents('.lnb-item').addClass('hasChild');
+		    aDepth1.prepend(newEl);
+		}
+
+	};
+	scwin.side_menu_onclick = function(e) {
+	    $('.side-menu__btn').addClass('is-click');
+	};
+	
+scwin.grpLink01_onclick = function(e) {
+	window.open('https://www.law.go.kr/법령/자동차관리법/(19054,20221115)');
+};
+
+scwin.grpLink02_onclick = function(e) {
+	window.open('https://www.law.go.kr/법령/자동차관리법시행령');
+};
+
+scwin.grpLink03_onclick = function(e) {
+	window.open('https://www.law.go.kr/법령/자동차관리법시행규칙');
+};
+
+scwin.grpLink04_onclick = function(e) {
+	window.open('https://www.law.go.kr/행정규칙/자동차운행기록및장치에관한관리지침/(2021-1279,20211126)');
+};
+]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload">
+    	<xf:group class="wrap" id="" style="">
+    		<w2:wframe id="" src="/sp5_ui/header.xml" style=""></w2:wframe><xf:group class="container" id="" style="">
+    			<xf:group class="container__inner" id="" style="">
+    				<xf:group class="content" id="" style="">
+    					<xf:group class="content__inner" id="" style="">
+    						<xf:group style="" id="" class="layout-container layout-full">
+    							<xf:group style="" id="" class="layout-container__inner layout-container--row">
+    								<xf:group style="" id="" class="lnb">
+    									<w2:tag tagname="h3" style="" id="" class="lnb__tit">이용안내</w2:tag>
+    									<xf:group style="" id="" class="lnb-list">
+    										<xf:group style="" id="" class="lnb-item">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Avsc_View_sp5.do">
+    												<xf:label><![CDATA[데이터 공유센터 소개]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group style="" id="" class="lnb-item">
+    											<w2:anchor outerDiv="false" id="" style="" href="/center/introduce/Gude_Cits_View_sp5.do">
+    												<xf:label><![CDATA[자율주행 AI 학습용 데이터]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Cons_View_sp5.do">
+    												<xf:label><![CDATA[데이터공유협의체]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item is-active is-open" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Legl_View_sp5.do">
+    												<xf:label><![CDATA[법령 및 지침]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    										<xf:group class="lnb-item" id="" style="">
+    											<w2:anchor id="" outerDiv="false" style="" href="/center/introduce/Gude_Rept_View_sp5.do">
+    												<xf:label><![CDATA[자율주행차 임시운행허가]]></xf:label>
+    											</w2:anchor>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    								<xf:group style="" id="" class="layout-content">
+    									<xf:group style="" id="" class="layout-content__inner">
+    										<xf:group style="" id="" class="layout-content__top">
+    											<w2:tag tagname="h4" style="" id="" class="layout-content__tit">법령 및 지침</w2:tag>
+    											<xf:group style="" id="" tagname="ul" class="location ml-auto">
+    												<xf:group style="" id="" tagname="li">
+    													<xf:image src="../resource/image/sub/icon/icon-home.png" style="" id="" alt="홈"></xf:image>
+    												</xf:group>
+    												<w2:tag tagname="li" style="" id="">이용안내</w2:tag>
+    												<w2:tag tagname="li" style="" id="">법령 및 지침</w2:tag>
+    											</xf:group>
+    										</xf:group>
+    										<w2:tag tagname="h5" style="" id="" class="layout-content__subtit">법령</w2:tag>
+    										<xf:group style="" id="" class="layout-content__view">
+    											<xf:group style="" id="" class="table-wrap">
+    												<xf:group tagname="table" style="width:100%;" id=""
+    													class="table-basic table-basic--col table-us_ce_04_list">
+    													<w2:attributes>
+    														<w2:summary></w2:summary>
+    													</w2:attributes>
+    													<xf:group tagname="caption">법령 및 지침 테이블</xf:group>
+    													<xf:group tagname="colgroup">
+    														<xf:group tagname="col" style="width:60.00%"></xf:group>
+    														<xf:group tagname="col" style="width:20.00%"></xf:group>
+    														<xf:group tagname="col" style="width:20.00%"></xf:group>
+    													</xf:group>
+    													<xf:group tagname="thead">
+    														<xf:group tagname="tr">
+    															<xf:group tagname="th" style="">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																자료명
+    															</xf:group>
+    															<xf:group tagname="th" style="">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																출처
+    															</xf:group>
+    															<xf:group tagname="th" style="">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																링크
+    															</xf:group>
+    														</xf:group>
+    													</xf:group>
+    													<xf:group tagname="tbody">
+    														<xf:group tagname="tr">
+    															<xf:group tagname="td" style="">TS한국교통안전공단 자동차안전연구원 자동차관리법</xf:group>
+    															<xf:group tagname="td" style="">법제처 국가법령정보센터</xf:group>
+    															<xf:group tagname="td" style="">
+    																<xf:group style="" id="grpLink01"
+    																	class="btn btn-color--white btn-width--120" tagname="button" ev:onclick="scwin.grpLink01_onclick">
+    																	<w2:attributes>
+    																		<w2:type>button</w2:type>
+    																	</w2:attributes>
+    																	<xf:image src="/html/resource/image/sub/icon-link--abroad.png"
+    																		style="" id="">
+    																	</xf:image>
+    																	바로가기
+    																</xf:group>
+    															</xf:group>
+    														</xf:group>
+    														<xf:group tagname="tr">
+    															<xf:group tagname="td" style="">TS한국교통안전공단 자동차안전연구원 자동차관리법 시행령</xf:group>
+    															<xf:group tagname="td" style="">법제처 국가법령정보센터</xf:group>
+    															<xf:group tagname="td" style="">
+    																<xf:group class="btn btn-color--white btn-width--120" id="grpLink02"
+    																	style="" tagname="button" ev:onclick="scwin.grpLink02_onclick">
+    																	<w2:attributes>
+    																		<w2:type>button</w2:type>
+    																	</w2:attributes>
+    																	<xf:image id="" src="/html/resource/image/sub/icon-link--abroad.png"
+    																		style="">
+    																	</xf:image>
+    																	바로가기
+    																</xf:group>
+    															</xf:group>
+    														</xf:group>
+    														<xf:group tagname="tr">
+    															<xf:group tagname="td" style="">TS한국교통안전공단 자동차안전연구원 자동차관리법 시행규칙</xf:group>
+    															<xf:group tagname="td" style="">법제처 국가법령정보센터</xf:group>
+    															<xf:group tagname="td" style="">
+    																<xf:group class="btn btn-color--white btn-width--120" id="grpLink03"
+    																	style="" tagname="button" ev:onclick="scwin.grpLink03_onclick">
+    																	<w2:attributes>
+    																		<w2:type>button</w2:type>
+    																	</w2:attributes>
+    																	<xf:image id="" src="/html/resource/image/sub/icon-link--abroad.png"
+    																		style="">
+    																	</xf:image>
+    																	바로가기
+    																</xf:group>
+    															</xf:group>
+    														</xf:group>
+    													</xf:group>
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+
+    										<w2:tag class="layout-content__subtit mt-30" id="" style="" tagname="h5">지침</w2:tag>
+    										<xf:group class="layout-content__view mb-80" id="" style="">
+    											<xf:group class="table-wrap" id="" style="">
+    												<xf:group class="table-basic table-basic--col table-us_ce_04_list" id=""
+    													style="width:100%;" tagname="table">
+    													<w2:attributes>
+    														<w2:summary></w2:summary>
+    													</w2:attributes>
+    													<xf:group tagname="caption">법령 및 지침 테이블</xf:group>
+    													<xf:group tagname="colgroup">
+    														<xf:group style="width:60.00%" tagname="col"></xf:group>
+    														<xf:group style="width:20.00%" tagname="col"></xf:group>
+    														<xf:group style="width:20.00%" tagname="col"></xf:group>
+    													</xf:group>
+    													<xf:group tagname="thead">
+    														<xf:group tagname="tr">
+    															<xf:group style="" tagname="th">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																자료명
+    															</xf:group>
+    															<xf:group style="" tagname="th">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																출처
+    															</xf:group>
+    															<xf:group style="" tagname="th">
+    																<w2:attributes>
+    																	<w2:scope>col</w2:scope>
+    																</w2:attributes>
+    																링크
+    															</xf:group>
+    														</xf:group>
+    													</xf:group>
+    													<xf:group tagname="tbody">
+    														<xf:group tagname="tr">
+    															<xf:group style="" tagname="td">자동차 운행기록 및 장치에 관한 관리지침</xf:group>
+    															<xf:group style="" tagname="td">법제처 국가법령정보센터</xf:group>
+    															<xf:group style="" tagname="td">
+    																<xf:group class="btn btn-color--white btn-width--120" id="grpLink04"
+    																	style="" tagname="button" ev:onclick="scwin.grpLink04_onclick">
+    																	<w2:attributes>
+    																		<w2:type>button</w2:type>
+    																	</w2:attributes>
+    																	<xf:image id="" src="/html/resource/image/sub/icon-link--abroad.png"
+    																		style="">
+    																	</xf:image>
+    																	바로가기
+    																</xf:group>
+    															</xf:group>
+    														</xf:group>
+
+    													</xf:group>
+    												</xf:group>
+    											</xf:group>
+    										</xf:group>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<footer style="" id="">
+    			<xf:group style="" id="" class="footer__inner">
+    				<xf:group style="" id="" class="footer-logo" tagname="span">
+    					<xf:image src="../resource/image/main/img-logo-head-color.png" style="" id=""></xf:image>
+    				</xf:group>
+    				<xf:group style="" id="" class="d-flex align-end">
+    					<xf:group style="" id="" tagname="address">
+    						<w2:span label="" style="" id="">주소</w2:span>
+    						18247) 경기도 화성시 송산면 삼존로 200 자동차안전연구원｜
+    						<w2:span label="" style="" id="">문의전화</w2:span>
+    						1577-0990
+    					</xf:group>
+    					<w2:tag tagname="button" style="" id="" class="btn btn--report">
+    						<w2:attributes>
+    							<w2:type>button</w2:type>
+    						</w2:attributes>
+    						품질오류 신고 및 확인
+    					</w2:tag>
+    					<xf:group style="" id="" class="footer-link" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image src="../resource/image/common/img-main-visual--logo01.png" style="" id=""></xf:image>
+    					</xf:group>
+    					<xf:group class="footer-link" id="" style="" tagname="a">
+    						<w2:attributes>
+    							<w2:href></w2:href>
+    						</w2:attributes>
+    						<xf:image id="" src="../resource/image/common/img-main-visual--logo02.png" style=""></xf:image>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" id="" class="copyRight" tagname="p">
+    					©2022.
+    					<w2:span label="" style="" id="">TS Corp.</w2:span>
+    					All rights reserved.
+    				</xf:group>
+    			</xf:group>
+    		</footer>
+    		
+    	</xf:group>
+    </body>
+</html>

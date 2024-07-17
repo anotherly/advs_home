@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script language="javascript" type="text/javascript" src="jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript">
+function CheckUploadFileSize(objFile)
+{
+	var nMaxSize = 4 * 1024 * 1024; // 4 MB
+	var nFileSize = objFile.files[0].size;
+	
+	if (nFileSize > nMaxSize) alert("4MB보다 큼!!\n" + nFileSize + " byte");
+	else alert("4MB보다 작음!!\n" + nFileSize + " byte");
+}
+
+function CheckuploadFileExt(objFile)
+{
+	var strFilePath = objFile.value;
+	
+	// 정규식
+	var RegExtFilter = /\.(zip)$/i;
+	if (strFilePath.match(RegExtFilter) == null) alert("허용하지 않는 확장자 (1)");
+	
+	if (RegExtFilter.test(strFilePath) == false) alert("허용하지 않는 확장자 (2)");
+	
+	// inArray
+	var strExt = strFilePath.split('.').pop().toLowerCase();
+	if ($.inArray(strExt, ["zip"]) == -1)
+	{
+		alert("허용하지 않는 확장자 (3)");
+		objFile.outerHTML = objFile.outerHTML;
+	}
+}
+
+</script>
+<title>Input 태그 - file</title>
+</head>
+<body>
+
+<input type="file" onchange="CheckUploadFileSize(this); CheckuploadFileExt(this);">
+
+</body>
+</html>

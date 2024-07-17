@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="device">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<!-- 목록 조회 -->
+	<select id="devcDAO.selectDevcList" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/* QUERY ID : devcDAO.selectDevcList*/
+		SELECT *	
+		  FROM (
+		        SELECT A.*
+		              ,DATE_FORMAT(A.MODIFY_DATE,'%Y-%m-%d %H:%i') AS MODIFY_DATE_VIEW
+ 					  ,DATE_FORMAT(A.REG_DATE,'%Y-%m-%d %H:%i') AS REG_DATE_VIEW
+ 					  ,ROUND(DATEDIFF(A.REG_DATE, A.MODIFY_DATE), 1) AS COLDIFF
+		              ,CEIL( ROW_NUMBER() OVER (ORDER BY A.MODIFY_DATE DESC) / 10 ) LISTCNT
+		          FROM TB_CL_HT_DEVICECHANGE A
+		              ,( SELECT E.TMP_RACE_NUMBER 
+		                   FROM TB_CM_HT_TEMPOPER E
+		                  WHERE 1=1
+									   <isNotEqual prepend="AND" property="authid" compareValue="103">
+							         E.USER_ID = #userid#
+									   </isNotEqual>
+		                    AND E.APPOR_STATUS = '102'
+		               ) B
+		         WHERE 1=1
+		           AND A.TMP_RACE_NUMBER = B.TMP_RACE_NUMBER
+				   <isEqual prepend="AND" property="searchType" compareValue="1">
+				      A.TMP_RACE_AGENCY LIKE '%' || #searchWord# || '%'
+				   </isEqual>
+				   <isEqual prepend="AND" property="searchType" compareValue="2">
+				      A.TMP_RACE_NUMBER LIKE '%' || #searchWord# || '%'
+				   </isEqual>
+		         ORDER BY A.MODIFY_DATE DESC
+		       ) AB
+		 WHERE LISTCNT = #iPageNo#
+	</select>
+	
+	<!-- 총 갯수 -->
+	<select id="devcDAO.selectDevcListTotCnt" parameterClass="java.util.HashMap" resultClass="int">
+		/* QUERY ID : devcDAO.selectDevcListTotCnt*/
+		SELECT COUNT(*) totcnt
+		  FROM TB_CL_HT_DEVICECHANGE A
+		      ,( SELECT E.TMP_RACE_NUMBER 
+		           FROM TB_CM_HT_TEMPOPER E
+              WHERE 1=1
+					   <isNotEqual prepend="AND" property="authid" compareValue="103">
+			         E.USER_ID = #userid#
+					   </isNotEqual>
+                AND E.APPOR_STATUS = '102'
+		       ) B
+		 WHERE 1=1
+		   AND A.TMP_RACE_NUMBER = B.TMP_RACE_NUMBER
+		   <isEqual prepend="AND" property="searchType" compareValue="1">
+		      A.TMP_RACE_AGENCY LIKE '%' || #searchWord# || '%'
+		   </isEqual>
+		   <isEqual prepend="AND" property="searchType" compareValue="2">
+		      A.TMP_RACE_NUMBER LIKE '%' || #searchWord# || '%'
+		   </isEqual>
+	</select>
+
+	<!-- 상세내용 -->
+	<select id="devcDAO.selectDevcInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		/*devcDAO.selectDevcInfo*/
+		SELECT A.*
+		      ,DATE_FORMAT(A.MODIFY_DATE, '%Y-%m-%d %H:%i') AS MODIFY_DATE_VIEW
+		  FROM TB_CL_HT_DEVICECHANGE A
+		 WHERE 1=1
+		   AND A.TMP_RACE_NUMBER = #drv_no#
+		   AND A.CHANGE_ID = #chg_id#
+	</select>
+
+	<!-- 운행정보 등록 -->
+	<insert id="devcDAO.insertDevc" parameterClass="java.util.HashMap">
+		/*devcDAO.insertDevc*/
+		INSERT 
+		  INTO TB_CL_HT_DEVICECHANGE 
+		       (TMP_RACE_NUMBER
+		       ,CHANGE_ID
+		       ,MODIFY_DATE
+		       ,TMP_RACE_AGENCY
+		       ,DRIVING_MODE_CHANGE_YN
+		       ,SPD_RANGE_CHANGE_YN
+		       ,DEVICE_CHANGE_YN
+		       ,DM_BEFORE_SPEC
+		       ,DM_AFTER_SPEC
+		       ,DM_BEFORE_FILENAME
+		       ,DM_AFTER_FILENAME
+		       ,SRC_BEFORE_SPEC
+		       ,SRC_AFTER_SPEC
+		       ,SRC_BEFORE_FILENAME
+		       ,SRC_AFTER_FILENAME
+		       ,DC_BEFORE_SPEC
+		       ,DC_AFTER_SPEC
+		       ,DC_BEFORE_FILENAME
+		       ,DC_AFTER_FILENAME
+		       ,CHANGE_INFO
+		       ,REG_ID
+		       ,REG_DATE)
+		VALUES (#tmp_race_number#
+		       ,#change_id#
+		       ,STR_TO_DATE(#modify_date#,'%Y-%m-%d %H:%i:%S')
+		       ,#tmp_race_agency#
+		       ,#radio_drivingMod#
+		       ,#radio_speedMod#
+		       ,#radio_equipMod#
+		       ,#dm_before_spec#
+		       ,#dm_after_spec#
+		       ,#customFile1#
+		       ,#customFile2#
+		       ,#src_before_spec#
+		       ,#src_after_spec#
+		       ,#customFile3#
+		       ,#customFile4#
+		       ,#dc_before_spec#
+		       ,#dc_after_spec#
+		       ,#customFile5#
+		       ,#customFile6#
+		       ,#change_info#
+		       ,#reg_id#
+		       ,SYSDATE())
+	</insert>
+
+	<!-- 수정 -->
+	<update id="devcDAO.updateDevc" parameterClass="java.util.HashMap">
+		/* QUERY ID : devcDAO.updateDevc*/
+        UPDATE TB_CL_HT_DEVICECHANGE
+           SET MODIFY_DATE				= STR_TO_DATE(#modify_date#,'%Y-%m-%d %H:%i:%S')
+		      ,TMP_RACE_AGENCY			= #tmp_race_agency#
+		      ,DRIVING_MODE_CHANGE_YN	= #radio_drivingMod#
+		      ,SPD_RANGE_CHANGE_YN		= #radio_speedMod#
+		      ,DEVICE_CHANGE_YN			= #radio_equipMod#
+		      ,DM_BEFORE_SPEC			= #dm_before_spec#
+		      ,DM_AFTER_SPEC			= #dm_after_spec#
+		      ,SRC_BEFORE_SPEC			= #src_before_spec#
+		      ,SRC_AFTER_SPEC			= #src_after_spec#
+		      ,DC_BEFORE_SPEC			= #dc_before_spec#
+		      ,DC_AFTER_SPEC			= #dc_after_spec#
+		      ,CHANGE_INFO				= #change_info#
+		      ,UPDATE_ID				= #reg_id#
+		      ,UPDATE_DATE				= SYSDATE()
+		   <isEqual property="dm_bf_file_yn" compareValue="Y">
+		      ,DM_BEFORE_FILENAME		= #customFile1#
+		   </isEqual>
+		   <isEqual property="dm_af_file_yn" compareValue="Y">
+		      ,DM_AFTER_FILENAME		= #customFile2#
+		   </isEqual>
+		   <isEqual property="sr_bf_file_yn" compareValue="Y">
+		      ,SRC_BEFORE_FILENAME		= #customFile3#
+		   </isEqual>
+		   <isEqual property="sr_af_file_yn" compareValue="Y">
+		      ,SRC_AFTER_FILENAME		= #customFile4#
+		   </isEqual>
+		   <isEqual property="dc_bf_file_yn" compareValue="Y">
+		      ,DC_BEFORE_FILENAME		= #customFile5#
+		   </isEqual>
+		   <isEqual property="dc_af_file_yn" compareValue="Y">
+		      ,DC_AFTER_FILENAME		= #customFile6#
+		   </isEqual>
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND CHANGE_ID = #chg_id#
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="devcDAO.deleteDevc" parameterClass="java.util.HashMap">
+		/*devcDAO.deleteDevc*/
+		DELETE FROM TB_CL_HT_DEVICECHANGE
+		 WHERE 1=1
+		   AND TMP_RACE_NUMBER = #drv_no#
+		   AND CHANGE_ID = #chg_id#
+	</delete>
+
+	<!-- CHANGE_ID.nextval -->
+	<select id="devcDAO.sequenceChangeId" parameterClass="java.util.HashMap" resultClass="String">
+		/*devcDAO.sequenceChangeId*/
+		SELECT IFNULL(MAX(TO_NUMBER(CHANGE_ID)),0)+1 FROM TB_CL_HT_DEVICECHANGE
+	</select>
+
+</sqlMap>
