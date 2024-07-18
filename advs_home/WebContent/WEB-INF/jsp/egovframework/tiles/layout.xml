@@ -7,8 +7,7 @@
 <!-- 인터넷 연결안될 경우(로컬)-->
 <!DOCTYPE tiles-definitions PUBLIC
 	"-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
-	"file:///C:\eGovFrameDev-3.9.0-64bit\workspace\advs_home\WebContent\WEB-INF\tld\tiles-config_2_1.dtd">
-
+	"file:///C:\Users\Administrator\git\advs_home\advs_home\WebContent\WEB-INF\tld\tiles-config_2_1.dtd">
 
 <!-- 인터넷 연결안될 경우(운영서버용)-->
 <!--  <!DOCTYPE tiles-definitions PUBLIC
