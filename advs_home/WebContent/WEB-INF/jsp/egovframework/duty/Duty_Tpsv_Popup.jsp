@@ -238,7 +238,7 @@
             <td>
             	<div class="ui-form ui-form-row align-center js-datepicker-range">
                 	<div class="ui-form-block">
-              			<input type="text" class="ui-input ui-form-width--140 js-datepicker" id="ins_init_date" name="ins_init_date"">
+              			<input type="text" class="ui-input ui-form-width--140 js-datepicker" id="ins_init_date" name="ins_init_date">
               		</div>
               	</div>
             </td>

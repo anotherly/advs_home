@@ -104,7 +104,7 @@
 		</taglib>
 		<taglib>
 			<taglib-uri>http://java.sun.com/jstl/xml</taglib-uri>
-			<taglib-location>/WEB-INF/tld/x.tld</taglib-location>
+			<taglib-location>/WEB-INF/tld/fn.tld</taglib-location>
 		</taglib>
 		<taglib>
 			<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>

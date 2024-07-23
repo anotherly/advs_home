@@ -665,7 +665,7 @@ public class DrvgController {
 	@RequestMapping(value = "Duty_Drvg_Updt_Process.do")
 	public String drvgUpdateProcess(@RequestParam MultiValueMap<String,String> params, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
 
-		System.out.println("aaaaaaaaaaaaaaaaaa : ");
+		System.out.println("\n--- Duty_Drvg_Updt Process (운행보고서 수정 프로세스 과정)--------\n");
 		
 		String result = "1"; //결과
 		
@@ -738,6 +738,7 @@ public class DrvgController {
 			map00.put("auto_driving_dist", params.get("auto_driving_dist").get(0));
 			map00.put("nomal_driving_dist", params.get("nomal_driving_dist").get(0));
 			map00.put("reg_id", reg_id);
+			map00.put("ins_init_date", params.get("ins_init_date").get(0));
 			//운행정보 등록
 			LOG.debug(" @@@@@@@@@@@@@@ : 1");
 			drvgService.updateDrvg(map00);
@@ -804,6 +805,8 @@ public class DrvgController {
 			map02.put("ctr_change_cnt", params.get("chng_6").get(0));
 			LOG.debug(" @@@@@@@@@@@@@@ : 15");
 			drvgService.updateCtrChange(map02);
+			
+			LOG.debug("\n\n--- End of Duty_Drvg_Updt Process (운행정보 보고서 수정 로그 완료) ---\n");
 			
 			// 기존 제어권 전환 갯수 : chngLeng
 			String chngLeng = params.get("chngLeng").get(0);
