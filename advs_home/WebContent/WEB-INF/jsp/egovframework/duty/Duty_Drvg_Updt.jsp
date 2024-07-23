@@ -221,7 +221,7 @@
 													<th scope="row">임시운행등록번호</th>
 													<td>${drvgInfo.tmpRaceNumber}</td>
 													<!-- ldk-test -->
-													<th scope="row">보험가입일자-test</th>
+													<th scope="row">보험가입일자</th>
 													<td>
 														<div class="ui-form ui-form-row align-center js-datepicker-range">
 															<div class="ui-form-block">
