@@ -227,7 +227,7 @@
 															<div class="ui-form-block">
 																<input type="text"
 																	class="ui-input ui-form-width--140 js-datepicker"
-																	id="id_4" name="ins_init_date">
+																	id="ins_init_date" name="ins_init_date" value="${drvgInfo.insInitDateView}">
 															</div>
 														</div>
 													</td>
