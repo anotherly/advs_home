@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="driving">
 
@@ -173,6 +173,7 @@
 		        ,NOMAL_DRIVING_DIST		= #nomal_driving_dist#
 		      	,UPDATE_ID				= #reg_id#
 		      	,UPDATE_DATE			= SYSDATE()
+		      	,INS_INIT_DATE 			= #ins_init_date#
 		WHERE 1=1
 		AND TMP_RACE_NUMBER = #drv_no#
 		AND STND_DT = DATE_FORMAT(#std_dt#,'%Y-%m-%d')
