@@ -93,7 +93,7 @@
         <!-- 서버 반영용 -->
         <!-- <property name="url" value="jdbc:mysql://192.168.1.42:3306/tsasc"></property> -->
         <!-- 개발환경용 -->
-        <property name="url" value="jdbc:mysql://grkeeper.kr:11003/tsasc"></property>
+        <property name="url" value="jdbc:mysql://localhost:11000/tsasc"></property>
         <property name="username" value="avds"/>
         <property name="password" value="avds"/>
         <property name="validationQuery" value="select 1"/>

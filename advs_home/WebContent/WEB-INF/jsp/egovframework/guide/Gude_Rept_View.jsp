@@ -79,7 +79,7 @@
 												<div class="permit-list d-flex">
 													<div class="permit-item">
 														<div class="permit-item__img">
-															<img src="/html/resource/image/sub/img-us_ce_05--img01.png" alt="">
+															<img src="/image/sub/img-us_ce_05--img01.png" alt="">
 														</div>
 														<div class="permit-item__txt">
 															<p>
@@ -90,7 +90,7 @@
 													</div>
 													<div class="permit-item">
 														<div class="permit-item__img">
-															<img src="/html/resource/image/sub/img-us_ce_05--img02.png" alt="">
+															<img src="/image/sub/img-us_ce_05--img02.png" alt="">
 														</div>
 														<div class="permit-item__txt">
 															<p>
@@ -101,7 +101,7 @@
 													</div>
 													<div class="permit-item">
 														<div class="permit-item__img">
-															<img src="/html/resource/image/sub/img-us_ce_05--img03.png" alt="">
+															<img src="/image/sub/img-us_ce_05--img03.png" alt="">
 														</div>
 														<div class="permit-item__txt">
 															<p>
@@ -112,7 +112,7 @@
 													</div>
 													<div class="permit-item">
 														<div class="permit-item__img">
-															<img src="/html/resource/image/sub/img-us_ce_05--img04.png" alt="">
+															<img src="/image/sub/img-us_ce_05--img04.png" alt="">
 														</div>
 														<div class="permit-item__txt">
 															<p>
@@ -123,7 +123,7 @@
 													</div>
 													<div class="permit-item">
 														<div class="permit-item__img">
-															<img src="/html/resource/image/sub/img-us_ce_05--img05.png" alt="">
+															<img src="/image/sub/img-us_ce_05--img05.png" alt="">
 														</div>
 														<div class="permit-item__txt">
 															<p>

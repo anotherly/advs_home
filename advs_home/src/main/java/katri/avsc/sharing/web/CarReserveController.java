@@ -140,7 +140,7 @@ public class CarReserveController {
 		paramMap.put("searchWord", searchWord);
 		/* 크로스사이트 체크 : E */
 
-		/** pageing setting */
+		/* pageing setting */
 		PageSetting pageSetting = new PageSetting(); //페이지 클래스
 		iPageNo = Util.setCurrentPage(paramMap.get("iPageNo"));
 		pageSetting.setCurrentPageNo(iPageNo); //현재 페이지  
@@ -329,6 +329,7 @@ public class CarReserveController {
 
 		String reserve_num = carReserveService.sequenceReserveNum(paramMap);
 		LOG.debug("        Position Log[1]");
+	    LOG.debug("----------paramMap: " + paramMap);
 		 
 //		String b_seq = publicDsetService.sequenceBseq(paramMap);
 //		LOG.debug("        Position Log[1]");

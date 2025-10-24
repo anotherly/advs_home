@@ -12,19 +12,21 @@
 	        	<entry key="pageSize" value="10"/>
 
 	        	<!-- 파일 업로드 경로 -->
-						<!-- 파일 업로드 경로 : 개발서버
-						<entry key="pathUpload" value="D:\\eGovFrame\\src\\AVSC\\src\\main\\webapp\\upload\\" />-->
-						<!-- 파일 업로드 경로 : 운영서버-->
-						<entry key="pathUpload" value="/home/app/avds_web/upload/" />
-						
+				<!-- 파일 업로드 경로 : 개발서버 -->
+				<entry key="pathUpload" value="C:\\eGovFrameDev-3.9.0-64bit\\workspace\\advs_home\\WebContent\\upload\\" />
+				<!-- C:\eGovFrameDev-3.9.0-64bit\workspace\advs_home\WebContent\upload -->
+				<!-- 파일 업로드 경로 : 운영서버-->
+				<!-- <entry key="pathUpload" value="/home/app/avds_web/upload/" /> -->
+				<!-- 파일 업로드 경로 : 운영서버-->
+				<entry key="pathUploadAdmin" value="/home/app/upload/" />
 
 	        	<!-- 업로드 구분자 --> 
-						<!-- 업로드 구분자 : 개발서버-->
-						<entry key="pathLetter" value="\\" />
-						<!-- 업로드 구분자 : 운영서버-->
-						<!--
-						<entry key="pathLetter" value="/" />
-						-->
+				<!-- 업로드 구분자 : 개발서버-->
+				<entry key="pathLetter" value="\\" />
+				<!-- 업로드 구분자 : 운영서버-->
+				<!--
+				<entry key="pathLetter" value="/" />
+				-->
 
 	        	<!-- 파일업로드 사이즈 제한 (Kbyte) --> 
 	        	<entry key="uploadSize" value="1048576"/>

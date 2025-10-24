@@ -12,7 +12,7 @@ $(document).ready(function() {
 // 		location.href = "/templetFile/협의체 가입 서류.zip"
 // 	});
 	c_form = document.listForm; //폼 셋팅
-});
+}); 
 
 /* 파일 다운로드  */
 function fn_Download(file_nm) {
@@ -130,11 +130,11 @@ function scrollFn(){
     											<strong>스타트업· 중소기업</strong> 등의<strong><br> 데이터 수집 가공</strong>을 지원하여 <strong>국내 자율주행 기술 개발 가속화 지원</strong>
 												<div class="btn-wrap mt-20">
 <!-- 													<button id="joinDown" class="btn btn-color--navy px-30"> -->
-<!-- 														<img src="/html/resource/image/common/icon/icon-download--white.png" > -->
+<!-- 														<img src="/image/common/icon/icon-download--white.png" > -->
 <!-- 														가입신청서 다운로드 -->
 <!-- 													</button> -->
 														<button type="button" class="btn btn-color--navy px-30" onclick="javascript:fn_Download('${attachFile.attachFilename}')">
-															<img src="/html/resource/image/common/icon/icon-download--white.png" >
+															<img src="/image/common/icon/icon-download--white.png" >
 															가입신청서 다운로드
                                                         </button>
 												</div>
@@ -163,7 +163,7 @@ function scrollFn(){
 																<strong>자율주행</strong> 인지 성능 향상<strong>을 위한 딥러닝 학습 데이터</strong>
 															</p>
 															<div class="el-box__img">
-																<img src="/html/resource/image/sub/img-us_ce_03--img02.jpg" style="" id="">
+																<img src="/image/sub/img-us_ce_03--img02.jpg" style="" id="">
 															</div>
 														</div>
 														<div class="el-box--border box-group-ce02--02 w-50">
@@ -171,7 +171,7 @@ function scrollFn(){
 																End to End<strong>딥러닝을 위한 학습 데이터</strong>
 															</p>
 															<div class="el-box__img">
-																<img src="/html/resource/image/sub/img-us_ce_03--img03.jpg" style="" id="">
+																<img src="/image/sub/img-us_ce_03--img03.jpg" style="" id="">
 															</div>
 														</div>
 														<!-- <div class="el-box--border box-group-ce02--03 w-50">
@@ -179,7 +179,7 @@ function scrollFn(){
 																<strong>자율주행</strong> 정밀 지도<strong>및</strong>도로 구조 <strong>정보</strong>
 															</p>
 															<div class="el-box__img">
-																<img src="/html/resource/image/sub/img-us_ce_03--img04.jpg" style="" id="">
+																<img src="/image/sub/img-us_ce_03--img04.jpg" style="" id="">
 															</div>
 														</div>
 														<div class="el-box--border box-group-ce02--04 w-50">
@@ -187,7 +187,7 @@ function scrollFn(){
 																<strong>자율주행</strong> 실증 사업(FOT)<strong>수집 데이터</strong>
 															</p>
 															<div class="el-box__img">
-																<img src="/html/resource/image/sub/img-us_ce_03--img05.jpg" style="" id="">
+																<img src="/image/sub/img-us_ce_03--img05.jpg" style="" id="">
 															</div>
 														</div> -->
 													</div>
@@ -287,102 +287,102 @@ function scrollFn(){
 													<div class="company-list">
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img src="/html/resource/image/sub/img-us_ce_03-com--01.jpg" style="" id="">
+																<img src="/image/sub/img-us_ce_03-com--01.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk02" src="/html/resource/image/sub/img-us_ce_03-com--02.jpg" style="" id="">
+																<img id="lnk02" src="/image/sub/img-us_ce_03-com--02.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item bg-color--navy">
 															<span class="company-item__img el-box--border">
-																<img id="lnk03" src="/html/resource/image/sub/img-us_ce_03-com--03.jpg" style="" id="">
+																<img id="lnk03" src="/image/sub/img-us_ce_03-com--03.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk04" src="/html/resource/image/sub/img-us_ce_03-com--04.jpg" style="" id="">
+																<img id="lnk04" src="/image/sub/img-us_ce_03-com--04.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk05" src="/html/resource/image/sub/img-us_ce_03-com--05.jpg" style="" id="">
+																<img id="lnk05" src="/image/sub/img-us_ce_03-com--05.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk06" src="/html/resource/image/sub/img-us_ce_03-com--06.jpg" style="" id="">
+																<img id="lnk06" src="/image/sub/img-us_ce_03-com--06.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk07" src="/html/resource/image/sub/img-us_ce_03-com--07.jpg" style="" id="">
+																<img id="lnk07" src="/image/sub/img-us_ce_03-com--07.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk08" src="/html/resource/image/sub/img-us_ce_03-com--08.jpg" style="" id="">
+																<img id="lnk08" src="/image/sub/img-us_ce_03-com--08.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk09" src="/html/resource/image/sub/img-us_ce_03-com--09.jpg" style="" id="">
+																<img id="lnk09" src="/image/sub/img-us_ce_03-com--09.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk10" src="/html/resource/image/sub/img-us_ce_03-com--10.jpg" style="" id="">
+																<img id="lnk10" src="/image/sub/img-us_ce_03-com--10.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk11" src="/html/resource/image/sub/img-us_ce_03-com--11.jpg" style="" id="">
+																<img id="lnk11" src="/image/sub/img-us_ce_03-com--11.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item bg-color-raisinBlack">
 															<span class="company-item__img el-box--border">
-																<img id="lnk12" src="/html/resource/image/sub/img-us_ce_03-com--12.jpg" style="" id="">
+																<img id="lnk12" src="/image/sub/img-us_ce_03-com--12.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk13" src="/html/resource/image/sub/img-us_ce_03-com--13.jpg" style="" id="">
+																<img id="lnk13" src="/image/sub/img-us_ce_03-com--13.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk14" src="/html/resource/image/sub/img-us_ce_03-com--14.jpg" style="" id="">
+																<img id="lnk14" src="/image/sub/img-us_ce_03-com--14.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk15" src="/html/resource/image/sub/img-us_ce_03-com--15.jpg" style="" id="">
+																<img id="lnk15" src="/image/sub/img-us_ce_03-com--15.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk16" src="/html/resource/image/sub/img-us_ce_03-com--16.jpg" style="" id="">
+																<img id="lnk16" src="/image/sub/img-us_ce_03-com--16.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk17" src="/html/resource/image/sub/img-us_ce_03-com--17.jpg" style="" id="">
+																<img id="lnk17" src="/image/sub/img-us_ce_03-com--17.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk18" src="/html/resource/image/sub/img-us_ce_03-com--18.jpg" style="" id="">
+																<img id="lnk18" src="/image/sub/img-us_ce_03-com--18.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk19" src="/html/resource/image/sub/img-us_ce_03-com--19.jpg" style="" id="">
+																<img id="lnk19" src="/image/sub/img-us_ce_03-com--19.jpg" style="" id="">
 															</span>
 														</div>
 														<div class="company-item">
 															<span class="company-item__img el-box--border">
-																<img id="lnk20" src="/html/resource/image/sub/img-us_ce_03-com--20.jpg" style="" id="">
+																<img id="lnk20" src="/image/sub/img-us_ce_03-com--20.jpg" style="" id="">
 															</span>
 														</div>
 													</div>

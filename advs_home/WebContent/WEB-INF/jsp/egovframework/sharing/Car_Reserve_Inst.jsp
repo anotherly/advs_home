@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <script type="text/javascript" src="/js/lib/jquery/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/raonkupload/js/raonkupload.js"></script>
-<script src="/js/clip.js"></script> <!-- ClipReport4 -->
+<script src="/js/clip.js"></script>
+<!-- ClipReport4 -->
 
 <script type="text/javaScript" defer>
 	var selectDay = "${selectDay}";
@@ -12,6 +14,8 @@
 	var G_today = "";
 
   $(document).ready(function() {
+	  console.log("차량예약 등록 화면");
+	  
     c_form = document.listForm; //폼 셋팅
     let today = new Date();  
 //     let after1Day = new Date(today.setDate(today.getDate() + 1));	// 다음날
@@ -239,261 +243,270 @@
 	
 </script>
 
-<form:form id="listForm" name="listForm" method="post" enctype="multipart/form-data">
-<input type="hidden" name="fileName" id="fileName"/>
-<input type="hidden" name="fileSize" id="fileSize"/>
-<input type="hidden" name="filePath" id="filePath"/>
-<input type="hidden" name="rentDay" id="rentDay"/>
-<input type="hidden" name="apply_company_code" id="apply_company_code" value="${agcy_nm}"/>
-<input type="hidden" name="rent_car_code" id="rent_car_code"/>
+<form:form id="listForm" name="listForm" method="post"
+	enctype="multipart/form-data">
+	<input type="hidden" name="fileName" id="fileName" />
+	<input type="hidden" name="fileSize" id="fileSize" />
+	<input type="hidden" name="filePath" id="filePath" />
+	<input type="hidden" name="rentDay" id="rentDay" />
+	<input type="hidden" name="apply_company_code" id="apply_company_code"
+		value="${agcy_nm}" />
+	<input type="hidden" name="rent_car_code" id="rent_car_code" />
 
-<div class="skip">
-  <a href="#container">Go to Content</a>
-</div>
+	<div class="skip">
+		<a href="#container">Go to Content</a>
+	</div>
 
-<!-- container -->
-<div class="container">
-    <div class="container__inner">
-        <div class="content">
-            <div class="content__inner">
+	<!-- container -->
+	<div class="container">
+		<div class="container__inner">
+			<div class="content">
+				<div class="content__inner">
 
-                <div class="layout-container layout-full">
-                    <div class="layout-container__inner layout-container--row">
-                        <div class="lnb">
-	                        <h3 class="lnb__tit">데이터공유센터<br/>시설이용</h3>
-	                        <div class="lnb-list">
-	                            <div class="lnb-item is-active is-open">
-	                                <a href="">차량 플랫폼 공유</a>
-	                                <ul class="lnb-depth--02 lists lists-cir--s">
-	                                    <li>
-	                                        <a href="/sharing/car/Car_Reserve_Main.do">안내</a>
-	                                    </li>
-	                                    <li class="is-active">
-	                                        <a href="/sharing/car/Car_Reserve_Inst.do">예약신청</a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="/sharing/car/Car_Reserve_List.do">예약현황 및 취소</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
-	                            <div class="lnb-item">
-	                                <a href="">공유센터 이용안내</a>
-	                                <ul class="lnb-depth--02 lists lists-cir--s">
-	                                    <li class="is-active">
-	                                        <a href="/center/fact/Center_Fact_Main.do">회의실 안내</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
-	                        </div>
-                        </div>
-                        <div class="layout-content">
-                                    <div class="layout-content__inner">
-                                        <div class="layout-content__top">
-                                            <h4 class="layout-content__tit">차량 플랫폼 공유</h4>
-                                            <ul class="location ml-auto">
-                                                <li>
-                                                    <img src="/image/sub/icon/icon-home.png" alt="홈">
-                                                </li>
-                                                <li>데이터공유센터 시설이용</li>
-                                                <li>차량 플랫폼 공유</li>
-                                                <li>예약신청</li>
-                                            </ul>
-                                        </div>
-                                        <h5 class="layout-content__subtit">예약신청</h5>
-                                        <div class="table-wrap">
-                                            <table class="table-basic table-basic--row">
-                                                <caption>데이터공유센터 시설이용 &gt; 차량 플랫폼 공유 &gt; 예약신청 테이블</caption>
-                                                <colgroup>
-                                                    <col style="width:15%">
-                                                    <col style="width:auto">
-                                                    <col style="width:15%">
-                                                    <col style="width:30%">
-                                                </colgroup>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            신청기관
-                                                        </th>
-                                                        <td>
-                                                            ${agcy_nm}
-                                                        </td>
-                                                        <th scope="row">
-                                                            <span class="el-caution font-s">*</span>사업자등록번호
-                                                        </th>
-                                                        <td>
-                                                            <div class="ui-form">
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--full" title="사업자등록번호 입력" id="biz_number" name="biz_number"  maxlength="12">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            기관주소
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form">
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--full" title="기관주소 입력" id="agency_adres" name="agency_adres">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <span class="el-caution font-s">*</span>날짜 선택
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form ui-form-row align-center js-datepicker">
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--s js-datepicker" title="날짜 선택 대여일시" id="rent_dt" name="rent_dt">
-                                                                </div>
-                                                                <span class="el-hyphen mx-3"></span>
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--s js-datepicker" title="날짜 선택 반납일시" id="return_dt" name="return_dt">
-                                                                </div>
-                                                            </div>
-                                                            <div class="ui-form-block ml-20">
-                                                                 <span class="el-caution font-xs">※ 당일 신청불가, 명일부터 최대 2주까지 신청가능</span>
-                                                             </div>
-                                                        </td>
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            대여 차량
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form">
-                                                                    <label for="rentCarCodeA">
-                                                                        <input type="radio" name="rentCarCode" checked="" id="rentCarCodeA" class="ui-input ui-input-radio" value="쏘렌토">
-                                                                        <span class="ui-input-radio__span"></span>
-                                                                        <span class="ui-input-radio__txt">쏘렌토</span>
-                                                                    </label>
-                                                                    <label for="rentCarCodeB" class="ml-30">
-                                                                        <input type="radio" name="rentCarCode" id="rentCarCodeB" class="ui-input ui-input-radio" value="싼타페">
-                                                                        <span class="ui-input-radio__span"></span>
-                                                                        <span class="ui-input-radio__txt">싼타페</span>
-                                                                    </label>
-                                                                    <label for="rentCarCodeC" class="ml-30">
-                                                                        <input type="radio" name="rentCarCode" id="rentCarCodeC" class="ui-input ui-input-radio" value="카니발">
-                                                                        <span class="ui-input-radio__span"></span>
-                                                                        <span class="ui-input-radio__txt">카니발</span>
-                                                                    </label>
-                                                                    <label for="rentCarCodeD" class="ml-30">
-                                                                        <input type="radio" name="rentCarCode" id="rentCarCodeD" class="ui-input ui-input-radio" value="제네시스G80">
-                                                                        <span class="ui-input-radio__span"></span>
-                                                                        <span class="ui-input-radio__txt">제네시스G80</span>
-                                                                    </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            운행 예정 지역
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form">
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--full" title="운행 예정 지역 입력" id="driving_schedule_place" name="driving_schedule_place">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            수집데이터
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form">
-                                                                <div class="ui-form-block">
-                                                                    <input type="text" class="ui-input ui-form-width--full" title="수집데이터 입력" id="collect_data" name="collect_data" >
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                   <tr>
-                                                        <th scope="row">
-                                                            비고
-                                                        </th>
-                                                        <td colspan="3">
-                                                            <div class="ui-form">
-                                                                <div class="ui-form-block">
-                                                                    <textarea type="text" class="ui-input ui-form-width--full" title="비고" id="etc" name="etc" ></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr> 
-                                             <tr>
-                                                 <th scope="row">첨부파일</th>
-                                                 <td colspan="3">
-                                                     <div class="ui-form">
-                                                         <div class="file">
-                                                             <div class="file__input" id="file__input">
-                                                                 <input class="file__input--file" name="file_info" id="file_info" type="file" onChange="fileExtCheck(this);">
-                                                                 <input type="text" class="file__upload--name" name="filename" id="filename" placeholder="선택된 파일 없음">
-                                                                 <label class="file__input--label" for="file_info">파일찾기</label>
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                            <div class="ui-form-block ml-20">
-                                                                 <span class="el-caution font-xs">※ 사업자등록증 첨부 필요</span>
-                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="btn-wrap btn-row justify-center mt-30 mb-80">
-                                            <button type="button" class="btn btn-width--l btn-color--white">취소</button>
-                                            <button type="button" class="btn btn-width--l btn-color--navy js-popup" onclick="location.href='javascript:fn_Insert();' ">예약신청</button>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                    </div>
-                </div>
+					<div class="layout-container layout-full">
+						<div class="layout-container__inner layout-container--row">
+							<div class="lnb">
+								<h3 class="lnb__tit">
+									데이터공유센터<br />시설이용
+								</h3>
+								<div class="lnb-list">
+									<div class="lnb-item is-active is-open">
+										<a href="">차량 플랫폼 공유</a>
+										<ul class="lnb-depth--02 lists lists-cir--s">
+											<li><a href="/sharing/car/Car_Reserve_Main.do">안내</a></li>
+											<li class="is-active"><a
+												href="/sharing/car/Car_Reserve_Inst.do">예약신청</a></li>
+											<li><a href="/sharing/car/Car_Reserve_List.do">예약현황
+													및 취소</a></li>
+										</ul>
+									</div>
+									<div class="lnb-item">
+										<a href="">공유센터 이용안내</a>
+										<ul class="lnb-depth--02 lists lists-cir--s">
+											<li class="is-active"><a
+												href="/center/fact/Center_Fact_Main.do">회의실 안내</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="layout-content">
+								<div class="layout-content__inner">
+									<div class="layout-content__top">
+										<h4 class="layout-content__tit">차량 플랫폼 공유</h4>
+										<ul class="location ml-auto">
+											<li><img src="/image/sub/icon/icon-home.png" alt="홈">
+											</li>
+											<li>데이터공유센터 시설이용</li>
+											<li>차량 플랫폼 공유</li>
+											<li>예약신청</li>
+										</ul>
+									</div>
+									<h5 class="layout-content__subtit">예약신청</h5>
+									<div class="table-wrap">
+										<table class="table-basic table-basic--row">
+											<caption>데이터공유센터 시설이용 &gt; 차량 플랫폼 공유 &gt; 예약신청 테이블</caption>
+											<colgroup>
+												<col style="width: 15%">
+												<col style="width: auto">
+												<col style="width: 15%">
+												<col style="width: 30%">
+											</colgroup>
+											<tbody>
+												<tr>
+													<th scope="row">신청기관</th>
+													<td>${agcy_nm}</td>
+													<th scope="row"><span class="el-caution font-s">*</span>사업자등록번호
+													</th>
+													<td>
+														<div class="ui-form">
+															<div class="ui-form-block">
+																<input type="text" class="ui-input ui-form-width--full"
+																	title="사업자등록번호 입력" id="biz_number" name="biz_number"
+																	maxlength="12">
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">기관주소</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<div class="ui-form-block">
+																<input type="text" class="ui-input ui-form-width--full"
+																	title="기관주소 입력" id="agency_adres" name="agency_adres">
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row"><span class="el-caution font-s">*</span>날짜
+														선택</th>
+													<td colspan="3">
+														<div
+															class="ui-form ui-form-row align-center js-datepicker">
+															<div class="ui-form-block">
+																<input type="text"
+																	class="ui-input ui-form-width--s js-datepicker"
+																	title="날짜 선택 대여일시" id="rent_dt" name="rent_dt">
+															</div>
+															<span class="el-hyphen mx-3"></span>
+															<div class="ui-form-block">
+																<input type="text"
+																	class="ui-input ui-form-width--s js-datepicker"
+																	title="날짜 선택 반납일시" id="return_dt" name="return_dt">
+															</div>
+														</div>
+														<div class="ui-form-block ml-20">
+															<span class="el-caution font-xs">※ 당일 신청불가, 명일부터
+																최대 2주까지 신청가능</span>
+														</div>
+													</td>
 
-            </div>
-        </div>
-    </div>
-</div>
-<!-- //container -->
-<!-- popup content -->
-<!-- <div class="popup-wrap" id="click_reserve"> -->
-<!--     <div class="popup" style="width:500px;"> -->
-<!--         <div class="popup__inner"> -->
-<!--             <div class="popup-header"> -->
-<!--                 <div class="d-flex"> -->
-<!--                     <span class="popup-logo__img"> -->
-<!--                         <img src="/image/sub/img-popup__logo.png" alt="TS"> -->
-<!--                     </span> -->
-<!--                     <h6>안내</h6> -->
-<!--                     <button type="button" class="popup-close" title="팝업 닫기"> -->
-<!--                         <img src="/image/sub/icon/icon-popup__close.png" alt=""> -->
-<!--                     </button> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="popup-cont"> -->
-<!--                 <div class="popup-cont__inner"> -->
-<!--                     <div class="popup-box"> -->
-<!--                         <p class="popup-box__txt"> -->
-<!--                             <span class="popup-box__name" id="popupName">자동차안전연구원</span> 님<br/><br/> -->
-<!--                             <span class="popup-box__date" id="popupContents">2022년 11월 01일 [ADVS-001 / 종일] </span><br/><br/> -->
-<!--                             예약이 완료되었습니다 -->
-<!--                         </p> -->
-<!--                     </div> -->
-<!--                     <p class="popup__capt el-caution font-s mt-10 ta-c"> -->
-<!--                         ※ 예약취소는 예약일로부터 1일 전까지 가능합니다. -->
-<!--                     </p> -->
-<!--                     <div class="btn-wrap mt-40 ta-c"> -->
-<!--                         <button type="button" class="btn popup-okay btn-width--s btn-height--s btn-color--navy">확인</button> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- </div> -->
-<!-- <div class="popup-overlay"></div> -->
+												</tr>
+												<tr>
+													<th scope="row">대여 차량</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<label for="rentCarCodeA"> <input type="radio"
+																name="rentCarCode" checked="" id="rentCarCodeA"
+																class="ui-input ui-input-radio" value="쏘렌토"> <span
+																class="ui-input-radio__span"></span> <span
+																class="ui-input-radio__txt">쏘렌토</span>
+															</label> 
+															<label for="rentCarCodeB" class="ml-30"> <input
+																type="radio" name="rentCarCode" id="rentCarCodeB"
+																class="ui-input ui-input-radio" value="싼타페"> <span
+																class="ui-input-radio__span"></span> <span
+																class="ui-input-radio__txt">싼타페</span>
+															</label>
+															
+															<label for="rentCarCodeD" class="ml-30"> <input
+																type="radio" name="rentCarCode" id="rentCarCodeD"
+																class="ui-input ui-input-radio" value="제네시스G80">
+																<span class="ui-input-radio__span"></span> <span
+																class="ui-input-radio__txt">제네시스G80</span>
+															</label>
+															 
+															<label for="rentCarCodeC" class="ml-30"> <input
+																type="radio" name="rentCarCode" id="rentCarCodeC"
+																class="ui-input ui-input-radio" value="카니발"> <span
+																class="ui-input-radio__span"></span> <span
+																class="ui-input-radio__txt">카니발</span>
+															</label> 
+															
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">운행 예정 지역</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<div class="ui-form-block">
+																<input type="text" class="ui-input ui-form-width--full"
+																	title="운행 예정 지역 입력" id="driving_schedule_place"
+																	name="driving_schedule_place">
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">수집데이터</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<div class="ui-form-block">
+																<input type="text" class="ui-input ui-form-width--full"
+																	title="수집데이터 입력" id="collect_data" name="collect_data">
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">비고</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<div class="ui-form-block">
+																<textarea type="text"
+																	class="ui-input ui-form-width--full" title="비고"
+																	id="etc" name="etc"></textarea>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">첨부파일</th>
+													<td colspan="3">
+														<div class="ui-form">
+															<div class="file">
+																<div class="file__input" id="file__input">
+																	<input class="file__input--file" name="file_info"
+																		id="file_info" type="file"
+																		onChange="fileExtCheck(this);"> <input
+																		type="text" class="file__upload--name" name="filename"
+																		id="filename" placeholder="선택된 파일 없음"> <label
+																		class="file__input--label" for="file_info">파일찾기</label>
+																</div>
+															</div>
+														</div>
+														<div class="ui-form-block ml-20">
+															<span class="el-caution font-xs">※ 사업자등록증 첨부 필요</span>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="btn-wrap btn-row justify-center mt-30 mb-80">
+										<button type="button"
+											class="btn btn-width--l btn-color--white">취소</button>
+										<button type="button"
+											class="btn btn-width--l btn-color--navy js-popup"
+											onclick="location.href='javascript:fn_Insert();' ">예약신청</button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	<!-- popup content -->
+	<!-- <div class="popup-wrap" id="click_reserve"> -->
+	<!--     <div class="popup" style="width:500px;"> -->
+	<!--         <div class="popup__inner"> -->
+	<!--             <div class="popup-header"> -->
+	<!--                 <div class="d-flex"> -->
+	<!--                     <span class="popup-logo__img"> -->
+	<!--                         <img src="/image/sub/img-popup__logo.png" alt="TS"> -->
+	<!--                     </span> -->
+	<!--                     <h6>안내</h6> -->
+	<!--                     <button type="button" class="popup-close" title="팝업 닫기"> -->
+	<!--                         <img src="/image/sub/icon/icon-popup__close.png" alt=""> -->
+	<!--                     </button> -->
+	<!--                 </div> -->
+	<!--             </div> -->
+	<!--             <div class="popup-cont"> -->
+	<!--                 <div class="popup-cont__inner"> -->
+	<!--                     <div class="popup-box"> -->
+	<!--                         <p class="popup-box__txt"> -->
+	<!--                             <span class="popup-box__name" id="popupName">자동차안전연구원</span> 님<br/><br/> -->
+	<!--                             <span class="popup-box__date" id="popupContents">2022년 11월 01일 [ADVS-001 / 종일] </span><br/><br/> -->
+	<!--                             예약이 완료되었습니다 -->
+	<!--                         </p> -->
+	<!--                     </div> -->
+	<!--                     <p class="popup__capt el-caution font-s mt-10 ta-c"> -->
+	<!--                         ※ 예약취소는 예약일로부터 1일 전까지 가능합니다. -->
+	<!--                     </p> -->
+	<!--                     <div class="btn-wrap mt-40 ta-c"> -->
+	<!--                         <button type="button" class="btn popup-okay btn-width--s btn-height--s btn-color--navy">확인</button> -->
+	<!--                     </div> -->
+	<!--                 </div> -->
+	<!--             </div> -->
+	<!--         </div> -->
+	<!--     </div> -->
+	<!-- </div> -->
+	<!-- <div class="popup-overlay"></div> -->
 </form:form>

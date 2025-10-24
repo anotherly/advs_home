@@ -358,4 +358,51 @@ public class DrvgServiceImpl extends EgovAbstractServiceImpl implements DrvgServ
 	public Map<String, String> selectAttachFileList() {
 		return drvgDAO.selectAttachFileList();
 	}
+	
+	// ldk-custom
+	
+	/**
+	 * 첨부파일 조회
+	 * @param paramMap - 조회할 정보가 담긴 VO
+	 * @return
+	 * @exception
+	 */
+	@Override
+	public Map<String,String> selectPDFFile(Map<String, String> paramMap) {
+		return drvgDAO.selectPDFFile(paramMap);
+	}
+	
+	/**
+	 * 파일 등록
+	 * @param paramMap - 조회할 정보가 담긴 VO
+	 * @return
+	 * @exception
+	 */
+	@Override
+	public void insertPDFFile(Map<String, String> paramMap) { 
+		drvgDAO.insertPDFFile(paramMap);
+	}
+	
+	/**
+	 * 첨부파일 수정
+	 * @param paramMap - 조회할 정보가 담긴 VO
+	 * @return 목록
+	 * @exception Exception
+	 */
+	@Override
+	public int updatePDFFile(Map<String,String> paramMap) {
+		return drvgDAO.updatePDFFile(paramMap);
+	}
+	
+	/**
+	 * 첨부파일 상세 삭제
+	 * @param paramMap - 삭제할 정보가 담긴 Map
+	 * @return delete개수
+	 * @exception
+	 */
+	@Override
+	public int deletePDFFile(Map<String, String> paramMap) {
+		return drvgDAO.deletePDFFile(paramMap);
+	}
+	// ldk-custom-end
 }

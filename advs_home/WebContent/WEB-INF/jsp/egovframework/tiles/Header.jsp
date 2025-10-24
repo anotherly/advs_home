@@ -36,13 +36,13 @@
 		if(!login) {
 %>
 			<!-- 로그인 전 -->
-			<!-- <a href="https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">회원가입</a>
-			<a href="https://www.kotsa.or.kr/mbs/inqFrmFindMemberId.do">ID/PW찾기</a>
-			<a href="https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">로그인</a> -->
+			<!-- <a href="https://tsum.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">회원가입</a>
+			<a href="https://tsum.kotsa.or.kr/mbs/inqFrmFindMemberId.do">ID/PW찾기</a>
+			<a href="https://tsum.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">로그인</a> -->
 			
-			<a href="https://www.kotsa.or.kr/tsum/mbs/insFrmMemberType.do?menuCode=09010000">회원가입</a>
-			<a href="https://www.kotsa.or.kr/tsum/mbs/inqFrmFindMemberId.do?menuCode=09010000">ID/PW찾기</a>
-			<a href="https://www.kotsa.or.kr/tsum/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">로그인</a>
+			<a href="https://tsum.kotsa.or.kr/tsum/mbs/insFrmMemberType.do?menuCode=09010000">회원가입</a>
+			<a href="https://tsum.kotsa.or.kr/tsum/mbs/inqFrmFindMemberId.do?menuCode=09010000">ID/PW찾기</a>
+			<a href="https://tsum.kotsa.or.kr/tsum/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do">로그인</a>
 			
 			<!-- //로그인 전 -->
 <%
@@ -50,9 +50,9 @@
 %>
            <a href="#"><%=user_nm%></a>
            <!-- <a href="/account/Logout_Process.do">로그아웃</a>
-           <a href="https://www.kotsa.or.kr/mpg/myPage.do?menuCode=09010000">개인정보수정</a> -->
+           <a href="https://tsum.kotsa.or.kr/mpg/myPage.do?menuCode=09010000">개인정보수정</a> -->
            <a href="/account/Logout_Process.do">로그아웃</a>           
-           <a href="https://www.kotsa.or.kr/tsum/mpg/myPage.do?menuCode=09010000">개인정보수정</a> 
+           <a href="https://tsum.kotsa.or.kr/tsum/mpg/myPage.do?menuCode=09010000">개인정보수정</a> 
            <a href="/data/record/Data_Uphs_List.do">My Data</a>
 <!--            <a href="/openapi/OpenAPI_Apply.do">Open API</a> -->
 <%

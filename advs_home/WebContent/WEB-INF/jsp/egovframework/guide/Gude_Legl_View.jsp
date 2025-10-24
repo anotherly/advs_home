@@ -99,7 +99,7 @@
 														<td>법제처 국가법령정보센터</td>
 														<td>
 															<button id="grpLink01" class="btn btn-color--white btn-width--120" onclick="grpLink01_onclick()">
-																<img src="/html/resource/image/sub/icon-link--abroad.png" alt=""> 바로가기
+																<img src="/image/sub/icon-link--abroad.png" alt=""> 바로가기
 															</button>
 														</td>
 													</tr>
@@ -108,7 +108,7 @@
 														<td>법제처 국가법령정보센터</td>
 														<td>
 															<button id="grpLink02" class="btn btn-color--white btn-width--120" onclick="grpLink02_onclick()">
-																<img src="/html/resource/image/sub/icon-link--abroad.png" alt=""> 바로가기
+																<img src="/image/sub/icon-link--abroad.png" alt=""> 바로가기
 															</button>
 														</td>
 													</tr>
@@ -117,7 +117,7 @@
 														<td>법제처 국가법령정보센터</td>
 														<td>
 															<button id="grpLink03" class="btn btn-color--white btn-width--120" onclick="grpLink03_onclick()">
-																<img src="/html/resource/image/sub/icon-link--abroad.png" alt=""> 바로가기
+																<img src="/image/sub/icon-link--abroad.png" alt=""> 바로가기
 															</button>
 														</td>
 													</tr>
@@ -148,7 +148,7 @@
 														<td>법제처 국가법령정보센터</td>
 														<td>
 															<button id="grpLink04" class="btn btn-color--white btn-width--120" onclick="grpLink04_onclick()">
-																<img src="/html/resource/image/sub/icon-link--abroad.png" alt=""> 바로가기
+																<img src="/image/sub/icon-link--abroad.png" alt=""> 바로가기
 															</button>
 														</td>
 													</tr>

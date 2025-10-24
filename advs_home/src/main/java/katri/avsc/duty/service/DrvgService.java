@@ -170,5 +170,39 @@ public interface DrvgService{
 
 	Map<String, String> selectAttachFileList();
 
+	// ldk-custom
+	
+	/**
+	 * 첨부파일 조회
+	 * @param paramMap - 조회할 정보가 담긴 Map
+	 * @return 결과
+	 * @exception
+	 */
+	Map<String,String> selectPDFFile(Map<String,String> paramMap);
+	
+	/**
+	 * 첨부파일 등록
+	 * @param paramMap - 조회할 정보가 담긴 Map
+	 * @return 결과
+	 * @exception
+	 */
+	void insertPDFFile(Map<String, String> paramMap);
+	
+	/**
+	 * 첨부파일 수정
+	 * @param paramMap - 수정할 정보가 담긴 Map
+	 * @return 결과
+	 * @exception
+	 */
+	int updatePDFFile(Map<String,String> paramMap);
+	
+	/**
+	 * 첨부파일 상세 삭제
+	 * @param paramMap - 삭제할 정보가 담긴 Map
+	 * @return delete개수
+	 * @exception
+	 */
+	int deletePDFFile(Map<String, String> paramMap);
+	// ldk-custom-end
 
 }

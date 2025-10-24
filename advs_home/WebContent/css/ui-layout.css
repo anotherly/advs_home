@@ -87,3 +87,8 @@
 .table-wrap + .layout-content__subtit {
   margin-top: 30px;
 }
+
+/* ldk-custom css 수정 (변화) */
+.attachment-wrap .layout-content__subtit {
+  margin-top: 30px;
+}

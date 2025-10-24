@@ -209,8 +209,14 @@ System.out.println(paramMap);
 	public String fileDownloadProcess(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String pathLetter = propertiesService.getString("pathLetter"); 	// 구분자 : "/", "\\"
-		String pathUpload = propertiesService.getString("pathUpload") + paramMap.get("dir_nm") + pathLetter;
+		String pathUpload = "";
 		String asIsPathUpload = propertiesService.getString("asIsPathUpload") + paramMap.get("dir_nm") + pathLetter;
+		//관리자 페이지에서 업로드 경로와 일반사용자 경로가 다르므로...
+		if (paramMap.get("dir_nm").equals("trnd")||paramMap.get("dir_nm").equals("notc")) {
+			pathUpload = propertiesService.getString("pathUploadAdmin") + paramMap.get("dir_nm") + pathLetter;
+		} else {
+			pathUpload = propertiesService.getString("pathUpload") + paramMap.get("dir_nm") + pathLetter;
+		}
 		
 		System.out.println("pathUpload >>>> "+ pathUpload);
 		LOG.debug(" ########## File_Download.do ###########");

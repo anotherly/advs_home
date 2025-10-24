@@ -254,17 +254,17 @@
 												<td colspan="3">
 													<select name="selectScenarioCode1" id="selectScenarioCode1" title="일반시나리오(시간) 선택" disabled>
 														<c:forEach var="list" items="${scenario_code1}" varStatus="loop">
-														<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectLoc}">selected</c:if>>${list.codeDetlNm}</option>
+															<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectLoc}">selected</c:if>>${list.codeDetlNm}</option>
 														</c:forEach>
 													</select>
 													<select name="selectScenarioCode2" id="selectScenarioCode2" title="엣지케이스(도로/상황) 선택" disabled>
 														<c:forEach var="list" items="${scenario_code2}" varStatus="loop">
-														<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectTime}">selected</c:if>>${list.codeDetlNm}</option>
+															<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectTime}">selected</c:if>>${list.codeDetlNm}</option>
 														</c:forEach>
 													</select>
 													<select name="selectScenarioCode3" id="selectScenarioCode3" title="특수시나리오(날씨) 선택" disabled>
 														<c:forEach var="list" items="${scenario_code3}" varStatus="loop">
-														<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectScenario}">selected</c:if>>${list.codeDetlNm}</option>
+															<option value="${list.codeDetlCd}" <c:if test="${list.codeDetlCd eq normalInfo.collectScenario}">selected</c:if>>${list.codeDetlNm}</option>
 														</c:forEach>
 													</select>
 												</td>

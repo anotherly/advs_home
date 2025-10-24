@@ -12,7 +12,7 @@
                 <a href="" class="footer-link">
                     <img src="/image/common/img-main-visual--logo01.png" alt="">
                 </a>
-                <a href="" class="footer-link" target="_blank">
+                <a href="https://www.molit.go.kr/portal.do" class="footer-link" target="_blank">
                     <img src="/image/common/img-main-visual--logo02.png" alt="">
                 </a>
             </div>

@@ -205,78 +205,78 @@ public class MainController {
 	 * @return "main/Main"
 	 * @exception Exception
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/main/Main_SP5.do")
-	public ModelAndView homeMainSP5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
-		
-		int port = request.getRemotePort();
-		
-		
-//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		/*ModelAndView mav = new ModelAndView("redirect:http://127.0.0.1:8082/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
-		mav.setViewName("redirect:http://127.0.0.1:8082/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");*/
-		
-		ModelAndView mav = new ModelAndView("redirect:https://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
-		mav.setViewName("redirects:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
-		
-		Map<String, Object> map = new HashMap<>();
-//		model.addAttribute("uriModel", uriModel);
-		
-		LOG.debug(" ########## Main.do ###########");
-		LOG.debug("    user_id["+(String)session.getAttribute("user_id")+"]");
-		
-		//임시운행번호 총갯수
-		int drvnoCnt = mainService.selectTempOperTotCnt(paramMap);
-		//총주행거리
-		Map<String, String> distInfo = mainService.selectDrivingInfo(paramMap);
-		//데이터 건수
-		int dataTotCnt = mainService.selectDataTotCnt(paramMap);
-		//데이터 용량
-		String dataTotVol = mainService.selectDataTotVolume(paramMap);
-		//게시판 : 공지사항
-		Map<String, String> map01 = new HashMap<String, String>();
-		map01.put("blbd_div_cd", "101");
-		map01.put("board_cnt", "1");	//표출갯수
-		List<?> notcList = mainService.selectNoticeList(map01);
-		//게시판 : 자율주행
-		Map<String, String> map02 = new HashMap<String, String>();
-		map02.put("blbd_div_cd", "102");
-		map02.put("board_cnt", "3");	//표출갯수
-		List<?> trndList = mainService.selectNoticeList(map02);
-		//데이터 : 평점순
-		Map<String, String> map03 = new HashMap<String, String>();
-		map03.put("popul", "point");
-		map03.put("board_cnt", "4");	//표출갯수
-		List<?> poinList = mainService.selectPopulList(map03);
-		//데이터 : 조회순
-		Map<String, String> map04 = new HashMap<String, String>();
-		map04.put("popul", "count");
-		map04.put("board_cnt", "4");	//표출갯수
-		List<?> coutList = mainService.selectPopulList(map04);
-		//데이터 : 최신자료
-		Map<String, String> map05 = new HashMap<String, String>();
-		map05.put("board_cnt", "4");	//표출갯수
-		List<?> recnList = mainService.selectRecentList(map05);
-		
-		LOG.debug(" drvnoCnt["+drvnoCnt+"]");
-		model.addAttribute("drvnoCnt", String.valueOf(drvnoCnt));
-		model.addAttribute("distInfo", distInfo);
-		model.addAttribute("dataTotCnt", dataTotCnt);
-		model.addAttribute("dataTotVol", dataTotVol);
-		model.addAttribute("notcList", notcList);
-		model.addAttribute("trndList", trndList);
-		model.addAttribute("poinList", poinList);
-		model.addAttribute("coutList", coutList);
-		model.addAttribute("recnList", recnList);
-		model.addAttribute("auth_id", (String)session.getAttribute("auth_id"));
-		model.addAttribute("user_id", (String)session.getAttribute("user_id"));
-		
-//		mav.addObject("map", map);
-		mav.addObject("model", model);
-		mav.addObject("paramMap", paramMap);
-		map.put("data", mav);
-		return mav;
-	}	
+//	@ResponseBody
+//	@RequestMapping(value = "/main/Main_SP5.do")
+//	public ModelAndView homeMainSP5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
+//		
+//		int port = request.getRemotePort();
+//		
+//		
+////		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		/*ModelAndView mav = new ModelAndView("redirect:http://127.0.0.1:8082/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
+//		mav.setViewName("redirect:http://127.0.0.1:8082/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");*/
+//		
+//		ModelAndView mav = new ModelAndView("redirect:https://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
+//		mav.setViewName("redirects:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/US_MA_01.xml");
+//		
+//		Map<String, Object> map = new HashMap<>();
+////		model.addAttribute("uriModel", uriModel);
+//		
+//		LOG.debug(" ########## Main.do ###########");
+//		LOG.debug("    user_id["+(String)session.getAttribute("user_id")+"]");
+//		
+//		//임시운행번호 총갯수
+//		int drvnoCnt = mainService.selectTempOperTotCnt(paramMap);
+//		//총주행거리
+//		Map<String, String> distInfo = mainService.selectDrivingInfo(paramMap);
+//		//데이터 건수
+//		int dataTotCnt = mainService.selectDataTotCnt(paramMap);
+//		//데이터 용량
+//		String dataTotVol = mainService.selectDataTotVolume(paramMap);
+//		//게시판 : 공지사항
+//		Map<String, String> map01 = new HashMap<String, String>();
+//		map01.put("blbd_div_cd", "101");
+//		map01.put("board_cnt", "1");	//표출갯수
+//		List<?> notcList = mainService.selectNoticeList(map01);
+//		//게시판 : 자율주행
+//		Map<String, String> map02 = new HashMap<String, String>();
+//		map02.put("blbd_div_cd", "102");
+//		map02.put("board_cnt", "3");	//표출갯수
+//		List<?> trndList = mainService.selectNoticeList(map02);
+//		//데이터 : 평점순
+//		Map<String, String> map03 = new HashMap<String, String>();
+//		map03.put("popul", "point");
+//		map03.put("board_cnt", "4");	//표출갯수
+//		List<?> poinList = mainService.selectPopulList(map03);
+//		//데이터 : 조회순
+//		Map<String, String> map04 = new HashMap<String, String>();
+//		map04.put("popul", "count");
+//		map04.put("board_cnt", "4");	//표출갯수
+//		List<?> coutList = mainService.selectPopulList(map04);
+//		//데이터 : 최신자료
+//		Map<String, String> map05 = new HashMap<String, String>();
+//		map05.put("board_cnt", "4");	//표출갯수
+//		List<?> recnList = mainService.selectRecentList(map05);
+//		
+//		LOG.debug(" drvnoCnt["+drvnoCnt+"]");
+//		model.addAttribute("drvnoCnt", String.valueOf(drvnoCnt));
+//		model.addAttribute("distInfo", distInfo);
+//		model.addAttribute("dataTotCnt", dataTotCnt);
+//		model.addAttribute("dataTotVol", dataTotVol);
+//		model.addAttribute("notcList", notcList);
+//		model.addAttribute("trndList", trndList);
+//		model.addAttribute("poinList", poinList);
+//		model.addAttribute("coutList", coutList);
+//		model.addAttribute("recnList", recnList);
+//		model.addAttribute("auth_id", (String)session.getAttribute("auth_id"));
+//		model.addAttribute("user_id", (String)session.getAttribute("user_id"));
+//		
+////		mav.addObject("map", map);
+//		mav.addObject("model", model);
+//		mav.addObject("paramMap", paramMap);
+//		map.put("data", mav);
+//		return mav;
+//	}	
 
 
 	/**
@@ -320,6 +320,8 @@ public class MainController {
 		}
 		session.invalidate(); //세션 제거
 		model.addAttribute("result_insert", result);
+		
+		LOG.debug(" ########## Logout_Process.do-end ###########");
 
 		return "common/Logout_Process";
 	}
@@ -350,50 +352,50 @@ public class MainController {
 	 * @return "Gude_Avsc_View"
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/center/introduce/Gude_Avsc_View_sp5.do")
-	public String avscView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, RedirectAttributes rttr, HttpSession session) throws Exception {
-		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		try {  
-		    /*String sessionA = (String) session.getAttribute("agcy_nm");
-		    String agcy_nm = URLEncoder.encode(Util.isNull(sessionA), "UTF-8");
-		    String sessionB = (String) session.getAttribute("agcy_id");
-		    String agcy_id = URLEncoder.encode(Util.isNull(sessionB), "UTF-8");
-		    String sessionC = (String) session.getAttribute("user_nm");
-		    String user_nm = URLEncoder.encode(Util.isNull(sessionC), "UTF-8");
-		    
-		    rttr.addAttribute("agcy_nm", agcy_nm); 
-		    rttr.addAttribute("agcy_id", agcy_id); 
-		    rttr.addAttribute("user_nm", user_nm); 
-			
-			rttr.addAttribute("user_id", session.getAttribute("user_id")); 
-			rttr.addAttribute("auth_id", session.getAttribute("auth_id")); 
-			rttr.addAttribute("grad_id", session.getAttribute("grad_id"));
-			
-			//이용안내 내용 잠시 주석
-			List<Map<String, Object>> listMap = (List<Map<String, Object>>) viseService.selectContectInfo(paramMap);  
-			
-			String a = (String) listMap.get(0).get("title");
-			String title = URLEncoder.encode(a, "UTF-8");
-			String b = (String) listMap.get(0).get("content");
-			String content = URLEncoder.encode(b, "UTF-8");
-			String c = (String) listMap.get(0).get("telNo");
-			String telNo = URLEncoder.encode(c, "UTF-8");
-			String d = (String) listMap.get(0).get("faxNo");
-			String faxNo = URLEncoder.encode(d, "UTF-8");
-			String e = (String) listMap.get(0).get("email");
-			String email = URLEncoder.encode(e, "UTF-8");
-					
-			rttr.addAttribute("content", content);
-			rttr.addAttribute("telNo", telNo);
-			rttr.addAttribute("faxNo", faxNo);
-			rttr.addAttribute("email", email);*/
-		
-		}catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-		
-    	return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_01.xml";
-	}
+//	@RequestMapping(value = "/center/introduce/Gude_Avsc_View_sp5.do")
+//	public String avscView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, RedirectAttributes rttr, HttpSession session) throws Exception {
+//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		try {  
+//		    /*String sessionA = (String) session.getAttribute("agcy_nm");
+//		    String agcy_nm = URLEncoder.encode(Util.isNull(sessionA), "UTF-8");
+//		    String sessionB = (String) session.getAttribute("agcy_id");
+//		    String agcy_id = URLEncoder.encode(Util.isNull(sessionB), "UTF-8");
+//		    String sessionC = (String) session.getAttribute("user_nm");
+//		    String user_nm = URLEncoder.encode(Util.isNull(sessionC), "UTF-8");
+//		    
+//		    rttr.addAttribute("agcy_nm", agcy_nm); 
+//		    rttr.addAttribute("agcy_id", agcy_id); 
+//		    rttr.addAttribute("user_nm", user_nm); 
+//			
+//			rttr.addAttribute("user_id", session.getAttribute("user_id")); 
+//			rttr.addAttribute("auth_id", session.getAttribute("auth_id")); 
+//			rttr.addAttribute("grad_id", session.getAttribute("grad_id"));
+//			
+//			//이용안내 내용 잠시 주석
+//			List<Map<String, Object>> listMap = (List<Map<String, Object>>) viseService.selectContectInfo(paramMap);  
+//			
+//			String a = (String) listMap.get(0).get("title");
+//			String title = URLEncoder.encode(a, "UTF-8");
+//			String b = (String) listMap.get(0).get("content");
+//			String content = URLEncoder.encode(b, "UTF-8");
+//			String c = (String) listMap.get(0).get("telNo");
+//			String telNo = URLEncoder.encode(c, "UTF-8");
+//			String d = (String) listMap.get(0).get("faxNo");
+//			String faxNo = URLEncoder.encode(d, "UTF-8");
+//			String e = (String) listMap.get(0).get("email");
+//			String email = URLEncoder.encode(e, "UTF-8");
+//					
+//			rttr.addAttribute("content", content);
+//			rttr.addAttribute("telNo", telNo);
+//			rttr.addAttribute("faxNo", faxNo);
+//			rttr.addAttribute("email", email);*/
+//		
+//		}catch (NullPointerException e) {
+//			e.printStackTrace();
+//		}
+//		
+//    	return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_01.xml";
+//	}
 	
 	/**
 	 * 이용안내- 공공데이터개방
@@ -414,29 +416,29 @@ public class MainController {
 	 * @return "Gude_Cits_View"
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/center/introduce/Gude_Cits_View_sp5.do")
-	public String citsView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
-		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		try{
-	    String sessionA = (String) session.getAttribute("agcy_nm");
-	    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
-	    String sessionB = (String) session.getAttribute("agcy_id");
-	    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
-	    String sessionC = (String) session.getAttribute("user_nm");
-	    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
-	    
-	    model.addAttribute("agcy_nm", agcy_nm); 
-	    model.addAttribute("agcy_id", agcy_id); 
-	    model.addAttribute("user_nm", user_nm); 
-		model.addAttribute("uriModel", uriModel);
-		model.addAttribute("user_id", session.getAttribute("user_id")); 
-		model.addAttribute("auth_id", session.getAttribute("auth_id")); 
-		model.addAttribute("grad_id", session.getAttribute("grad_id"));
-	}catch (NullPointerException e) {
-		e.printStackTrace();
-	}
-		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_02.xml";
-	}
+//	@RequestMapping(value = "/center/introduce/Gude_Cits_View_sp5.do")
+//	public String citsView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
+//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		try{
+//	    String sessionA = (String) session.getAttribute("agcy_nm");
+//	    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
+//	    String sessionB = (String) session.getAttribute("agcy_id");
+//	    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
+//	    String sessionC = (String) session.getAttribute("user_nm");
+//	    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
+//	    
+//	    model.addAttribute("agcy_nm", agcy_nm);
+//	    model.addAttribute("agcy_id", agcy_id);
+//	    model.addAttribute("user_nm", user_nm);
+//		model.addAttribute("uriModel", uriModel);
+//		model.addAttribute("user_id", session.getAttribute("user_id"));
+//		model.addAttribute("auth_id", session.getAttribute("auth_id"));
+//		model.addAttribute("grad_id", session.getAttribute("grad_id"));
+//	}catch (NullPointerException e) {
+//		e.printStackTrace();
+//	}
+//		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_02.xml";
+//	}
 
 	/**
 	 * 이용안내- 데이터공유협의체
@@ -459,30 +461,30 @@ public class MainController {
 	 * @return "Gude_Cons_View"
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/center/introduce/Gude_Cons_View_sp5.do")
-	public String consView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
-		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		try{
-		    String sessionA = (String) session.getAttribute("agcy_nm");
-		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
-		    String sessionB = (String) session.getAttribute("agcy_id");
-		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
-		    String sessionC = (String) session.getAttribute("user_nm");
-		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
-		    
-		    model.addAttribute("agcy_nm", agcy_nm); 
-		    model.addAttribute("agcy_id", agcy_id); 
-		    model.addAttribute("user_nm", user_nm); 
-			model.addAttribute("uriModel", uriModel);
-			model.addAttribute("user_id", session.getAttribute("user_id")); 
-			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
-			model.addAttribute("grad_id", session.getAttribute("grad_id"));
-		}catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_03.xml";
-	}
+//	@RequestMapping(value = "/center/introduce/Gude_Cons_View_sp5.do")
+//	public String consView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
+//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		try{
+//		    String sessionA = (String) session.getAttribute("agcy_nm");
+//		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
+//		    String sessionB = (String) session.getAttribute("agcy_id");
+//		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
+//		    String sessionC = (String) session.getAttribute("user_nm");
+//		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
+//		    
+//		    model.addAttribute("agcy_nm", agcy_nm); 
+//		    model.addAttribute("agcy_id", agcy_id); 
+//		    model.addAttribute("user_nm", user_nm); 
+//			model.addAttribute("uriModel", uriModel);
+//			model.addAttribute("user_id", session.getAttribute("user_id")); 
+//			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
+//			model.addAttribute("grad_id", session.getAttribute("grad_id"));
+//		}catch (NullPointerException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_03.xml";
+//	}
 
 	/**
 	 * 이용안내- 법령 및 지침
@@ -503,30 +505,30 @@ public class MainController {
 	 * @return "Gude_Legl_View"
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/center/introduce/Gude_Legl_View_sp5.do")
-	public String leglView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
-		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		try{
-		    String sessionA = (String) session.getAttribute("agcy_nm");
-		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
-		    String sessionB = (String) session.getAttribute("agcy_id");
-		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
-		    String sessionC = (String) session.getAttribute("user_nm");
-		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
-		    
-		    model.addAttribute("agcy_nm", agcy_nm); 
-		    model.addAttribute("agcy_id", agcy_id); 
-		    model.addAttribute("user_nm", user_nm); 
-			model.addAttribute("uriModel", uriModel);
-			model.addAttribute("user_id", session.getAttribute("user_id")); 
-			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
-			model.addAttribute("grad_id", session.getAttribute("grad_id"));
-		}catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_04.xml";
-	}
+//	@RequestMapping(value = "/center/introduce/Gude_Legl_View_sp5.do")
+//	public String leglView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
+//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		try{
+//		    String sessionA = (String) session.getAttribute("agcy_nm");
+//		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
+//		    String sessionB = (String) session.getAttribute("agcy_id");
+//		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
+//		    String sessionC = (String) session.getAttribute("user_nm");
+//		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
+//		    
+//		    model.addAttribute("agcy_nm", agcy_nm); 
+//		    model.addAttribute("agcy_id", agcy_id); 
+//		    model.addAttribute("user_nm", user_nm); 
+//			model.addAttribute("uriModel", uriModel);
+//			model.addAttribute("user_id", session.getAttribute("user_id")); 
+//			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
+//			model.addAttribute("grad_id", session.getAttribute("grad_id"));
+//		}catch (NullPointerException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_04.xml";
+//	}
 
 	/**
 	 * 이용안내- 운행보고 안내
@@ -547,30 +549,30 @@ public class MainController {
 	 * @return "Gude_Rept_View"
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/center/introduce/Gude_Rept_View_sp5.do")
-	public String drvgView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
-		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
-		try{
-		    String sessionA = (String) session.getAttribute("agcy_nm");
-		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
-		    String sessionB = (String) session.getAttribute("agcy_id");
-		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
-		    String sessionC = (String) session.getAttribute("user_nm");
-		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
-		    
-		    model.addAttribute("agcy_nm", agcy_nm); 
-		    model.addAttribute("agcy_id", agcy_id); 
-		    model.addAttribute("user_nm", user_nm); 
-			model.addAttribute("uriModel", uriModel);
-			model.addAttribute("user_id", session.getAttribute("user_id")); 
-			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
-			model.addAttribute("grad_id", session.getAttribute("grad_id"));
-		}catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_05.xml";
-	}
+//	@RequestMapping(value = "/center/introduce/Gude_Rept_View_sp5.do")
+//	public String drvgView_sp5(@RequestParam Map<String, String> paramMap, ModelMap model, HttpServletRequest request, HttpSession session) throws Exception {
+//		RequestURIModel uriModel = Util.getRequestURIModel(request.getRequestURI().replaceAll( request.getContextPath(), "")); //메뉴를 구성하기위한 설정
+//		try{
+//		    String sessionA = (String) session.getAttribute("agcy_nm");
+//		    String agcy_nm = URLEncoder.encode(sessionA, "UTF-8");
+//		    String sessionB = (String) session.getAttribute("agcy_id");
+//		    String agcy_id = URLEncoder.encode(sessionB, "UTF-8");
+//		    String sessionC = (String) session.getAttribute("user_nm");
+//		    String user_nm = URLEncoder.encode(sessionC, "UTF-8");
+//		    
+//		    model.addAttribute("agcy_nm", agcy_nm); 
+//		    model.addAttribute("agcy_id", agcy_id); 
+//		    model.addAttribute("user_nm", user_nm); 
+//			model.addAttribute("uriModel", uriModel);
+//			model.addAttribute("user_id", session.getAttribute("user_id")); 
+//			model.addAttribute("auth_id", session.getAttribute("auth_id")); 
+//			model.addAttribute("grad_id", session.getAttribute("grad_id"));
+//		}catch (NullPointerException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return "redirect:http://localhost:8081/websquare/websquare.html?w2xPath=/sp5_ui/sub/US_CE_05.xml";
+//	}
 
 	/**
 	 * 홈페이지 접속로그 등록 처리
@@ -646,19 +648,6 @@ public class MainController {
 
 		return "redirect:/main/Main.do"; 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	/**

@@ -167,6 +167,7 @@
 
 <form:form id="listForm" name="listForm" method="post"
 	enctype="multipart/form-data">
+	<input type="hidden" name="tmp_race_number" id="tmp_race_number" />
 	<input type="hidden" name="drv_no" id="drv_no" />
 	<input type="hidden" name="std_dt" id="std_dt" />
 	<input type="hidden" id="excelType" name="excelType" />
@@ -220,7 +221,7 @@
 												<tr>
 													<th scope="row">임시운행등록번호</th>
 													<td>${drvgInfo.tmpRaceNumber}</td>
-													<!-- ldk-test -->
+													<!-- ldk-custom -->
 													<th scope="row">보험가입일자</th>
 													<td>
 														<div class="ui-form ui-form-row align-center js-datepicker-range">
@@ -409,6 +410,8 @@
 									<div class="el-box el-box--gray el-box--border mt-20">
 										<p class="el-essential font-s">※ 다운로드 한 양식의 파일명을 임의로 변경하여
 											업로드 할 경우 오류가 발생할 수 있습니다.</p>
+										<br>
+										<p class="el-essential font-s">※ 엑셀 파일에서 기존 예시를 복사하여 신규 추가해주시고 업로드 하시기 전 최초 예시 3줄은 행 삭제해주시기 바랍니다.</p>
 										<table
 											class="table-basic table-basic--row mt-20 table-us_du_02_write--05">
 											<caption>운행정보보고 &gt; 운행정보보고서 &gt; 제어권 전환 정보 테이블</caption>
@@ -432,7 +435,7 @@
 												<tr>
 													<td>
 														<p class="d-flex">
-															<img src="" alt=""> 엑셀 파일 등록하기
+															<img src="" alt=""> 엑셀 파일 등록하기 (변경됐을 경우)
 														</p>
 													</td>
 													<td>
@@ -493,6 +496,45 @@
 											</c:choose>
 										</tbody>
 									</table>
+									<!-- ldk-custom 보고서등록 첨부파일 란 추가 -->
+									<div class="attachment-wrap">
+										<h5 class="layout-content__subtit">보험 증권사 정보</h5>
+										<div id="toBeTable"
+											class="el-box el-box--gray el-box--border mt-20">
+											<table
+												class="table-basic table-basic--row mt-20 table-us_du_02_write--05">
+												<colgroup>
+													<col style="width: 25%">
+													<col style="width: auto">
+												</colgroup>
+												<tbody>
+													<tr>
+														<td>
+															<p class="d-flex">
+																<img src="" alt=""> 새로운 첨부파일로 변경하기
+															</p>
+														</td>
+														<td>
+															<div class="ui-form">
+																<!-- <form action=""> -->
+																<div class="file">
+																<div class="file__input" id="file__input">
+																	<input class="file__input--file" name="file_info"
+																		id="file_info" type="file"
+																		onChange="fileExtCheck(this);"> <input
+																		type="text" class="file__upload--name" name="filename"
+																		id="filename" placeholder="선택된 파일 없음"> <label
+																		class="file__input--label" for="file_info">파일찾기</label>
+																</div>
+															</div>
+																<!-- </form> -->
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 
 
 									<div class="btn-wrap btn-row justify-center mt-30 mb-80">
