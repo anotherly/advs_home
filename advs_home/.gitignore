@@ -1,0 +1,36 @@
+# ==========================================
+# [전자정부프레임워크 / Eclipse / Java 프로젝트용 .gitignore]
+# ==========================================
+
+# 빌드 산출물
+/bin/
+/target/
+/build/
+*.class
+*.jar
+*.war
+*.ear
+
+# 이클립스 설정 및 메타데이터
+.project
+.classpath
+.settings/
+.metadata/
+
+# IDE별 설정
+/.idea/
+/.vscode/
+
+# 로그 및 임시 파일
+*.log
+tmp/
+temp/
+
+# OS 임시 파일
+Thumbs.db
+.DS_Store
+
+# ==========================================
+# [특정 파일 제외 (Git 추적 안 함)]
+# ==========================================
+/WebContent/WEB-INF/jsp/egovframework/tiles/layout.xml
