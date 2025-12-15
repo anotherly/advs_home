@@ -133,7 +133,7 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		}
 		/* URL접근 방지 : E */
 
@@ -209,13 +209,13 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			if (drvChk == 0 && !auth_id.equals("103")) {
 				model.addAttribute("rst_scrn", "drvg");
 				model.addAttribute("rst_user", user_id);
 				model.addAttribute("rst_auth", auth_id);
-				return "common/Auth_Process";
+				return "common/Auth_Process.tiles";
 			}
 		}
 		/* URL접근 방지 : E */
@@ -274,7 +274,7 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		}
 		/* URL접근 방지 : E */
 
@@ -320,14 +320,14 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			// 잠시 개발을 위한 주석처리
 //			if(drvChk == 0) {
 //				model.addAttribute("rst_scrn", "drvg");
 //				model.addAttribute("rst_user", user_id);
 //				model.addAttribute("rst_auth", auth_id);
-//				return "common/Auth_Process";
+//				return "common/Auth_Process.tiles";
 //			}
 		}
 		/* URL접근 방지 : E */
@@ -408,14 +408,14 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			// >>실서버 반영시 확인
 			// 로컬 등록 테스트를 위해 주석처리
 			/*
 			 * if(drvChk == 0) { model.addAttribute("rst_scrn", "drvg");
 			 * model.addAttribute("rst_user", user_id); model.addAttribute("rst_auth",
-			 * auth_id); return "common/Auth_Process"; }
+			 * auth_id); return "common/Auth_Process.tiles"; }
 			 */
 		}
 		/* URL접근 방지 : E */
@@ -707,14 +707,14 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			// 등록기간 아닙니다 일단 피하기 잠시 개발을 위한 주석처리
 			/*if (drvChk == 0) {
 				model.addAttribute("rst_scrn", "drvg");
 				model.addAttribute("rst_user", user_id);
 				model.addAttribute("rst_auth", auth_id);
-				return "common/Auth_Process";
+				return "common/Auth_Process.tiles";
 			}*/
 		}
 		/* URL접근 방지 : E */
@@ -777,14 +777,14 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			// 잠시 개발을 위한 주석처리
 			/*if (drvChk == 0) {
 				model.addAttribute("rst_scrn", "drvg");
 				model.addAttribute("rst_user", user_id);
 				model.addAttribute("rst_auth", auth_id);
-				return "common/Auth_Process";
+				return "common/Auth_Process.tiles";
 			}*/
 		}
 		/* URL접근 방지 : E */
@@ -882,14 +882,14 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		} else {
 			// 잠시 개발을 위한 주석처리
 			/*if (drvChk == 0) {
 				model.addAttribute("rst_scrn", "drvg");
 				model.addAttribute("rst_user", user_id);
 				model.addAttribute("rst_auth", auth_id);
-				return "common/Auth_Process";
+				return "common/Auth_Process.tiles";
 			}*/
 		}
 		/* URL접근 방지 : E */
@@ -1228,7 +1228,7 @@ public class DrvgController {
 			model.addAttribute("rst_scrn", "duty");
 			model.addAttribute("rst_user", user_id);
 			model.addAttribute("rst_auth", auth_id);
-			return "common/Auth_Process";
+			return "common/Auth_Process.tiles";
 		}
 		/* URL접근 방지 : E */
 

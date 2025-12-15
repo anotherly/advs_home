@@ -24,7 +24,8 @@
 
 </div>
 </body>
-<script type="text/javaScript" defer="defer">
+<!-- 251114 취약점조치 : 임시로그인 삭제 -->
+<!-- <script type="text/javaScript" defer="defer">
 document.addEventListener('keydown', function(e){
     var keyCode = e.keyCode;
     if(e.shiftKey && e.ctrlKey && keyCode === 76){
@@ -49,5 +50,5 @@ document.addEventListener('keydown', function(e){
         reportForm.submit();
     }
 });
-</script>
+</script> -->
 </html>

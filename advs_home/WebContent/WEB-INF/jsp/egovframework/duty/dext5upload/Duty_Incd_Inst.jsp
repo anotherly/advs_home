@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 	<script type="text/javascript" src="/dext5upload/js/dext5upload.js"></script>
     <script type="text/javascript">
+    	console.log("미사용으로 추정됨 : dext duty incd inst");
         var G_UploadID;
         var G_vertical = '\u000B'; // 파일 구분자
         var G_formfeed = '\u000C'; // 각 파일당 속성 구분자

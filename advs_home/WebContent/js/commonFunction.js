@@ -64,6 +64,7 @@ function fn_AgcyView(url, auth, user) {
  * parameter : url:url, auth:권한
  */
 function fn_DutyView(url, auth, user) {
+	console.log(" 페이지 : 운행정보보고 fn_DutyView");
 	if( !nullCheck(user) ) {
 		url = "https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
 	} else {

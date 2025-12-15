@@ -9,7 +9,10 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.sql.Clob;
 import java.sql.SQLException;
 
@@ -474,6 +477,88 @@ public class Util {
 		return ipAddr;
 	}
 
+	//->20240820 보안취약점 관련 수정 시작
+	
+    /**
+     * <pre>
+	 * 프론트화면에서 받아온 데이터(폼,파라미터 등)을
+	 * 파라미터로 받아
+	 * 쉘 체크 작업을 하기 위해
+	 * iterater로 분배하는 전초작업
+     * </pre>
+     *
+	 * @param String str
+	 * @return String
+     */
+	
+	public static boolean paramChk(Map<String, String[]> map) {
+		 Iterator<String> iterator = map.keySet().iterator();
+         Map<String,String> paramMap = new HashMap<String,String>();
+		 while( iterator.hasNext() ){
+			 String key = iterator.next();
+			 String[] value = map.get(key);
+			 String upValue=value[0];
+			 //게시판 툴을 사용하는 경우 별도 처리 
+			 if(!(key.equals("b_content") || key.equals("acc_detail_info"))) {
+				 upValue=injectionCheck(upValue);
+			 }
+			 if(!upValue.equals(value[0])) {
+				 return false;
+			 }
+ 		}
+		 return true;
+	}
+	
+    /**
+     * <pre>
+	 * 보안취약점 조치 - 경로추적 및 파일 다운로드 방지
+	 * 필터링해야하는 특수 구문을 체크하여 
+	 * 위험요소가 있을 경우 error 반환
+     * </pre>
+     *
+	 * @param String dn_path : 다운로드 디렉터리 경로
+	 * @param String fname : 다운로드 파일명
+	 * 
+	 * @return String
+     */
+	
+	public static String checkpath(String dn_path, String fname) {
+		//운영체제를 판별하여 구분자 기호를 결정
+		String osName = System.getProperty("os.name").toLowerCase();
+		String osPath ="\\";
+		if(!osName.contains("win")) { //윈도우가 아니라면
+			osPath ="/";
+		}else { //window 환경이라면
+			osPath ="\\";
+		}
+		//불필요 특수문자 필터링
+		if( ( dn_path.indexOf("..\\")!=-1 
+			|| dn_path.indexOf("../")!=-1
+			|| dn_path.indexOf("%")!=-1
+			) ) {
+			return "error";
+		}
+		if( !dn_path.equals("") ) {
+			dn_path = dn_path + osPath;
+		}else { 
+			return "error";
+		}
+		String origfile = dn_path + fname;
+		//fname에서 파일명 분리
+		String filename3 = fname.substring(fname.lastIndexOf(osPath) + 1); // 실 서버 (centos),개발서버 (winodw) 통용
+		String FilePath = dn_path + filename3;
+		
+		if(origfile.equals(FilePath)) {
+			return FilePath;
+		}else {
+			return "error";
+		}
+		
+	}
+	
+	//->20240820 수정 끝
+	
+	
     /**
      * <pre>
 	 * 웹 셀 방지

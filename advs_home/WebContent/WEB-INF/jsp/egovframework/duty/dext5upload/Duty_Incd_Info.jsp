@@ -8,6 +8,7 @@
 <script src="/js/clip.js"></script> <!-- ClipReport4 -->
 <script type="text/javascript" src="/dext5upload/js/dext5upload.js"></script>
 <script type="text/javascript">
+	console.log("미사용으로 추정됨 : dext duty incd info");
      var G_UploadID;
      var G_vertical = '\u000B'; // 파일 구분자
      var G_formfeed = '\u000C'; // 각 파일당 속성 구분자
@@ -27,7 +28,7 @@
      
 </script>
 <script type="text/javaScript" language="javascript" defer="defer">
-
+	alert("이거 쓰냐...? : dext duty incd info");
   //폼 변수
   var c_form = "";
 

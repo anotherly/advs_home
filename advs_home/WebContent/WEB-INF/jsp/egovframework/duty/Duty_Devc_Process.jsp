@@ -9,7 +9,7 @@
 	else if('${result_update}' == "1")
 	{
 		alert("수정 되었습니다.");
-		location.href="/duty/device/Duty_Devc_Info.do?drv_no="+encodeURI('${drv_no}')+"&chg_id=${chg_id}";
+		location.href="/duty/device/Duty_Devc_List.do";
 	}
 	else if('${result_delete}' == "1")
 	{

@@ -16,7 +16,7 @@
 	} else if ('${result_update}' == "1") {
 		alert("제어권전환 상세 ${result_ctrchng} 건을 포함한 정보가 수정 되었습니다.");
 		//alert("운행정보가 수정 되었습니다.");
-		location.href = "/duty/driving/Duty_Drvg_Info.do?drv_no=" + encodeURI('${drv_no}') + "&std_dt=${std_dt}";
+		location.href = "/duty/driving/Duty_Drvg_List.do";
 	} else if ('${result_delete}' == "1") {
 		alert("삭제 되었습니다.");
 		location.href = "/duty/driving/Duty_Drvg_List.do";

@@ -9,7 +9,7 @@ function GetfnParamSet() {
 var rex_gsPreViewFeatures = "center=yes,scrollbars=no,status=no,toolbar=no,resizable=1,location=no,menu=no,width=835,height=600";
 
 function clipreports(id){ 
-	
+	console.log("function clipreports");
 	this.id = id;
 	this.type; 
 	this.rptname ="";
