@@ -3,6 +3,10 @@
  * URL 이동
  * parameter : :url
  */
+
+//tsum 변경시 단일 변경을 위한 공통 로그인 url
+var loginUrl = "https://tsum.kotsa.or.kr/tsum/mbs/inqFrmLogin.do";
+
 function urlReplace(url) {
 	location.replace(url);
 }
@@ -24,7 +28,7 @@ function fn_Logout() {
  */
 function fn_OpenView(url, auth, user) {
 	if( !nullCheck(user) ) {
-		url = "https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
+		url = loginUrl+"?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
 	} else {
 		if( !nullCheck(auth) ) {
 			if(confirm("등록된 사용자가 아닙니다. 권한신청을 하시겠습니까?")) {
@@ -42,7 +46,7 @@ function fn_OpenView(url, auth, user) {
  */
 function fn_AgcyView(url, auth, user) {
 	if( !nullCheck(user) ) {
-		url = "https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
+		url = loginUrl+"?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
 	} else {
 		if( !nullCheck(auth) ) {
 			if(confirm("등록된 사용자가 아닙니다. 권한신청을 하시겠습니까?")) {
@@ -66,7 +70,7 @@ function fn_AgcyView(url, auth, user) {
 function fn_DutyView(url, auth, user) {
 	console.log(" 페이지 : 운행정보보고 fn_DutyView");
 	if( !nullCheck(user) ) {
-		url = "https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
+		url = loginUrl+"?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
 	} else {
 		if( !nullCheck(auth) ) {
 			if(confirm("등록된 사용자가 아닙니다. 권한신청을 하시겠습니까?")) {
@@ -75,10 +79,11 @@ function fn_DutyView(url, auth, user) {
 				return;
 			}
 		} else {
-			if(auth == '101' || auth == '102') {
+			//25년 1월 임시운행기관 제외하는거 풀어달라는 고객사 요청
+			/*if(auth == '101' || auth == '102') {
 				alert('임시운행기관만 접근이 가능합니다');
 				url = "/center/introduce/Gude_Rept_View.do";
-			}
+			}*/
 		}
 	}
 	urlReplace(url);
@@ -89,7 +94,7 @@ function fn_DutyView(url, auth, user) {
  */
 function fn_DtupView(url, auth, user) {
 	if( !nullCheck(user) ) {
-		url = "https://www.kotsa.or.kr/mbs/inqFrmLogin.do?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
+		url = loginUrl+"?nextPage=https://avds.kotsa.or.kr/sso/CreateRequest.jsp?RelayState=https://avds.kotsa.or.kr/main/Connect_Log_Process.do";
 	} else {
 		if( !nullCheck(auth) ) {
 			if(confirm("등록된 사용자가 아닙니다. 권한신청을 하시겠습니까?")) {
