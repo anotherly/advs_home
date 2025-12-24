@@ -4,7 +4,7 @@
 <sqlMap namespace="publicDset">
 
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
-
+	<!-- 25년 기능고도화 공공/협의체데이터 기관추가 regid -->
 	<resultMap id="publicDsetMap" class="java.util.HashMap">
 		<result property="bSeq" column="B_SEQ" />
 		<result property="bbsSeq" column="BBS_SEQ" />
@@ -47,6 +47,10 @@
 		<result property="collectTime" column="COLLECT_TIME" />
 		<result property="listcnt" column="LISTCNT" />
 		<result property="downloadcnt" column="DOWNLOADCNT" />
+		<result property="regId" column="REG_ID" />
+		<result property="agencyCd" column="AGENCY_CD" />
+		<result property="agencyNm" column="AGENCY_NM" />
+		
 	</resultMap>
 
 	<resultMap id="datasetMap" class="java.util.HashMap">
@@ -62,6 +66,9 @@
 		<result property="regDateView" column="REG_DATE_VIEW" />
 		<result property="regId" column="REG_ID" />
 		<result property="bbsGroupSeq" column="BBS_GROUP_SEQ" />
+		<result property="regId" column="REG_ID" />
+		<result property="agencyCd" column="AGENCY_CD" />
+		<result property="agencyNm" column="AGENCY_NM" />
 	</resultMap>
 
 	<parameterMap id="datasetParamMap" class="java.util.HashMap">
@@ -75,6 +82,8 @@
 		<parameter property="file_size"/>
 		<parameter property="reg_id"/>
 		<parameter property="bbs_group_seq"/>
+		<parameter property="agency_cd"/>
+		<parameter property="agency_nm"/>
 	</parameterMap>
 
 	<!-- 목록 조회 -->
@@ -99,6 +108,9 @@
 		              ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
 		              ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
 		              ,fn_ct_get_code_name('data_type', A.DATA_TYPE ) AS DATA_TYPE_VIEW
+		              <!-- 25년 기능고도화 공공/협의체데이터 기관추가 -->
+		              ,fn_ct_get_agency_name(A.REG_ID) AS AGENCY_NM
+		              
  					  ,IFNULL(FORMAT(IFNULL(B.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
 		              ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
 		              ,D.BDWR_TTL_NM
@@ -203,6 +215,8 @@
               ,fn_ct_get_code_name('autocar_driving_mode', A.DRIVING_MODE ) AS DRIVING_MODE_VIEW
               ,fn_ct_get_code_name('act_info_type', A.ACT_INFO_TYPE ) AS ACT_INFO_TYPE_VIEW
               ,fn_ct_get_code_name('data_type', A.DATA_TYPE ) AS DATA_TYPE_VIEW
+              <!-- 25년 기능고도화 공공/협의체데이터 기관추가 -->
+              ,fn_ct_get_agency_name(A.REG_ID) AS AGENCY_NM
               ,IFNULL(FORMAT(IFNULL(B.FILE_SIZE, 0)/ 1024, 0),'-') AS FILE_SIZE_VIEW
               ,DATE_FORMAT(A.REG_DATE, '%Y-%m-%d %H:%i') AS REG_DATE_VIEW
               ,D.BDWR_TTL_NM

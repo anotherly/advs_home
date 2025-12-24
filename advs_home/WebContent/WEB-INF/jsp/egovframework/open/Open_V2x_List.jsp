@@ -317,15 +317,16 @@
                 <c:if test="${bbs_seq eq '3030'}">
                  <caption>공공데이터 &gt; V2X 데이터셋</caption>
                 </c:if>
-                 <colgroup>
+				<colgroup>
                      <col style="width:7%">
+                     <col style="width:10%">
+                     <col style="width:10%">
                      <col style="width:12%">
-                     <col style="width:12%">
-                     <col style="width:13%">
                      <col style="width:auto">
-                     <col style="width:15%">
+                     <col style="width:13%">
                      <col style="width:16%">
-                        </colgroup>
+                     <col style="width:10%">
+                 </colgroup>
                         <thead>
                             <tr>
                                 <th scope="col">번호</th>
@@ -335,6 +336,7 @@
                                 <th scope="col">제목</th>
                                 <th scope="col">주행모드</th>
                                 <th scope="col">수집일자</th>
+                                <th scope="col">등록기관</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -357,6 +359,7 @@
                                 <td class="bTitle">${list.bTitle}</td>
                                 <td>${list.drivingModeView}</td>
                                 <td>${list.collectDay}</td>
+                                <td>${list.agencyNm}</td>
                             </tr>
 				                </c:forEach>
 				              </c:otherwise>
